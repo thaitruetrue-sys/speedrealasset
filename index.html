@@ -14,6 +14,20 @@
 
 <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1RQxI3LaCooOiw7ztak4VS6szsCh_oOAa">
 
+<!-- ============================================================
+     Google Analytics 4 (GA4)
+     ============================================================ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-49MVX3WNYP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-49MVX3WNYP', {
+    anonymize_ip: true,
+    cookie_flags: 'SameSite=None;Secure'
+  });
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;900&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -231,6 +245,8 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
 .footer-contact .ico{color:#7dd3fc;font-size:16px}
 .footer-contact strong{font-family:'Kanit',sans-serif;font-weight:600;color:#fff}
 .footer-bottom{max-width:1200px;margin:20px auto 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:12.5px;color:#64748b;position:relative;z-index:2}
+.footer-stats{display:inline-flex;align-items:center;gap:6px;color:#7dd3fc}
+.footer-stats .ico{font-size:14px}
 
 /* MOBILE BAR */
 .mobile-bar{
@@ -284,6 +300,7 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
 <symbol id="s-warehouse" viewBox="0 0 24 24"><path d="M3 21V8l9-4 9 4v13"/><path d="M7 21v-8h10v8"/><path d="M7 17h10"/></symbol>
 <symbol id="s-factory" viewBox="0 0 24 24"><path d="M3 21V10l6 4V10l6 4V7h4v14z"/><path d="M3 21h18"/><path d="M9 21v-3M13 21v-3M17 21v-3"/></symbol>
 <symbol id="s-home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></symbol>
+<symbol id="s-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
 </svg>
 
 <!-- HEADER -->
@@ -370,7 +387,7 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
 
   <div class="grid" id="grid">
 
-    <!-- CARD 1 -->
+    <!-- CARD 1: Whizdom Station -->
     <article class="card" data-type="sale condo">
       <div class="card-img">
         <span class="badge b-condo">คอนโด</span>
@@ -399,7 +416,15 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
         <div class="video">
           <div class="video-label"><span class="rec"></span><svg class="ico"><use href="#s-yt"/></svg> วิดีโอพาชมทรัพย์</div>
           <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/W0v2z146zqY?rel=0&modestbranding=1&playsinline=1" title="Whizdom Station" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen></iframe>
+            <iframe 
+              src="https://www.youtube.com/embed/W0v2z146zqY?rel=0&modestbranding=1&playsinline=1" 
+              title="Whizdom Station" 
+              loading="lazy" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              sandbox="allow-scripts allow-same-origin allow-presentation"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
           </div>
           <a class="vlink" href="https://www.youtube.com/watch?v=W0v2z146zqY" target="_blank" rel="noopener noreferrer"><svg class="ico"><use href="#s-ext"/></svg> เปิดดูบน YouTube</a>
         </div>
@@ -410,7 +435,7 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
       </div>
     </article>
 
-    <!-- CARD 2 -->
+    <!-- CARD 2: ที่ดิน บางนาตราด -->
     <article class="card" data-type="sale land">
       <div class="card-img">
         <span class="badge b-land">🌳 ที่ดิน</span>
@@ -441,7 +466,15 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
         <div class="video">
           <div class="video-label"><span class="rec"></span><svg class="ico"><use href="#s-yt"/></svg> วิดีโอที่ดิน</div>
           <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/Rmg51jPXF-s?rel=0&modestbranding=1&playsinline=1" title="ที่ดิน บางนาตราด" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen></iframe>
+            <iframe 
+              src="https://www.youtube.com/embed/Rmg51jPXF-s?rel=0&modestbranding=1&playsinline=1" 
+              title="ที่ดิน บางนาตราด" 
+              loading="lazy" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              sandbox="allow-scripts allow-same-origin allow-presentation"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
           </div>
           <a class="vlink" href="https://www.youtube.com/watch?v=Rmg51jPXF-s" target="_blank" rel="noopener noreferrer"><svg class="ico"><use href="#s-ext"/></svg> เปิดดูบน YouTube</a>
         </div>
@@ -452,7 +485,7 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
       </div>
     </article>
 
-    <!-- CARD 3 -->
+    <!-- CARD 3: Lumpini Place Ratchada -->
     <article class="card" data-type="sale condo">
       <div class="card-img">
         <span class="badge b-condo">คอนโด</span>
@@ -480,7 +513,15 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
         <div class="video">
           <div class="video-label"><span class="rec"></span><svg class="ico"><use href="#s-yt"/></svg> วิดีโอพาชมทรัพย์</div>
           <div class="video-box">
-            <iframe src="https://www.youtube.com/embed/f_VwtA_PfLI?rel=0&modestbranding=1&playsinline=1" title="Lumpini Place Ratchada" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen></iframe>
+            <iframe 
+              src="https://www.youtube.com/embed/f_VwtA_PfLI?rel=0&modestbranding=1&playsinline=1" 
+              title="Lumpini Place Ratchada" 
+              loading="lazy" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              sandbox="allow-scripts allow-same-origin allow-presentation"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
           </div>
           <a class="vlink" href="https://www.youtube.com/watch?v=f_VwtA_PfLI" target="_blank" rel="noopener noreferrer"><svg class="ico"><use href="#s-ext"/></svg> เปิดดูบน YouTube</a>
         </div>
@@ -491,7 +532,7 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
       </div>
     </article>
 
-    <!-- CARD 4 -->
+    <!-- CARD 4: โฮมออฟฟิศ อโศก -->
     <article class="card" data-type="rent house">
       <div class="card-img">
         <span class="badge b-hot">🔥 ยอดนิยม</span>
@@ -575,6 +616,10 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
     </div>
     <div class="footer-bottom">
       <span>© 2026 <strong style="color:#cbd5e1">SPEED REAL ASSET</strong> · สงวนลิขสิทธิ์ทุกประการ</span>
+      <span class="footer-stats">
+        <svg class="ico"><use href="#s-eye"/></svg>
+        ผู้เข้าชมแล้ว <strong id="visitorCount" style="color:#fff">—</strong> ครั้ง
+      </span>
       <span>ดูแลโดย คุณทศพล · โทร 083-879-9635</span>
     </div>
   </div>
@@ -592,6 +637,7 @@ h1,h2,h3{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:va
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  /* ===== ตัวกรอง + ค้นหา ===== */
   const chips = document.querySelectorAll('.chip');
   const cards = document.querySelectorAll('.card');
   const searchInput = document.getElementById('searchInput');
@@ -634,6 +680,21 @@ document.addEventListener('DOMContentLoaded', function() {
       currentSearch = e.target.value.toLowerCase().trim();
       filterCards();
     });
+  }
+
+  /* ===== Visitor Counter (CountAPI) ===== */
+  const counterEl = document.getElementById('visitorCount');
+  if (counterEl) {
+    fetch('https://api.countapi.xyz/hit/speedrealasset-2026/visits')
+      .then(r => r.json())
+      .then(d => {
+        if (d && typeof d.value === 'number') {
+          counterEl.textContent = d.value.toLocaleString('th-TH');
+        } else {
+          counterEl.textContent = '—';
+        }
+      })
+      .catch(() => { counterEl.textContent = '—'; });
   }
 });
 </script>
