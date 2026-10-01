@@ -107,9 +107,6 @@
 }
 </script>
 
-<!-- ============================================================
-     GOOGLE ANALYTICS 4
-     ============================================================ -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-49MVX3WNYP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -118,10 +115,6 @@
   gtag('config', 'G-49MVX3WNYP', {anonymize_ip: true, cookie_flags: 'SameSite=None;Secure'});
 </script>
 
-<!-- ============================================================
-     MICROSOFT CLARITY — ปิดไว้ก่อน (รอ ID จริงจาก clarity.microsoft.com)
-     เมื่อได้ ID แล้ว: ลบเครื่องหมายคอมเมนต์ออก และเปลี่ยน YOUR_CLARITY_ID
-     ============================================================ -->
 <!--
 <script type="text/javascript">
   (function(c,l,a,r,i,t,y){
@@ -132,10 +125,6 @@
 </script>
 -->
 
-<!-- ============================================================
-     FACEBOOK PIXEL — ปิดไว้ก่อน (รอ Pixel ID จริงจาก Facebook Events Manager)
-     เมื่อได้ ID แล้ว: ลบเครื่องหมายคอมเมนต์ออก และเปลี่ยน YOUR_PIXEL_ID
-     ============================================================ -->
 <!--
 <script>
   !function(f,b,e,v,n,t,s)
@@ -176,21 +165,23 @@ a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color:var(--primary)}
 .ico{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
+/* HEADER */
 .header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);box-shadow:var(--shadow-sm)}
 .header-inner{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.header-brand{display:inline-flex;align-items:center;gap:12px}
+.header-brand{display:inline-flex;align-items:center;gap:12px;min-width:0;flex:1}
 .header-logo{width:52px;height:52px;flex:none;border-radius:12px;overflow:hidden;background:#fff;display:grid;place-items:center;box-shadow:0 4px 14px -6px rgba(26,95,180,.35);padding:4px;border:1px solid var(--border-color)}
 .header-logo img{width:100%;height:100%;object-fit:contain}
 .header-name{font-family:'Kanit',sans-serif;font-weight:900;font-size:18px;color:var(--primary);display:block;line-height:1.1}
 .header-name span{color:var(--primary-light)}
 .header-tag{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);display:block;margin-top:2px}
-.header-nav{display:flex;align-items:center;gap:10px}
-.header-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:999px;font-family:'Kanit',sans-serif;font-weight:600;font-size:13.5px;transition:all .2s}
+.header-nav{display:flex;align-items:center;gap:10px;flex:none}
+.header-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:999px;font-family:'Kanit',sans-serif;font-weight:600;font-size:13.5px;transition:all .2s;white-space:nowrap}
 .header-btn:hover{transform:translateY(-1px)}
 .header-btn-phone{background:var(--primary);color:#fff}
 .header-btn-phone .ico{color:#7dd3fc;font-size:15px}
 .header-btn-line{background:var(--accent);color:#fff}
 
+/* HERO */
 .hero{position:relative;overflow:hidden;padding:75px 20px 95px;text-align:center;color:#fff;background:radial-gradient(900px 500px at 12% -10%,rgba(26,95,180,.55) 0%,transparent 62%),radial-gradient(700px 400px at 88% 0%,rgba(74,168,224,.4) 0%,transparent 58%),linear-gradient(165deg,#061530 0%,#0a1f44 50%,#040d22 100%)}
 .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 75%);-webkit-mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 75%);pointer-events:none}
 .hero-inner{position:relative;z-index:2;max-width:840px;margin:0 auto}
@@ -207,7 +198,10 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .hero-cta .b-line{background:var(--accent);color:#fff}
 .hero-cta .b-phone{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px)}
 
+/* MAIN */
 .main{max-width:1200px;margin:-40px auto 60px;padding:0 20px;position:relative;z-index:5}
+
+/* CONTACT STRIP */
 .contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:16px;background:#fff;border:1px solid var(--border-color);border-radius:20px;box-shadow:var(--shadow-md);margin-bottom:36px}
 .contact{display:flex;align-items:center;gap:12px;padding:10px;border-radius:12px;transition:background .2s}
 .contact:hover{background:#f6f9fe}
@@ -218,6 +212,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .contact-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-weight:600;display:block}
 .contact-value{font-family:'Kanit',sans-serif;font-size:15px;font-weight:600;color:var(--primary)}
 
+/* TRUST BADGES */
 .trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:48px}
 .trust-item{background:#fff;border:1px solid var(--border-color);border-radius:16px;padding:18px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--shadow-sm);transition:transform .2s}
 .trust-item:hover{transform:translateY(-2px)}
@@ -226,11 +221,13 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .trust-item h4{font-size:15px;margin-bottom:3px}
 .trust-item p{font-size:12.5px;color:var(--text-muted);line-height:1.5}
 
+/* SECTION HEAD */
 .section-head{text-align:center;margin-bottom:28px}
 .section-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--primary-light);background:#eef5fd;padding:5px 14px;border-radius:999px;margin-bottom:8px;font-family:'Kanit',sans-serif}
 .section-head h2{font-size:clamp(22px,4vw,32px);margin-bottom:8px}
 .section-head p{color:var(--text-muted);font-size:14.5px;max-width:520px;margin:0 auto}
 
+/* TOOLBAR */
 .toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;margin-bottom:24px;background:#fff;border:1px solid var(--border-color);border-radius:16px;box-shadow:var(--shadow-sm)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{font-family:inherit;font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;border:1px solid var(--border-color);background:#fff;color:var(--text-muted);cursor:pointer;transition:all .2s}
@@ -239,6 +236,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .search-box{display:flex;align-items:center;gap:8px;background:#f6f9fe;border:1px solid var(--border-color);padding:6px 14px;border-radius:999px;width:100%;max-width:280px}
 .search-box input{border:0;background:transparent;outline:none;font-family:inherit;font-size:13px;width:100%;color:var(--text-dark)}
 
+/* CARD GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:60px}
 .card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border-color);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm);transition:all .3s}
 .card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
@@ -255,6 +253,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .price-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
 .price{font-family:'Kanit',sans-serif;font-size:24px;font-weight:700;color:var(--primary-light);line-height:1.1}
 .price-call{font-size:20px;color:#a16207}
+.price small{font-size:14px;color:var(--text-muted)}
 .note{font-size:11.5px;background:#eef5fd;color:#154a92;padding:3px 10px;border-radius:6px;font-weight:600}
 .note-green{background:#ecfdf5;color:#059669}
 .note-amber{background:#fef3c7;color:#a16207}
@@ -272,6 +271,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .tags li .ico{color:#2563eb}
 .tags-amber li{color:#92400e;background:#fef3c7;border-color:#fde68a}
 
+/* LITE YOUTUBE */
 .video{margin-bottom:14px;padding-top:12px;border-top:1px dashed var(--border-color)}
 .video-label{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
 .video-label .ico{color:#ef4444}
@@ -285,6 +285,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .video-play-btn svg{width:20px;height:20px;fill:#fff;stroke:none;margin-left:3px}
 .video-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+/* ACTIONS */
 .actions{display:flex;gap:10px;margin-top:auto;padding-top:8px}
 .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 14px;border-radius:12px;font-family:'Kanit',sans-serif;font-size:13.5px;font-weight:600;border:0;cursor:pointer;transition:all .2s;text-decoration:none}
 .btn:hover{transform:translateY(-1px)}
@@ -295,6 +296,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .btn-call:hover{background:#040d22}
 .empty-state{grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--text-muted);display:none}
 
+/* MORTGAGE CALCULATOR */
 .calc-section{background:#fff;border:1px solid var(--border-color);border-radius:24px;padding:32px 24px;margin:0 auto 60px;box-shadow:var(--shadow-md);max-width:900px}
 .calc-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;margin-top:20px}
 .calc-inputs{display:flex;flex-direction:column;gap:16px}
@@ -306,6 +308,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .calc-result h3{font-size:36px;color:#fff;font-weight:700;margin:8px 0;line-height:1.1;font-family:'Kanit',sans-serif}
 .calc-result p{font-size:12.5px;color:#a5b4fc;line-height:1.5}
 
+/* FAQ */
 .faq-section{max-width:900px;margin:0 auto;padding:0}
 .faq-list{display:flex;flex-direction:column;gap:12px}
 .faq-item{background:#fff;border:1px solid var(--border-color);border-radius:16px;overflow:hidden;transition:all .25s;box-shadow:var(--shadow-sm)}
@@ -318,6 +321,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .faq-answer{padding:0 22px 20px;color:#475569;font-size:14.5px;line-height:1.75}
 .faq-answer strong{color:var(--primary);font-weight:700}
 
+/* FOOTER */
 .footer{background:linear-gradient(165deg,#0a1f44,#040d22);color:#8fa1c7;padding:50px 20px 24px;margin-top:70px;position:relative;overflow:hidden}
 .footer::before{content:'';position:absolute;top:-40%;left:50%;width:80%;height:80%;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(26,95,180,.25),transparent);filter:blur(60px);pointer-events:none}
 .footer-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
@@ -338,18 +342,39 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .footer-stats{display:inline-flex;align-items:center;gap:6px;color:#7dd3fc}
 .footer-stats .ico{font-size:14px}
 
+/* MOBILE BAR */
 .mobile-bar{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--border-color);padding:10px 16px;display:flex;gap:10px;box-shadow:0 -4px 16px rgba(0,0,0,.1)}
 @media(min-width:769px){.mobile-bar{display:none}}
 .mobile-bar .btn{padding:10px;font-size:14px}
 
+/* RESPONSIVE */
 @media (max-width:820px){
   .footer-top{grid-template-columns:1fr;gap:24px}
   .calc-grid{grid-template-columns:1fr}
 }
 @media (max-width:640px){
+  .header-inner{padding:10px 14px}
   .header-logo{width:46px;height:46px}
   .header-name{font-size:15px}
-  .header-btn{padding:8px 14px;font-size:12.5px}
+  .header-tag{font-size:8.5px;letter-spacing:.1em}
+
+  /* ✅ FIX: ปุ่ม Header แสดงแค่ไอคอนบนมือถือ */
+  .header-btn{
+    width:42px;
+    height:42px;
+    padding:0;
+    justify-content:center;
+    border-radius:50%;
+    flex:none;
+  }
+  .header-btn .header-btn-text{display:none}
+  .header-btn .ico{
+    font-size:18px;
+    width:18px;
+    height:18px;
+  }
+  .header-nav{gap:8px}
+
   .hero{padding:50px 16px 75px}
   .hero h1{font-size:26px}
   .main{padding:0 14px}
@@ -388,6 +413,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 <symbol id="s-docs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
 </svg>
 
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
     <a class="header-brand" href="#top">
@@ -400,12 +426,19 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
       </span>
     </a>
     <nav class="header-nav">
-      <a class="header-btn header-btn-phone" href="tel:0838799635"><svg class="ico"><use href="#s-phone"/></svg><span>083-879-9635</span></a>
-      <a class="header-btn header-btn-line" href="https://line.me/ti/p/~0838799635" target="_blank" rel="noopener noreferrer"><svg class="ico"><use href="#s-chat"/></svg><span>LINE</span></a>
+      <a class="header-btn header-btn-phone" href="tel:0838799635" aria-label="โทร 083-879-9635">
+        <svg class="ico"><use href="#s-phone"/></svg>
+        <span class="header-btn-text">083-879-9635</span>
+      </a>
+      <a class="header-btn header-btn-line" href="https://line.me/ti/p/~0838799635" target="_blank" rel="noopener noreferrer" aria-label="แชท LINE">
+        <svg class="ico"><use href="#s-chat"/></svg>
+        <span class="header-btn-text">LINE</span>
+      </a>
     </nav>
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-inner">
     <span class="hero-badge"><span class="hero-dot"></span> นายหน้ามืออาชีพ · ปรึกษาฟรี ไม่มีค่าใช้จ่ายล่วงหน้า</span>
@@ -418,6 +451,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
   </div>
 </section>
 
+<!-- MAIN -->
 <main class="main">
 
   <section class="contacts">
