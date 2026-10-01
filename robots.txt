@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://thaitrue-true-sys.github.io/speedrealasset/sitemap.xml
+
+# บล็อก Bot ไม่จำเป็น
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
