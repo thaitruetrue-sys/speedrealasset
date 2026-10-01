@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- หน้าภาษาไทย (Default) -->
   <url>
-    <loc>https://thaitrue-true-sys.github.io/speedrealasset/</loc>
-    <lastmod>2026-01-01</lastmod>
+    <loc>https://thaitruetrue-sys.github.io/speedrealasset/</loc>
+    <xhtml:link rel="alternate" hreflang="th" href="https://thaitruetrue-sys.github.io/speedrealasset/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thaitruetrue-sys.github.io/speedrealasset/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thaitruetrue-sys.github.io/speedrealasset/"/>
+    <lastmod>2025-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://lh3.googleusercontent.com/d/1RQxI3LaCooOiw7ztak4VS6szsCh_oOAa</image:loc>
-      <image:title>Speed Real Asset Logo</image:title>
-    </image:image>
+  </url>
+
+  <!-- หน้าภาษาอังกฤษ -->
+  <url>
+    <loc>https://thaitruetrue-sys.github.io/speedrealasset/en/</loc>
+    <xhtml:link rel="alternate" hreflang="th" href="https://thaitruetrue-sys.github.io/speedrealasset/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thaitruetrue-sys.github.io/speedrealasset/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://thaitruetrue-sys.github.io/speedrealasset/"/>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
 </urlset>
