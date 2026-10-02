@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a1f44">
+<title>Admin Panel · Speed Real Asset</title>
+<link rel="icon" type="image/png" href="https://thaitruetrue-sys.github.io/speedrealasset/logo-main.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;900&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#0a1f44;--pl:#1a5fb4;--accent:#06c755;--bg:#f4f7fc;
+  --muted:#5a6b8c;--border:#e3eaf6;
+  --shadow-sm:0 2px 8px rgba(10,31,68,.06);
+  --shadow-md:0 12px 28px -10px rgba(10,31,68,.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:#1a2f5a;padding:20px;line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Kanit',sans-serif;color:var(--primary);line-height:1.3}
+.wrap{max-width:1200px;margin:0 auto}
+.hidden{display:none!important}
+
+/* LOGIN */
+.login-box{max-width:420px;margin:60px auto;background:#fff;padding:36px 32px;border-radius:22px;box-shadow:var(--shadow-md)}
+.login-box h1{font-size:22px;margin-bottom:6px;text-align:center}
+.login-box .sub{color:var(--muted);margin-bottom:24px;font-size:13.5px;text-align:center}
+.login-logo{width:64px;height:64px;margin:0 auto 18px;background:#fff;border-radius:16px;padding:6px;box-shadow:0 8px 20px -8px rgba(26,95,180,.4);border:1px solid var(--border);display:grid;place-items:center}
+.login-logo img{width:100%;height:100%;object-fit:contain}
+.login-err{color:#dc2626;font-size:13px;margin-top:12px;text-align:center;min-height:20px}
+
+/* FORM */
+label{display:block;font-size:13px;font-weight:600;color:var(--primary);margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:#f6f9fe;outline:none;color:#0a1f44;transition:all .2s;margin-bottom:14px}
+input:focus,select:focus,textarea:focus{border-color:var(--pl);background:#fff;box-shadow:0 0 0 3px rgba(26,95,180,.1)}
+textarea{resize:vertical;min-height:60px}
+small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;margin-bottom:12px;font-weight:400}
+
+/* BUTTONS */
+.btn{padding:11px 22px;border-radius:11px;border:0;font-family:'Kanit',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;line-height:1}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.btn-primary{background:var(--primary);color:#fff;width:100%}
+.btn-primary:hover:not(:disabled){background:#040d22}
+.btn-green{background:var(--accent);color:#fff}
+.btn-green:hover:not(:disabled){background:#05a347}
+.btn-gray{background:#e5e7eb;color:#374151}
+.btn-gray:hover:not(:disabled){background:#d1d5db}
+.btn-red{background:#dc2626;color:#fff;padding:7px 14px;font-size:12.5px}
+.btn-red:hover:not(:disabled){background:#b91c1c}
+.btn-blue{background:var(--pl);color:#fff;padding:7px 14px;font-size:12.5px}
+.btn-blue:hover:not(:disabled){background:#1d4ed8}
+.btn-amber{background:#f59e0b;color:#fff;padding:7px 14px;font-size:12.5px}
+.btn-amber:hover:not(:disabled){background:#d97706}
+
+/* TOPBAR */
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:12px;background:#fff;padding:16px 22px;border-radius:16px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+.topbar-brand{display:flex;align-items:center;gap:12px}
+.topbar-brand img{width:38px;height:38px;object-fit:contain;background:#fff;border-radius:9px;padding:3px;border:1px solid var(--border)}
+.topbar-brand h1{font-size:18px;margin-bottom:2px}
+.topbar-brand .user{font-size:12px;color:var(--muted);display:block}
+.topbar-brand .user strong{color:var(--pl)}
+
+/* PANEL */
+.panel{background:#fff;border-radius:18px;padding:26px;box-shadow:var(--shadow-sm);margin-bottom:22px;border:1px solid var(--border)}
+.panel h2{font-size:18px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.panel h2 .badge-count{font-size:12.5px;color:var(--muted);font-weight:500;background:#f1f5f9;padding:4px 12px;border-radius:999px;font-family:'Sarabun',sans-serif}
+
+/* GRID */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+@media(max-width:760px){.row,.row-3{grid-template-columns:1fr}}
+
+/* LANG TABS */
+.lang-tabs{display:flex;gap:8px;margin-bottom:20px;border-bottom:2px solid var(--border);padding-bottom:0}
+.lang-tab{padding:10px 24px;border:0;background:transparent;font-family:'Kanit',sans-serif;font-weight:600;font-size:14px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:8px 8px 0 0}
+.lang-tab:hover{background:#f6f9fe;color:var(--primary)}
+.lang-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.lang-panel{display:none}
+.lang-panel.active{display:block}
+
+/* UPLOAD */
+.upload-zone{border:2px dashed var(--border);border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:#f9fbfe;margin-bottom:16px}
+.upload-zone:hover{border-color:var(--pl);background:#eef5fd}
+.upload-zone.dragover{border-color:var(--accent);background:#ecfdf5;transform:scale(1.01)}
+.upload-zone input{display:none}
+.upload-zone .icon-up{font-size:36px;margin-bottom:8px}
+.upload-zone strong{color:var(--pl)}
+.upload-zone .up-status{font-size:12px;color:var(--muted);margin-top:8px}
+.preview{margin:12px auto 0;max-width:260px;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px -6px rgba(0,0,0,.2);position:relative}
+.preview img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
+.preview .remove{position:absolute;top:8px;right:8px;width:28px;height:28px;background:rgba(220,38,38,.9);border:0;color:#fff;border-radius:50%;cursor:pointer;font-size:16px;display:grid;place-items:center;line-height:1}
+
+/* LIST */
+.list-item{display:grid;grid-template-columns:80px 1fr auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;background:#f9fbfe;transition:all .2s}
+.list-item:hover{background:#fff;border-color:#a8d8f0;box-shadow:var(--shadow-sm)}
+.list-item img{width:80px;height:60px;object-fit:cover;border-radius:9px;background:#e2e8f0}
+.list-item .info h4{font-size:14px;margin-bottom:4px;line-height:1.3}
+.list-item .info p{font-size:12px;color:var(--muted);line-height:1.3}
+.list-item .info .ref{display:inline-block;font-size:10.5px;background:#eef5fd;padding:2px 9px;border-radius:5px;color:var(--pl);font-weight:700;margin-bottom:5px;font-family:'Kanit',sans-serif;letter-spacing:.03em}
+.list-item .info .st-available{background:#ecfdf5;color:#059669}
+.list-item .info .st-sold{background:#fee2e2;color:#991b1b}
+.list-item .info .st-hidden{background:#fef3c7;color:#92400e}
+.list-item .actions-cell{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:640px){
+  .list-item{grid-template-columns:60px 1fr}
+  .list-item img{width:60px;height:48px}
+  .list-item .actions-cell{grid-column:1/-1;justify-content:stretch}
+  .list-item .actions-cell .btn{flex:1}
+}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:36px 20px;color:var(--muted)}
+.empty .big{font-size:44px;margin-bottom:10px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;padding:14px 22px;border-radius:12px;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);font-size:14px;z-index:9999;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:340px}
+.toast.show{transform:translateY(0)}
+.toast.err{background:#dc2626}
+.toast.ok{background:var(--accent)}
+
+/* SPINNER */
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SECTION DIVIDER */
+.divider{border:0;border-top:1px dashed var(--border);margin:20px 0}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div class="login-box" id="loginBox">
+  <div class="login-logo">
+    <img src="https://thaitruetrue-sys.github.io/speedrealasset/logo-main.png" alt="SRA">
+  </div>
+  <h1>🔐 เข้าสู่ระบบจัดการ</h1>
+  <p class="sub">Speed Real Asset · Admin Panel</p>
+  <label>อีเมล</label>
+  <input type="email" id="loginEmail" placeholder="admin@example.com" autocomplete="username">
+  <label>รหัสผ่าน</label>
+  <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+  <button class="btn btn-primary" id="loginBtn">เข้าสู่ระบบ</button>
+  <div class="login-err" id="loginErr"></div>
+</div>
+
+<!-- ============ ADMIN ============ -->
+<div class="wrap hidden" id="adminWrap">
+
+  <div class="topbar">
+    <div class="topbar-brand">
+      <img src="https://thaitruetrue-sys.github.io/speedrealasset/logo-main.png" alt="SRA">
+      <div>
+        <h1>🎛️ จัดการทรัพย์</h1>
+        <span class="user">เข้าสู่ระบบ: <strong id="userEmail">—</strong></span>
+      </div>
+    </div>
+    <button class="btn btn-gray" id="logoutBtn">ออกจากระบบ</button>
+  </div>
+
+  <!-- ========== FORM ========== -->
+  <div class="panel">
+    <h2 id="formTitle">➕ เพิ่มทรัพย์ใหม่</h2>
+    <input type="hidden" id="editId">
+
+    <!-- รูปภาพ -->
+    <label>รูปภาพ (บีบเป็น WebP อัตโนมัติ)</label>
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="imageInput" accept="image/*">
+      <div id="uploadText">
+        <div class="icon-up">📸</div>
+        <strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br>
+        <span class="up-status">รองรับ JPG / PNG · บีบ ≤ 300 KB อัตโนมัติ</span>
+      </div>
+      <div class="preview hidden" id="previewBox">
+        <img id="previewImg" alt="preview">
+        <button type="button" class="remove" id="removeImgBtn" title="ลบรูป">×</button>
+      </div>
+    </div>
+
+    <!-- ฟิลด์กลาง -->
+    <div class="row-3">
+      <div>
+        <label>รหัสทรัพย์ (ref)</label>
+        <input id="fRef" placeholder="SRA-1024">
+      </div>
+      <div>
+        <label>สถานะ</label>
+        <select id="fStatus">
+          <option value="available">✅ ว่าง (แสดงเว็บ)</option>
+          <option value="sold">🔴 ขายแล้ว (ซ่อน)</option>
+          <option value="hidden">🟡 ซ่อนชั่วคราว</option>
+        </select>
+      </div>
+      <div>
+        <label>ประเภท (คั่นด้วย ,)</label>
+        <input id="fType" placeholder="sale, condo">
+        <small class="hint">all / sale / rent / condo / land / house</small>
+      </div>
+    </div>
+
+    <div class="row-3">
+      <div>
+        <label>ราคา (แสดงผล)</label>
+        <input id="fPriceText" placeholder="฿ 3,500,000">
+      </div>
+      <div>
+        <label>ราคา (ตัวเลข)</label>
+        <input type="number" id="fPriceNumber" placeholder="3500000">
+      </div>
+      <div>
+        <label>สีป้าย (badgeClass)</label>
+        <select id="fBadgeClass">
+          <option value="b-condo">🟣 ม่วง (คอนโด)</option>
+          <option value="b-land">🟤 น้ำตาล (ที่ดิน)</option>
+          <option value="b-hot">🔴 แดง (ยอดนิยม)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>YouTube Video ID (optional)</label>
+        <input id="fVideoId" placeholder="W0v2z146zqY">
+      </div>
+      <div>
+        <label>สีหมายเหตุ (noteClass)</label>
+        <select id="fNoteClass">
+          <option value="note-green">🟢 เขียว (ราคาต่อ ตร.ม.)</option>
+          <option value="">🔵 ฟ้า (default)</option>
+          <option value="note-amber">🟡 เหลือง (เตือน)</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Language Tabs -->
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="th" type="button">🇹🇭 ภาษาไทย</button>
+      <button class="lang-tab" data-lang="en" type="button">🇬🇧 English</button>
+    </div>
+
+    <!-- PANEL TH -->
+    <div class="lang-panel active" data-lang="th">
+      <div class="row">
+        <div>
+          <label>ป้ายมุมรูป</label>
+          <input id="fBadge" placeholder="คอนโด / ที่ดิน / 🔥 ยอดนิยม">
+        </div>
+        <div>
+          <label>หมายเหตุ</label>
+          <input id="fNote" placeholder="≈ ฿133,180 / ตร.ม.">
+        </div>
+      </div>
+
+      <label>ชื่อทรัพย์</label>
+      <input id="fTitle" placeholder="Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม.">
+
+      <label>ทำเล</label>
+      <input id="fLocation" placeholder="ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู">
+
+      <label>คำอธิบายเพิ่มเติม (optional)</label>
+      <textarea id="fDesc" rows="2" placeholder="<strong>ไฮไลท์:</strong> ..."></textarea>
+
+      <label>Specs — บรรทัดละ 1 รายการ</label>
+      <textarea id="fSpecs" rows="4" placeholder="s-bed><b>1</b> ห้องนอน
+s-bath><b>1</b> ห้องน้ำ
+s-area><b>26.28</b> ตร.ม.
+s-car>จอด <b>1</b> คัน"></textarea>
+      <small class="hint">Icons: s-bed, s-bath, s-area, s-car, s-home, s-ruler, s-pin</small>
+
+      <label>Tags — คั่นด้วย ,</label>
+      <input id="fTags" placeholder="ติด BTS, ใกล้เดอะมอลล์">
+    </div>
+
+    <!-- PANEL EN -->
+    <div class="lang-panel" data-lang="en">
+      <div class="row">
+        <div>
+          <label>Badge</label>
+          <input id="fBadgeEn" placeholder="Condo / Land / 🔥 Hot Deal">
+        </div>
+        <div>
+          <label>Note</label>
+          <input id="fNoteEn" placeholder="≈ ฿133,180 / sq.m.">
+        </div>
+      </div>
+
+      <label>Title</label>
+      <input id="fTitleEn" placeholder="Whizdom Station Ratchada – Thapra 26.28 sq.m.">
+
+      <label>Location</label>
+      <input id="fLocationEn" placeholder="Opposite The Mall Thapra · BTS Talat Phlu">
+
+      <label>Description (optional)</label>
+      <textarea id="fDescEn" rows="2" placeholder="<strong>Highlight:</strong> ..."></textarea>
+
+      <label>Specs — one per line</label>
+      <textarea id="fSpecsEn" rows="4" placeholder="s-bed><b>1</b> Bedroom
+s-bath><b>1</b> Bathroom
+s-area><b>26.28</b> sq.m.
+s-car>Parking for <b>1</b> car"></textarea>
+
+      <label>Tags — comma separated</label>
+      <input id="fTagsEn" placeholder="BTS Access, Near The Mall">
+      <small class="hint">💡 ถ้าเว้นว่างไว้ หน้า EN จะใช้ข้อมูลภาษาไทยแทนอัตโนมัติ</small>
+    </div>
+
+    <hr class="divider">
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-green" id="saveBtn" style="flex:2;min-width:180px">💾 บันทึก</button>
+      <button class="btn btn-gray" id="cancelBtn" style="flex:1;min-width:120px">ยกเลิก / ล้างฟอร์ม</button>
+    </div>
+  </div>
+
+  <!-- ========== LIST ========== -->
+  <div class="panel">
+    <h2>
+      📋 รายการทรัพย์ทั้งหมด
+      <span class="badge-count" id="countBadge">—</span>
+    </h2>
+    <div id="listWrap">
+      <div class="empty"><div class="big">⏳</div>กำลังโหลด...</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ========== FIREBASE SDK ========== -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import {
+  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import {
+  getFirestore, collection, doc, addDoc, updateDoc, deleteDoc,
+  onSnapshot, serverTimestamp, query, orderBy
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import {
+  getStorage, ref as sRef, uploadBytes, getDownloadURL, deleteObject
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
+
+/* ============================================================
+   🔴 แก้ตรงนี้ — ใส่ firebaseConfig ของคุณ
+   ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "estate-b1012.firebaseapp.com",
+  projectId: "estate-b1012",
+  storageBucket: "estate-b1012.appspot.com",
+  messagingSenderId: "1234567890",
+  appId: "1:1234567890:web:abc123def456"
+};
+/* ============================================================ */
+
+const app     = initializeApp(firebaseConfig);
+const auth    = getAuth(app);
+const db      = getFirestore(app);
+const storage = getStorage(app);
+
+const $ = id => document.getElementById(id);
+
+/* ============ TOAST ============ */
+let toastTimer;
+function toast(msg, type = '') {
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.className = 'toast', 3200);
+}
+
+/* ============ COMPRESS IMAGE → WebP ============ */
+async function compressImage(file, maxW = 1600, quality = 0.82) {
+  const bmp = await createImageBitmap(file);
+  const scale = Math.min(1, maxW / bmp.width);
+  const canvas = document.createElement('canvas');
+  canvas.width  = Math.round(bmp.width  * scale);
+  canvas.height = Math.round(bmp.height * scale);
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(bmp, 0, 0, canvas.width, canvas.height);
+  return new Promise(resolve => canvas.toBlob(resolve, 'image/webp', quality));
+}
+
+/* ============ STATE ============ */
+let compressedBlob = null;      // Blob รูปใหม่ที่รออัปโหลด
+let existingImageUrl = '';      // URL รูปที่มีอยู่เดิม (ตอนแก้ไข)
+let existingImagePath = '';     // Storage path ของรูปเดิม
+let cache = {};                 // เก็บข้อมูลทรัพย์ทั้งหมด (id → data)
+
+/* ============ LOGIN ============ */
+$('loginBtn').addEventListener('click', async () => {
+  const btn = $('loginBtn');
+  const email = $('loginEmail').value.trim();
+  const pass  = $('loginPass').value;
+  $('loginErr').textContent = '';
+  if (!email || !pass) { $('loginErr').textContent = 'กรอกอีเมลและรหัสผ่าน'; return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> กำลังเข้าสู่ระบบ...';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch (e) {
+    console.error(e);
+    const map = {
+      'auth/invalid-email': 'อีเมลไม่ถูกต้อง',
+      'auth/user-not-found': 'ไม่พบบัญชีนี้',
+      'auth/wrong-password': 'รหัสผ่านไม่ถูกต้อง',
+      'auth/invalid-credential': 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
+      'auth/too-many-requests': 'ลองผิดหลายครั้งเกินไป รอสักครู่'
+    };
+    $('loginErr').textContent = map[e.code] || 'เข้าสู่ระบบไม่สำเร็จ: ' + e.code;
+  }
+  btn.disabled = false;
+  btn.textContent = 'เข้าสู่ระบบ';
+});
+
+// กด Enter ในช่องรหัสผ่าน = login
+$('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') $('loginBtn').click();
+});
+
+$('logoutBtn').addEventListener('click', () => {
+  if (confirm('ออกจากระบบ?')) signOut(auth);
+});
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    $('loginBox').classList.add('hidden');
+    $('adminWrap').classList.remove('hidden');
+    $('userEmail').textContent = user.email;
+    subscribeList();
+  } else {
+    $('loginBox').classList.remove('hidden');
+    $('adminWrap').classList.add('hidden');
+  }
+});
+
+/* ============ LANGUAGE TABS ============ */
+document.querySelectorAll('.lang-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelector(`.lang-panel[data-lang="${tab.dataset.lang}"]`).classList.add('active');
+  });
+});
+
+/* ============ IMAGE UPLOAD ============ */
+const uploadZone = $('uploadZone');
+uploadZone.addEventListener('click', e => {
+  if (e.target.id === 'removeImgBtn') return;
+  $('imageInput').click();
+});
+uploadZone.addEventListener('dragover', e => {
+  e.preventDefault();
+  uploadZone.classList.add('dragover');
+});
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('dragover');
+  if (e.dataTransfer.files[0]) handleImageFile(e.dataTransfer.files[0]);
+});
+$('imageInput').addEventListener('change', e => {
+  if (e.target.files[0]) handleImageFile(e.target.files[0]);
+});
+$('removeImgBtn').addEventListener('click', e => {
+  e.stopPropagation();
+  clearImage();
+});
+
+async function handleImageFile(file) {
+  if (!file.type.startsWith('image/')) {
+    toast('❌ ต้องเป็นไฟล์รูปภาพเท่านั้น', 'err');
+    return;
+  }
+  if (file.size > 15 * 1024 * 1024) {
+    toast('❌ ไฟล์ใหญ่เกิน 15 MB', 'err');
+    return;
+  }
+
+  $('uploadText').innerHTML = '<div class="icon-up">⏳</div>กำลังบีบรูป...';
+
+  try {
+    compressedBlob = await compressImage(file);
+    const url = URL.createObjectURL(compressedBlob);
+    $('previewImg').src = url;
+    $('previewBox').classList.remove('hidden');
+    $('uploadText').innerHTML = `<div class="icon-up">✅</div>พร้อมบันทึก · ขนาด ${(compressedBlob.size/1024).toFixed(0)} KB`;
+  } catch (err) {
+    console.error(err);
+    toast('❌ บีบรูปไม่สำเร็จ', 'err');
+    $('uploadText').innerHTML = '<div class="icon-up">📸</div><strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง';
+  }
+}
+
+function clearImage() {
+  compressedBlob = null;
+  existingImageUrl = '';
+  existingImagePath = '';
+  $('imageInput').value = '';
+  $('previewBox').classList.add('hidden');
+  $('previewImg').src = '';
+  $('uploadText').innerHTML = `
+    <div class="icon-up">📸</div>
+    <strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br>
+    <span class="up-status">รองรับ JPG / PNG · บีบ ≤ 300 KB อัตโนมัติ</span>`;
+}
+
+/* ============ PARSE SPECS ============ */
+function parseSpecs(text) {
+  return text.split('\n')
+    .map(l => l.trim())
+    .filter(Boolean)
+    .map(line => {
+      const idx = line.indexOf('>');
+      if (idx === -1) return { icon: 's-check', text: line };
+      return {
+        icon: line.slice(0, idx).trim(),
+        text: line.slice(idx + 1).trim()
+      };
+    });
+}
+
+function specsToString(arr) {
+  return (arr || []).map(s => `${s.icon}>${s.text}`).join('\n');
+}
+
+/* ============ SAVE ============ */
+$('saveBtn').addEventListener('click', async () => {
+  const btn = $('saveBtn');
+  const editId = $('editId').value;
+  const isEdit = !!editId;
+
+  // Validate
+  if (!$('fRef').value.trim())      { toast('❌ กรุณากรอกรหัสทรัพย์', 'err'); return; }
+  if (!$('fTitle').value.trim())    { toast('❌ กรุณากรอกชื่อทรัพย์ (TH)', 'err'); return; }
+  if (!$('fPriceText').value.trim()){ toast('❌ กรุณากรอกราคา', 'err'); return; }
+  if (!compressedBlob && !existingImageUrl) {
+    toast('❌ กรุณาเลือกรูปภาพ', 'err');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> กำลังบันทึก...';
+
+  try {
+    // 1) อัปโหลดรูป (ถ้ามีใหม่)
+    let imageUrl  = existingImageUrl;
+    let imagePath = existingImagePath;
+
+    if (compressedBlob) {
+      const fileName = `properties/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.webp`;
+      const fileRef = sRef(storage, fileName);
+      await uploadBytes(fileRef, compressedBlob, { contentType: 'image/webp' });
+      imageUrl  = await getDownloadURL(fileRef);
+      imagePath = fileName;
+
+      // ลบรูปเก่า
+      if (existingImagePath) {
+        try { await deleteObject(sRef(storage, existingImagePath)); } catch (e) { /* ignore */ }
+      }
+    }
+
+    // 2) สร้างข้อมูล
+    const data = {
+      // ฟิลด์กลาง
+      ref:           $('fRef').value.trim(),
+      status:        $('fStatus').value,
+      type:          $('fType').value.split(',').map(t => t.trim()).filter(Boolean),
+      badgeClass:    $('fBadgeClass').value,
+      noteClass:     $('fNoteClass').value,
+      priceText:     $('fPriceText').value.trim(),
+      priceNumber:   Number($('fPriceNumber').value) || 0,
+      imageUrl, imagePath,
+      videoId:       $('fVideoId').value.trim(),
+
+      // TH
+      badge:         $('fBadge').value.trim(),
+      title:         $('fTitle').value.trim(),
+      location:      $('fLocation').value.trim(),
+      desc:          $('fDesc').value.trim(),
+      note:          $('fNote').value.trim(),
+      specs:         parseSpecs($('fSpecs').value),
+      tags:          $('fTags').value.split(',').map(t => t.trim()).filter(Boolean),
+
+      // EN (fallback = TH ตอนแสดงผล)
+      badge_en:      $('fBadgeEn').value.trim(),
+      title_en:      $('fTitleEn').value.trim(),
+      location_en:   $('fLocationEn').value.trim(),
+      desc_en:       $('fDescEn').value.trim(),
+      note_en:       $('fNoteEn').value.trim(),
+      specs_en:      parseSpecs($('fSpecsEn').value),
+      tags_en:       $('fTagsEn').value.split(',').map(t => t.trim()).filter(Boolean),
+
+      updatedAt:     serverTimestamp()
+    };
+
+    // 3) บันทึก
+    if (isEdit) {
+      await updateDoc(doc(db, 'properties', editId), data);
+      toast('✅ อัปเดตสำเร็จ', 'ok');
+    } else {
+      data.createdAt = serverTimestamp();
+      await addDoc(collection(db, 'properties'), data);
+      toast('✅ เพิ่มทรัพย์สำเร็จ', 'ok');
+    }
+
+    resetForm();
+  } catch (e) {
+    console.error(e);
+    toast('❌ เกิดข้อผิดพลาด: ' + (e.message || e.code), 'err');
+  }
+  btn.disabled = false;
+  btn.textContent = '💾 บันทึก';
+});
+
+/* ============ RESET FORM ============ */
+function resetForm() {
+  const fields = [
+    'fRef','fType','fPriceText','fPriceNumber','fVideoId',
+    'fBadge','fTitle','fLocation','fDesc','fNote','fSpecs','fTags',
+    'fBadgeEn','fTitleEn','fLocationEn','fDescEn','fNoteEn','fSpecsEn','fTagsEn',
+    'editId'
+  ];
+  fields.forEach(id => $(id).value = '');
+  $('fStatus').value = 'available';
+  $('fBadgeClass').value = 'b-condo';
+  $('fNoteClass').value = 'note-green';
+  clearImage();
+  $('formTitle').textContent = '➕ เพิ่มทรัพย์ใหม่';
+
+  // กลับไปแท็บ TH
+  document.querySelector('.lang-tab[data-lang="th"]').click();
+}
+
+$('cancelBtn').addEventListener('click', () => {
+  if (confirm('ล้างฟอร์มทั้งหมด?')) resetForm();
+});
+
+/* ============ SUBSCRIBE LIST (real-time) ============ */
+function subscribeList() {
+  const q = query(collection(db, 'properties'), orderBy('createdAt', 'desc'));
+  onSnapshot(q, snap => {
+    cache = {};
+    const wrap = $('listWrap');
+
+    if (snap.empty) {
+      wrap.innerHTML = '<div class="empty"><div class="big">📭</div>ยังไม่มีรายการทรัพย์<br><small>เพิ่มรายการแรกด้านบนได้เลย</small></div>';
+      $('countBadge').textContent = '0 รายการ';
+      return;
+    }
+
+    $('countBadge').textContent = snap.size + ' รายการ';
+    wrap.innerHTML = snap.docs.map(d => {
+      const p = d.data();
+      cache[d.id] = p;
+
+      const stClass = p.status === 'sold' ? 'st-sold'
+                    : p.status === 'hidden' ? 'st-hidden'
+                    : 'st-available';
+      const stText  = p.status === 'sold' ? 'ขายแล้ว'
+                    : p.status === 'hidden' ? 'ซ่อน'
+                    : 'ว่าง';
+
+      const img = p.imageUrl || '';
+      return `
+        <div class="list-item">
+          <img src="${img}" alt="" loading="lazy">
+          <div class="info">
+            <span class="ref ${stClass}">${p.ref || '—'} · ${stText}</span>
+            <h4>${escapeHtml(p.title || '(ไม่มีชื่อ)')}</h4>
+            <p>${escapeHtml(p.priceText || '')} · ${escapeHtml(p.location || '')}</p>
+          </div>
+          <div class="actions-cell">
+            ${p.status !== 'sold' ? `<button class="btn btn-amber" data-act="sold" data-id="${d.id}">ขายแล้ว</button>` : ''}
+            ${p.status !== 'available' ? `<button class="btn btn-green" data-act="available" data-id="${d.id}">เปิดขาย</button>` : ''}
+            <button class="btn btn-blue" data-act="edit" data-id="${d.id}">แก้ไข</button>
+            <button class="btn btn-red" data-act="del" data-id="${d.id}">ลบ</button>
+          </div>
+        </div>`;
+    }).join('');
+
+    // ผูก event ให้ปุ่มต่างๆ
+    wrap.querySelectorAll('[data-act]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const act = btn.dataset.act;
+        if (act === 'edit') return editItem(id);
+        if (act === 'del')  return deleteItem(id);
+        if (act === 'sold' || act === 'available') return changeStatus(id, act);
+      });
+    });
+  }, err => {
+    console.error(err);
+    $('listWrap').innerHTML = '<div class="empty"><div class="big">⚠️</div>โหลดรายการไม่สำเร็จ<br><small>' + err.message + '</small></div>';
+  });
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+/* ============ EDIT ============ */
+function editItem(id) {
+  const p = cache[id];
+  if (!p) return;
+
+  $('editId').value        = id;
+  $('fRef').value          = p.ref || '';
+  $('fStatus').value       = p.status || 'available';
+  $('fType').value         = (p.type || []).join(', ');
+  $('fBadgeClass').value   = p.badgeClass || 'b-condo';
+  $('fNoteClass').value    = p.noteClass || 'note-green';
+  $('fPriceText').value    = p.priceText || '';
+  $('fPriceNumber').value  = p.priceNumber || '';
+  $('fVideoId').value      = p.videoId || '';
+
+  // TH
+  $('fBadge').value        = p.badge || '';
+  $('fTitle').value        = p.title || '';
+  $('fLocation').value     = p.location || '';
+  $('fDesc').value         = p.desc || '';
+  $('fNote').value         = p.note || '';
+  $('fSpecs').value        = specsToString(p.specs);
+  $('fTags').value         = (p.tags || []).join(', ');
+
+  // EN
+  $('fBadgeEn').value      = p.badge_en || '';
+  $('fTitleEn').value      = p.title_en || '';
+  $('fLocationEn').value   = p.location_en || '';
+  $('fDescEn').value       = p.desc_en || '';
+  $('fNoteEn').value       = p.note_en || '';
+  $('fSpecsEn').value      = specsToString(p.specs_en);
+  $('fTagsEn').value       = (p.tags_en || []).join(', ');
+
+  // รูปเดิม
+  compressedBlob     = null;
+  existingImageUrl   = p.imageUrl || '';
+  existingImagePath  = p.imagePath || '';
+  if (existingImageUrl) {
+    $('previewImg').src = existingImageUrl;
+    $('previewBox').classList.remove('hidden');
+    $('uploadText').innerHTML = '<div class="icon-up">🖼️</div>ใช้รูปเดิมอยู่ · คลิกเพื่อเปลี่ยน';
+  }
+
+  $('formTitle').textContent = '✏️ แก้ไข: ' + (p.ref || '');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  toast('📝 โหลดข้อมูลมาแก้ไขแล้ว');
+}
+
+/* ============ CHANGE STATUS ============ */
+async function changeStatus(id, status) {
+  try {
+    await updateDoc(doc(db, 'properties', id), {
+      status,
+      updatedAt: serverTimestamp()
+    });
+    toast(status === 'sold' ? '🔴 ทำเครื่องหมายขายแล้ว' : '✅ เปิดขายอีกครั้ง', 'ok');
+  } catch (e) {
+    toast('❌ เปลี่ยนสถานะไม่สำเร็จ', 'err');
+  }
+}
+
+/* ============ DELETE ============ */
+async function deleteItem(id) {
+  const p = cache[id];
+  if (!p) return;
+  if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nแนะนำ: ถ้าแค่ขายแล้ว ให้กดปุ่ม "ขายแล้ว" แทน — ข้อมูลจะยังอยู่`)) return;
+
+  try {
+    // ลบรูปใน Storage
+    if (p.imagePath) {
+      try { await deleteObject(sRef(storage, p.imagePath)); } catch (e) { /* ignore */ }
+    }
+    await deleteDoc(doc(db, 'properties', id));
+    toast('🗑️ ลบสำเร็จ', 'ok');
+
+    // ถ้ากำลังแก้ไข item นี้อยู่ → รีเซ็ตฟอร์ม
+    if ($('editId').value === id) resetForm();
+  } catch (e) {
+    console.error(e);
+    toast('❌ ลบไม่สำเร็จ: ' + e.message, 'err');
+  }
+}
+</script>
+</body>
+</html>
