@@ -118,7 +118,7 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .lang-panel{display:none}
 .lang-panel.active{display:block}
 
-.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:#f9fbfe;margin-bottom:14px}
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:#f9fbfe;margin-bottom:10px}
 .upload-zone:hover{border-color:var(--pl);background:#eef5fd}
 .upload-zone.dragover{border-color:var(--accent);background:#ecfdf5}
 .upload-zone input{display:none}
@@ -129,7 +129,7 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .preview img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
 .preview .remove{position:absolute;top:6px;right:6px;width:26px;height:26px;background:rgba(220,38,38,.9);border:0;color:#fff;border-radius:50%;cursor:pointer;font-size:14px;display:grid;place-items:center;line-height:1}
 
-.toast{position:fixed;bottom:20px;right:20px;background:var(--primary);color:#fff;padding:13px 20px;border-radius:12px;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);font-size:13.5px;z-index:9999;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:320px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--primary);color:#fff;padding:13px 20px;border-radius:12px;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);font-size:13.5px;z-index:9999;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:360px;line-height:1.4}
 .toast.show{transform:translateY(0)}
 .toast.err{background:#dc2626}
 .toast.ok{background:var(--accent)}
@@ -191,7 +191,7 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 
   <div class="toolbar">
     <h3>📋 รายการทรัพย์ในระบบ <span class="count" id="countBadge">—</span></h3>
-    <span style="font-size:11.5px;color:var(--muted)">☁️ รูปเก็บที่ Cloudinary · 🔄 Real-time</span>
+    <span style="font-size:11.5px;color:var(--muted)">☁️ Cloudinary Upload · 🔄 Real-time Firestore</span>
   </div>
 
   <div class="list-wrap" id="listWrap">
@@ -208,19 +208,25 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
     <div class="panel-body">
       <input type="hidden" id="editId">
 
-      <label>รูปภาพ (บีบเป็น WebP + อัปโหลด Cloudinary)</label>
+      <label>รูปภาพ (อัปโหลด Cloudinary อัตโนมัติ)</label>
       <div class="upload-zone" id="uploadZone">
         <input type="file" id="imageInput" accept="image/*">
         <div id="uploadText">
           <div class="icon-up">📸</div>
           <strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br>
-          <span class="up-status">รองรับ JPG / PNG · บีบอัตโนมัติ</span>
+          <span class="up-status">รองรับ JPG / PNG · บีบรูป WebP อัตโนมัติ</span>
         </div>
         <div class="progress-bar" id="progressBar"><div class="fill" id="progressFill"></div></div>
         <div class="preview hidden" id="previewBox">
           <img id="previewImg" alt="preview">
           <button type="button" class="remove" id="removeImgBtn" title="ลบรูป">×</button>
         </div>
+      </div>
+
+      <div>
+        <label>หรือระบุลิงก์รูปภาพโดยตรง (Image URL สำรอง)</label>
+        <input id="fImageUrlDirect" placeholder="https://images.unsplash.com/... หรือ ลิงก์รูปอื่นๆ">
+        <small class="hint">💡 หากไม่อยากอัปโหลดไฟล์ สามารถวางลิงก์รูปที่นี่ได้โดยตรง</small>
       </div>
 
       <div class="row-3">
@@ -242,7 +248,7 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 
       <div class="row-3">
         <div><label>ราคา (แสดงผล)</label><input id="fPriceText" placeholder="฿ 3,500,000"></div>
-        <div><label>ราคา (ตัวเลข)</label><input type="number" id="fPriceNumber" placeholder="3500000"></div>
+        <div><label>ราคา (ตัวเลขคำนวณ)</label><input type="number" id="fPriceNumber" placeholder="3500000"></div>
         <div>
           <label>สีป้าย</label>
           <select id="fBadgeClass">
@@ -306,7 +312,7 @@ s-car>จอด <b>1</b> คัน"></textarea>
         <textarea id="fSpecsEn" rows="4"></textarea>
         <label>Tags — comma separated</label>
         <input id="fTagsEn" placeholder="BTS Access, Near The Mall">
-        <small class="hint">💡 ถ้าเว้นว่าง หน้า EN จะใช้ข้อมูลภาษาไทยแทนอัตโนมัติ</small>
+        <small class="hint">💡 หากเว้นว่างไว้ หน้า EN จะนำข้อมูลภาษาไทยไปแสดงแทนอัตโนมัติ</small>
       </div>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
@@ -342,7 +348,7 @@ const firebaseConfig = {
 };
 
 /* ============================================================
-   ☁️ Cloudinary Config — ใช้ sra_upload
+   ☁️ Cloudinary Config (ต้องตั้ง Preset เป็น Unsigned)
    ============================================================ */
 const CLOUDINARY_CLOUD_NAME    = "a7jig3ni";
 const CLOUDINARY_UPLOAD_PRESET = "sra_upload";
@@ -360,7 +366,7 @@ function toast(msg, type = '') {
   t.textContent = msg;
   t.className = 'toast show ' + type;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.className = 'toast', 3200);
+  toastTimer = setTimeout(() => t.className = 'toast', 4500);
 }
 
 async function compressImage(file, maxW = 1600, quality = 0.82) {
@@ -395,11 +401,18 @@ function uploadToCloudinary(blob, onProgress) {
         catch (e) { reject(new Error('Invalid JSON response')); }
       } else {
         let errMsg = 'Cloudinary error ' + xhr.status;
-        try { errMsg = JSON.parse(xhr.responseText).error.message || errMsg; } catch (e) {}
+        try {
+          const errRes = JSON.parse(xhr.responseText);
+          errMsg = errRes.error?.message || errMsg;
+        } catch (e) {}
+
+        if (errMsg.includes('API key') || errMsg.includes('preset') || errMsg.includes('whitelist')) {
+          errMsg += ' (กรุณาเข้าไปตั้งค่า Preset "sra_upload" ใน Cloudinary ให้เป็น Unsigned)';
+        }
         reject(new Error(errMsg));
       }
     };
-    xhr.onerror = () => reject(new Error('Network error'));
+    xhr.onerror = () => reject(new Error('Network error: ไม่สามารถเชื่อมต่อ Cloudinary ได้'));
     xhr.send(formData);
   });
 }
@@ -465,9 +478,9 @@ document.querySelectorAll('.lang-tab').forEach(tab => {
 
 $('formToggle').addEventListener('click', () => $('formPanel').classList.toggle('collapsed'));
 
-/* ============ IMPORT 4 รายการเก่า ============ */
+/* ============ IMPORT 4 รายการ ============ */
 const IMPORT_DATA = [
-  {ref:"SRA-1024",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 3,500,000",priceNumber:3500000,imageUrl:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",publicId:"",videoId:"W0v2z146zqY",badge:"คอนโด",title:"Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม. ติด BTS ตลาดพลู",location:"ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",desc:"",note:"≈ ฿133,180 / ตร.ม.",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>26.28</b> ตร.ม."},{icon:"s-car",text:"จอด <b>1</b> คัน"}],tags:["ติด BTS","ใกล้เดอะมอลล์"],badge_en:"Condo",title_en:"Whizdom Station Ratchada – Thapra (26.28 sq.m.) Next to BTS Talat Phlu",location_en:"Opposite The Mall Thapra · BTS Talat Phlu · BRT Ratchaphruek",desc_en:"",note_en:"≈ ฿133,180 / sq.m.",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>26.28</b> sq.m."},{icon:"s-car",text:"Parking for <b>1</b> Car"}],tags_en:["Next to BTS","Near the Mall"]},
+  {ref:"SRA-1024",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 3,500,000",priceNumber:3500000,imageUrl:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",publicId:"",videoId:"W0v2z146zqY",badge:"คอนโด",title:"Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม. ติด BTS ตลาดพลู",location:"ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",desc:"",note:"≈ ฿133,180 / ตร.ม.",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>26.28</b> ตร.ม."},{icon:"s-car",text:"จอด <b>1</b> คัน"}],tags:["ติด BTS","ใกล้เดอะมอลล์"],badge_en:"Condo",title_en:"Whizdom Station Ratchada – Thapra (26.28 sq.m.) Next to BTS ตลาดพลู",location_en:"Opposite The Mall Thapra · BTS Talat Phlu · BRT Ratchaphruek",desc_en:"",note_en:"≈ ฿133,180 / sq.m.",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>26.28</b> sq.m."},{icon:"s-car",text:"Parking for <b>1</b> Car"}],tags_en:["Next to BTS","Near the Mall"]},
   {ref:"SRA-2048",status:"available",type:["sale","land"],badgeClass:"b-land",noteClass:"note-amber",priceText:"📞 ราคาโทรถาม",priceNumber:0,imageUrl:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",publicId:"",videoId:"Rmg51jPXF-s",badge:"🌳 ที่ดิน",title:"ขายที่ดิน บางนาตราด กม.49/10 ทรงสี่เหลี่ยมสวย",location:"ริมถนนบางนาตราด กม.49/10 · สมุทรปราการ",desc:"<strong>ไฮไลท์:</strong> หน้ากว้าง 80 ม. ลึก 100 ม. ติดถนนสายหลัก เหมาะสร้างปั๊มน้ำมัน โกดัง คลังสินค้า หรือโรงงาน",note:"5 ไร่",specs:[{icon:"s-area",text:"<b>5</b> ไร่"},{icon:"s-ruler",text:"กว้าง <b>80</b> ม."},{icon:"s-ruler",text:"ยาว <b>100</b> ม."},{icon:"s-pin",text:"กม. <b>49/10</b>"}],tags:["ปั๊มน้ำมัน","โกดัง/โรงงาน"],badge_en:"🌳 Land",title_en:"Prime Land on Bangna-Trad Km.49/10 (Rectangular Shape)",location_en:"Bangna-Trad Frontage Rd. Km.49/10 · Samut Prakan",desc_en:"<strong>Key Highlight:</strong> Width: 80 m, Depth: 100 m with main road access.",note_en:"5 Rai",specs_en:[{icon:"s-area",text:"<b>5</b> Rai"},{icon:"s-ruler",text:"Width: <b>80</b> m"},{icon:"s-ruler",text:"Depth: <b>100</b> m"},{icon:"s-pin",text:"Km. <b>49/10</b>"}],tags_en:["Petrol Station","Warehouse / Factory"]},
   {ref:"SRA-3072",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 2,100,000",priceNumber:2100000,imageUrl:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",publicId:"",videoId:"f_VwtA_PfLI",badge:"คอนโด",title:"Lumpini Place Ratchada ชั้น 11 วิวสูง ใกล้ BTS ตลาดพลู",location:"The Mall Lifestore ท่าพระ · BTS ตลาดพลู",desc:"",note:"ของดีราคาคุณภาพ",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>35.29</b> ตร.ม."},{icon:"s-home",text:"ชั้น <b>11</b>"}],tags:["สาทร 15 นาที","ใกล้ห้างดัง"],badge_en:"Condo",title_en:"Lumpini Place Ratchada (11th Fl.) High Floor near BTS Talat Phlu",location_en:"The Mall Lifestore Thapra · BTS Talat Phlu",desc_en:"",note_en:"Great Value",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>35.29</b> sq.m."},{icon:"s-home",text:"<b>11th</b> Floor"}],tags_en:["Sathorn 15 mins","Near the Mall"]},
   {ref:"SRA-5510",status:"available",type:["rent","house"],badgeClass:"b-hot",noteClass:"",priceText:"฿ 45,000 / เดือน",priceNumber:45000,imageUrl:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",publicId:"",videoId:"",badge:"🔥 ยอดนิยม",title:"โฮมออฟฟิศ 4 ชั้น ใจกลางอโศก-สุขุมวิท 21",location:"อโศก สุขุมวิท 21 · ใกล้ MRT / BTS",desc:"",note:"สัญญา 3 ปี",specs:[{icon:"s-area",text:"<b>5</b> ห้องทำงาน"},{icon:"s-bath",text:"<b>4</b> ห้องน้ำ"},{icon:"s-area",text:"<b>320</b> ตร.ม."},{icon:"s-car",text:"จอด <b>4</b> คัน"}],tags:["ติด MRT/BTS","ลิฟต์ส่วนตัว"],badge_en:"🔥 Hot Deal",title_en:"4-Storey Modern Home Office in Prime Asoke – Sukhumvit 21",location_en:"Asoke, Sukhumvit 21 · MRT Sukhumvit & BTS Asok",desc_en:"",note_en:"3-Year Lease",specs_en:[{icon:"s-area",text:"<b>5</b> Office Rooms"},{icon:"s-bath",text:"<b>4</b> Bathrooms"},{icon:"s-area",text:"<b>320</b> sq.m."},{icon:"s-car",text:"Parking for <b>4</b> Cars"}],tags_en:["Near MRT & BTS","Private Elevator"]}
@@ -487,11 +500,11 @@ $('importBtn').addEventListener('click', async () => {
     log.scrollTop = log.scrollHeight;
   };
 
-  if (!confirm('นำเข้าทรัพย์ 4 รายการจากเว็บหลัก?')) return;
+  if (!confirm('นำเข้าทรัพย์ที่ยังไม่มีในระบบ?')) return;
 
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> กำลังนำเข้า...';
-  logLine('🚀 เริ่มนำเข้า ' + IMPORT_DATA.length + ' รายการ...', 'info');
+  logLine('🚀 เริ่มตรวจสอบทรัพย์ ' + IMPORT_DATA.length + ' รายการ...', 'info');
 
   try {
     const existing = await getDocs(collection(db, 'properties'));
@@ -518,11 +531,11 @@ $('importBtn').addEventListener('click', async () => {
       }
     }
     logLine('');
-    logLine(`🎉 เสร็จ — สำเร็จ ${success} · ข้าม ${skipped} · ล้มเหลว ${failed}`, 'ok');
+    logLine(`🎉 เสร็จสิ้น — สำเร็จ ${success} · ข้าม ${skipped} · ล้มเหลว ${failed}`, 'ok');
     toast(`✅ นำเข้าสำเร็จ ${success} รายการ`, 'ok');
   } catch (e) {
     logLine('❌ ' + e.message, 'err');
-    toast('❌ นำเข้าไม่สำเร็จ', 'err');
+    toast('❌ นำเข้าไม่สำเร็จ: ' + e.message, 'err');
   }
   btn.disabled = false;
   btn.innerHTML = '📥 นำเข้าทรัพย์เก่า';
@@ -546,7 +559,7 @@ async function handleImageFile(file) {
 
   $('progressBar').classList.add('show');
   $('progressFill').style.width = '0%';
-  $('uploadText').innerHTML = '<div class="icon-up">⏳</div>กำลังบีบรูป...';
+  $('uploadText').innerHTML = '<div class="icon-up">⏳</div>กำลังบีบรูปภาพ...';
 
   try {
     compressedBlob = await compressImage(file);
@@ -555,6 +568,7 @@ async function handleImageFile(file) {
     $('previewBox').classList.remove('hidden');
     $('uploadText').innerHTML = `<div class="icon-up">✅</div>พร้อมบันทึก · ${(compressedBlob.size/1024).toFixed(0)} KB`;
     $('progressBar').classList.remove('show');
+    $('fImageUrlDirect').value = '';
   } catch (err) {
     toast('❌ บีบรูปไม่สำเร็จ', 'err');
     $('uploadText').innerHTML = '<div class="icon-up">📸</div><strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง';
@@ -566,7 +580,7 @@ function clearImage() {
   compressedBlob = null; existingImageUrl = ''; existingPublicId = '';
   $('imageInput').value = ''; $('previewBox').classList.add('hidden'); $('previewImg').src = '';
   $('progressBar').classList.remove('show');
-  $('uploadText').innerHTML = `<div class="icon-up">📸</div><strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br><span class="up-status">รองรับ JPG / PNG · บีบอัตโนมัติ</span>`;
+  $('uploadText').innerHTML = `<div class="icon-up">📸</div><strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br><span class="up-status">รองรับ JPG / PNG · บีบรูป WebP อัตโนมัติ</span>`;
 }
 
 function parseSpecs(text) {
@@ -583,35 +597,38 @@ $('saveBtn').addEventListener('click', async () => {
   const btn = $('saveBtn');
   const editId = $('editId').value;
   const isEdit = !!editId;
+  const directUrl = $('fImageUrlDirect').value.trim();
 
-  if (!$('fRef').value.trim())      return toast('❌ กรุณากรอกรหัสทรัพย์', 'err');
-  if (!$('fTitle').value.trim())    return toast('❌ กรุณากรอกชื่อทรัพย์ (TH)', 'err');
-  if (!$('fPriceText').value.trim()) return toast('❌ กรุณากรอกราคา', 'err');
-  if (!compressedBlob && !existingImageUrl) return toast('❌ กรุณาเลือกรูปภาพ', 'err');
+  if (!$('fRef').value.trim())       return toast('❌ กรุณากรอกรหัสทรัพย์', 'err');
+  if (!$('fTitle').value.trim())     return toast('❌ กรุณากรอกชื่อทรัพย์ (TH)', 'err');
+  if (!$('fPriceText').value.trim())  return toast('❌ กรุณากรอกราคา', 'err');
+  if (!compressedBlob && !existingImageUrl && !directUrl) {
+    return toast('❌ กรุณาเลือกรูปภาพ หรือใส่ลิงก์รูปภาพ', 'err');
+  }
 
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> กำลังอัปโหลด...';
+  btn.innerHTML = '<span class="spinner"></span> กำลังบันทึก...';
 
   try {
-    let imageUrl = existingImageUrl;
+    let imageUrl = directUrl || existingImageUrl;
     let publicId = existingPublicId;
 
     if (compressedBlob) {
       $('progressBar').classList.add('show');
       $('progressFill').style.width = '0%';
+      btn.innerHTML = '<span class="spinner"></span> กำลังอัปโหลด Cloudinary...';
 
       const result = await uploadToCloudinary(compressedBlob, pct => {
         $('progressFill').style.width = pct + '%';
-        btn.innerHTML = `<span class="spinner"></span> อัปโหลด ${pct}%`;
+        btn.innerHTML = `<span class="spinner"></span> อัปโหลดรูปภาพ ${pct}%`;
       });
 
       imageUrl = result.secure_url;
       publicId = result.public_id;
-
       $('progressBar').classList.remove('show');
     }
 
-    btn.innerHTML = '<span class="spinner"></span> กำลังบันทึกข้อมูล...';
+    btn.innerHTML = '<span class="spinner"></span> บันทึกฐานข้อมูล...';
 
     const data = {
       ref: $('fRef').value.trim(),
@@ -642,11 +659,11 @@ $('saveBtn').addEventListener('click', async () => {
 
     if (isEdit) {
       await updateDoc(doc(db, 'properties', editId), data);
-      toast('✅ อัปเดตสำเร็จ', 'ok');
+      toast('✅ อัปเดตข้อมูลสำเร็จ', 'ok');
     } else {
       data.createdAt = serverTimestamp();
       await addDoc(collection(db, 'properties'), data);
-      toast('✅ เพิ่มทรัพย์สำเร็จ', 'ok');
+      toast('✅ เพิ่มทรัพย์ใหม่สำเร็จ', 'ok');
     }
     resetForm();
     $('formPanel').classList.add('collapsed');
@@ -659,7 +676,7 @@ $('saveBtn').addEventListener('click', async () => {
 });
 
 function resetForm() {
-  ['fRef','fType','fPriceText','fPriceNumber','fVideoId','fBadge','fTitle','fLocation','fDesc','fNote','fSpecs','fTags','fBadgeEn','fTitleEn','fLocationEn','fDescEn','fNoteEn','fSpecsEn','fTagsEn','editId'].forEach(id => $(id).value = '');
+  ['fRef','fType','fPriceText','fPriceNumber','fVideoId','fBadge','fTitle','fLocation','fDesc','fNote','fSpecs','fTags','fBadgeEn','fTitleEn','fLocationEn','fDescEn','fNoteEn','fSpecsEn','fTagsEn','fImageUrlDirect','editId'].forEach(id => $(id).value = '');
   $('fStatus').value = 'available';
   $('fBadgeClass').value = 'b-condo';
   $('fNoteClass').value = 'note-green';
@@ -688,7 +705,8 @@ function subscribeList() {
     $('statSold').textContent = sold;
     $('statHidden').textContent = hidden;
 
-    if (snap.empty) $('importBtn').classList.remove('hidden');
+    // ถ้าในระบบมีน้อยกว่า 4 รายการ ให้ปุ่มนำเข้าแสดง เพื่อดึงทรัพย์ที่ตกหล่นได้
+    if (snap.size < IMPORT_DATA.length) $('importBtn').classList.remove('hidden');
     else $('importBtn').classList.add('hidden');
 
     if (snap.empty) {
@@ -704,13 +722,13 @@ function subscribeList() {
 
       const stClass = p.status === 'sold' ? 'st-sold' : p.status === 'hidden' ? 'st-hidden' : 'st-available';
       const stText  = p.status === 'sold' ? 'ขายแล้ว' : p.status === 'hidden' ? 'ซ่อน' : 'ว่าง';
-      const thumbUrl = p.publicId ? cloudinaryOptimized(p.imageUrl, 200) : p.imageUrl;
+      const thumbUrl = p.publicId ? cloudinaryOptimized(p.imageUrl, 200) : (p.imageUrl || '');
 
       return `
         <div class="list-item">
-          <img class="thumb" src="${thumbUrl || ''}" alt="" loading="lazy">
+          <img class="thumb" src="${escapeHtml(thumbUrl)}" alt="" loading="lazy">
           <div class="info">
-            <span class="ref ${stClass}">${p.ref || '—'} · ${stText}</span>
+            <span class="ref ${stClass}">${escapeHtml(p.ref || '—')} · ${stText}</span>
             <h4>${escapeHtml(p.title || '(ไม่มีชื่อ)')}</h4>
             <p>${escapeHtml(p.priceText || '')} · ${escapeHtml(p.location || '')}</p>
           </div>
@@ -738,7 +756,7 @@ function subscribeList() {
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
 function editItem(id) {
@@ -767,31 +785,33 @@ function editItem(id) {
   $('fNoteEn').value = p.note_en || '';
   $('fSpecsEn').value = specsToString(p.specs_en);
   $('fTagsEn').value = (p.tags_en || []).join(', ');
+  $('fImageUrlDirect').value = p.imageUrl || '';
+
   compressedBlob = null;
   existingImageUrl = p.imageUrl || '';
   existingPublicId = p.publicId || '';
   if (existingImageUrl) {
     $('previewImg').src = existingImageUrl;
     $('previewBox').classList.remove('hidden');
-    $('uploadText').innerHTML = '<div class="icon-up">🖼️</div>ใช้รูปเดิม · คลิกเพื่อเปลี่ยน';
+    $('uploadText').innerHTML = '<div class="icon-up">🖼️</div>ใช้รูปเดิมอยู่ · คลิกเพื่อเปลี่ยนไฟล์';
   }
   $('formTitle').textContent = '✏️ แก้ไข: ' + (p.ref || '');
   $('formPanel').classList.remove('collapsed');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  toast('📝 โหลดข้อมูลมาแก้ไข');
+  toast('📝 โหลดข้อมูลมาแก้ไขแล้ว');
 }
 
 async function changeStatus(id, status) {
   try {
     await updateDoc(doc(db, 'properties', id), { status, updatedAt: serverTimestamp() });
     toast(status === 'sold' ? '🔴 ตั้งเป็นขายแล้ว' : '✅ เปิดขายอีกครั้ง', 'ok');
-  } catch (e) { toast('❌ เปลี่ยนสถานะไม่สำเร็จ', 'err'); }
+  } catch (e) { toast('❌ เปลี่ยนสถานะไม่สำเร็จ: ' + e.message, 'err'); }
 }
 
 async function deleteItem(id) {
   const p = cache[id];
   if (!p) return;
-  if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nℹ️ รูปจะยังอยู่ใน Cloudinary (ลบเองได้ใน Dashboard)`)) return;
+  if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nℹ️ ถ้าแค่ขายแล้ว แนะนำให้กดปุ่ม "ขายแล้ว" แทน`)) return;
   try {
     await deleteDoc(doc(db, 'properties', id));
     toast('🗑️ ลบสำเร็จ', 'ok');
