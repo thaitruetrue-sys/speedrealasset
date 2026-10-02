@@ -444,7 +444,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
     </div>
   </div>
 
-  <!-- Grid: filled by Firebase -->
+  <!-- Grid: filled by Firebase Real-time -->
   <div class="grid" id="grid">
     <div class="loading">
       <div class="spin"></div>
@@ -560,7 +560,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
       <details class="faq-item">
         <summary>มีทรัพย์ให้เลือกกี่รายการ?</summary>
         <div class="faq-answer">
-          <p>ปัจจุบันมีทรัพย์ในระบบกว่า <strong>250 รายการ</strong> ครอบคลุมบ้านเดี่ยว คอนโด ทาวน์โฮม ที่ดินเปล่า และอาคารพาณิชย์ในกรุงเทพฯ ปริมณฑล และต่างจังหวัด พร้อมอัปเดตรายการใหม่ทุกสัปดาห์</p>
+          <p>ปัจจุบันมีทรัพย์ในระบบครอบคลุมบ้านเดี่ยว คอนโด ทาวน์โฮม ที่ดินเปล่า และอาคารพาณิชย์ในกรุงเทพฯ ปริมณฑล และต่างจังหวัด พร้อมอัปเดตรายการใหม่ทุกสัปดาห์</p>
         </div>
       </details>
     </div>
@@ -612,7 +612,6 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 
 <!-- ==================== FIREBASE + RENDER (TH) ==================== -->
 <script type="module">
-// ✅ แก้แล้ว: ไม่ใช้ orderBy → ไม่ต้องใช้ Composite Index
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import {
   getFirestore, collection, query, where, onSnapshot
@@ -631,7 +630,8 @@ const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
 
 function cloudinaryOptimized(url, width = 800) {
-  if (!url || !url.includes('/upload/')) return url;
+  if (!url || !url.includes('/upload/')) return url || '';
+  if (url.includes('/upload/f_auto,q_auto')) return url;
   return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
 }
 
@@ -643,8 +643,9 @@ function escapeHtml(s) {
 
 window.__renderFromFirebase = (list) => {
   const grid = document.getElementById('grid');
+  if (!grid) return;
 
-  if (!list.length) {
+  if (!list || !list.length) {
     grid.innerHTML = `
       <div class="empty-state" style="display:block">
         <div class="big">📭</div>
@@ -655,22 +656,24 @@ window.__renderFromFirebase = (list) => {
   }
 
   grid.innerHTML = list.map(p => {
-    // TH fields (ใช้ค่า TH โดยตรง ไม่ fallback จาก EN)
     const badge    = p.badge    || '';
-    const title    = p.title    || '';
+    const title    = p.title    || '(ไม่มีชื่อทรัพย์)';
     const location = p.location || '';
     const desc     = p.desc     || '';
     const note     = p.note     || '';
-    const specs    = p.specs    || [];
-    const tags     = p.tags     || [];
+    const specs    = Array.isArray(p.specs) ? p.specs : [];
+    const tags     = Array.isArray(p.tags) ? p.tags : [];
 
-    const imgUrl = p.publicId ? cloudinaryOptimized(p.imageUrl, 800) : p.imageUrl;
+    const rawImg = p.imageUrl || '';
+    const imgUrl = (p.publicId || rawImg.includes('cloudinary.com'))
+                   ? cloudinaryOptimized(rawImg, 800)
+                   : rawImg;
 
     return `
       <article class="card" data-type="${(p.type || []).join(' ')}">
         <div class="card-img">
-          <span class="badge ${p.badgeClass || 'b-condo'}">${escapeHtml(badge)}</span>
-          <img src="${escapeHtml(imgUrl || '')}" alt="${escapeHtml(title)}" loading="lazy" width="700" height="438" decoding="async">
+          ${badge ? `<span class="badge ${p.badgeClass || 'b-condo'}">${escapeHtml(badge)}</span>` : ''}
+          <img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(title)}" loading="lazy" width="700" height="438" decoding="async">
           <span class="ref">${escapeHtml(p.ref || '')}</span>
         </div>
         <div class="card-body">
@@ -682,7 +685,11 @@ window.__renderFromFirebase = (list) => {
           <p class="loc"><svg class="ico"><use href="#s-pin"/></svg>${escapeHtml(location)}</p>
           ${desc ? `<div class="desc">${desc}</div>` : ''}
           ${specs.length ? `<ul class="specs">
-            ${specs.map(s => `<li><svg class="ico"><use href="#${escapeHtml(s.icon)}"/></svg><span>${s.text}</span></li>`).join('')}
+            ${specs.map(s => {
+              const icon = typeof s === 'object' ? (s.icon || 's-check') : 's-check';
+              const text = typeof s === 'object' ? (s.text || '') : s;
+              return `<li><svg class="ico"><use href="#${escapeHtml(icon)}"/></svg><span>${text}</span></li>`;
+            }).join('')}
           </ul>` : ''}
           ${tags.length ? `<ul class="tags">
             ${tags.map(t => `<li><svg class="ico"><use href="#s-check"/></svg>${escapeHtml(t)}</li>`).join('')}
@@ -690,7 +697,7 @@ window.__renderFromFirebase = (list) => {
           ${p.priceNumber ? `<button class="btn-calc-sync" data-calc-price="${p.priceNumber}" type="button"><svg class="ico"><use href="#s-calc"/></svg> คำนวณยอดผ่อนทรัพย์นี้</button>` : ''}
           ${p.videoId ? `
           <div class="video">
-            <div class="video-label"><span class="rec"></span><svg class="ico"><use href="#s-yt"/></svg> วิดีโอพาชมห้องจริง</div>
+            <div class="video-label"><span class="rec"></span><svg class="ico"><use href="#s-yt"/></svg> วิดีโอพาชมทรัพย์จริง</div>
             <div class="video-facade" data-video-id="${escapeHtml(p.videoId)}">
               <img src="https://img.youtube.com/vi/${escapeHtml(p.videoId)}/hqdefault.jpg" alt="${escapeHtml(title)}" loading="lazy">
               <div class="video-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
@@ -707,29 +714,32 @@ window.__renderFromFirebase = (list) => {
   document.dispatchEvent(new CustomEvent('cards:rendered'));
 };
 
-// ✅ Query ใหม่: แค่ where อย่างเดียว → ไม่ต้องใช้ Composite Index
+// ดึงเฉพาะสถานะ available
 const q = query(
   collection(db, 'properties'),
   where('status', '==', 'available')
 );
 
 onSnapshot(q, snap => {
-  // เรียงฝั่ง client (ใหม่ → เก่า)
+  // เรียงลำดับจากใหม่ไปเก่า
   const list = snap.docs
     .map(d => d.data())
     .sort((a, b) => {
-      const ta = (a.createdAt && a.createdAt.seconds) || 0;
-      const tb = (b.createdAt && b.createdAt.seconds) || 0;
+      const ta = (a.createdAt && a.createdAt.seconds) ? a.createdAt.seconds : (a.updatedAt && a.updatedAt.seconds ? a.updatedAt.seconds : 0);
+      const tb = (b.createdAt && b.createdAt.seconds) ? b.createdAt.seconds : (b.updatedAt && b.updatedAt.seconds ? b.updatedAt.seconds : 0);
       return tb - ta;
     });
   window.__renderFromFirebase(list);
 }, err => {
   console.error('Firestore error:', err);
-  document.getElementById('grid').innerHTML = `
-    <div class="empty-state" style="display:block">
-      <div class="big">⚠️</div>
-      <p>ไม่สามารถโหลดรายการทรัพย์ได้ กรุณาโทร 083-879-9635</p>
-    </div>`;
+  const grid = document.getElementById('grid');
+  if (grid) {
+    grid.innerHTML = `
+      <div class="empty-state" style="display:block">
+        <div class="big">⚠️</div>
+        <p>ไม่สามารถโหลดรายการทรัพย์ได้ชั่วคราว กรุณาโทร 083-879-9635</p>
+      </div>`;
+  }
 });
 </script>
 
@@ -763,6 +773,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const grid = document.getElementById('grid');
+    if (!grid) return;
     let emptyEl = grid.querySelector('.empty-state');
     const totalCards = cards.length;
 
