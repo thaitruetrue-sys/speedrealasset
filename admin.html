@@ -342,11 +342,10 @@ const firebaseConfig = {
 };
 
 /* ============================================================
-   ☁️ Cloudinary Config
+   ☁️ Cloudinary Config — ใช้ sra_upload
    ============================================================ */
 const CLOUDINARY_CLOUD_NAME    = "a7jig3ni";
 const CLOUDINARY_UPLOAD_PRESET = "sra_upload";
-const CLOUDINARY_FOLDER        = "properties";
 /* ============================================================ */
 
 const app  = initializeApp(firebaseConfig);
@@ -380,7 +379,6 @@ function uploadToCloudinary(blob, onProgress) {
     const formData = new FormData();
     formData.append('file', blob);
     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    if (CLOUDINARY_FOLDER) formData.append('folder', CLOUDINARY_FOLDER);
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
@@ -803,4 +801,3 @@ async function deleteItem(id) {
 </script>
 </body>
 </html>
-Update preset to sra_upload
