@@ -51,6 +51,8 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .btn-blue:hover:not(:disabled){background:#1d4ed8}
 .btn-amber{background:#f59e0b;color:#fff;padding:7px 14px;font-size:12.5px}
 .btn-amber:hover:not(:disabled){background:#d97706}
+.btn-import{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;padding:11px 22px;font-size:14px}
+.btn-import:hover:not(:disabled){background:linear-gradient(135deg,#6d28d9,#4c1d95)}
 
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:12px;background:#fff;padding:16px 22px;border-radius:16px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
 .topbar-brand{display:flex;align-items:center;gap:12px}
@@ -62,6 +64,15 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .panel{background:#fff;border-radius:18px;padding:26px;box-shadow:var(--shadow-sm);margin-bottom:22px;border:1px solid var(--border)}
 .panel h2{font-size:18px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .panel h2 .badge-count{font-size:12.5px;color:var(--muted);font-weight:500;background:#f1f5f9;padding:4px 12px;border-radius:999px;font-family:'Sarabun',sans-serif}
+
+.import-panel{background:linear-gradient(135deg,#faf5ff,#f3e8ff);border:1px solid #e9d5ff}
+.import-panel h2{color:#5b21b6;border-bottom-color:#e9d5ff}
+.import-panel p{font-size:13.5px;color:#6b21a8;margin-bottom:16px;line-height:1.6}
+.import-log{background:#1e1b4b;color:#a5f3fc;font-family:'Courier New',monospace;font-size:12px;padding:14px;border-radius:10px;max-height:240px;overflow-y:auto;display:none;margin-top:14px;line-height:1.7}
+.import-log.show{display:block}
+.import-log .ok{color:#4ade80}
+.import-log .err{color:#f87171}
+.import-log .info{color:#fbbf24}
 
 .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
@@ -147,6 +158,18 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
     <button class="btn btn-gray" id="logoutBtn">ออกจากระบบ</button>
   </div>
 
+  <!-- ========== IMPORT PANEL ========== -->
+  <div class="panel import-panel">
+    <h2>📥 นำเข้าทรัพย์ 4 รายการเก่า (ทำครั้งเดียว)</h2>
+    <p>
+      ปุ่มนี้จะนำเข้าทรัพย์ 4 รายการที่ฝังอยู่ในหน้าเว็บเดิม (Whizdom, ที่ดินบางนา, Lumpini, ออฟฟิศอโศก) เข้าสู่ระบบจัดการ<br>
+      <strong>⚠️ กดครั้งเดียว</strong> — ถ้ากดซ้ำจะได้ข้อมูลซ้ำกัน
+    </p>
+    <button class="btn btn-import" id="importBtn">📥 เริ่มนำเข้าทรัพย์ 4 รายการ</button>
+    <div class="import-log" id="importLog"></div>
+  </div>
+
+  <!-- ========== FORM ========== -->
   <div class="panel">
     <h2 id="formTitle">➕ เพิ่มทรัพย์ใหม่</h2>
     <input type="hidden" id="editId">
@@ -318,7 +341,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import {
   getFirestore, collection, doc, addDoc, updateDoc, deleteDoc,
-  onSnapshot, serverTimestamp, query, orderBy
+  onSnapshot, serverTimestamp, query, orderBy, getDocs
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 import {
   getStorage, ref as sRef, uploadBytes, getDownloadURL, deleteObject
@@ -424,6 +447,223 @@ document.querySelectorAll('.lang-tab').forEach(tab => {
     tab.classList.add('active');
     document.querySelector(`.lang-panel[data-lang="${tab.dataset.lang}"]`).classList.add('active');
   });
+});
+
+/* ============ IMPORT 4 รายการเก่า ============ */
+const IMPORT_DATA = [
+  {
+    ref: "SRA-1024",
+    status: "available",
+    type: ["sale", "condo"],
+    badgeClass: "b-condo",
+    noteClass: "note-green",
+    priceText: "฿ 3,500,000",
+    priceNumber: 3500000,
+    imageUrl: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",
+    imagePath: "",
+    videoId: "W0v2z146zqY",
+    badge: "คอนโด",
+    title: "Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม. ติด BTS ตลาดพลู",
+    location: "ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",
+    desc: "",
+    note: "≈ ฿133,180 / ตร.ม.",
+    specs: [
+      { icon: "s-bed", text: "<b>1</b> ห้องนอน" },
+      { icon: "s-bath", text: "<b>1</b> ห้องน้ำ" },
+      { icon: "s-area", text: "<b>26.28</b> ตร.ม." },
+      { icon: "s-car", text: "จอด <b>1</b> คัน" }
+    ],
+    tags: ["ติด BTS", "ใกล้เดอะมอลล์"],
+    badge_en: "Condo",
+    title_en: "Whizdom Station Ratchada – Thapra (26.28 sq.m.) Next to BTS Talat Phlu",
+    location_en: "Opposite The Mall Thapra · BTS Talat Phlu · BRT Ratchaphruek",
+    desc_en: "",
+    note_en: "≈ ฿133,180 / sq.m.",
+    specs_en: [
+      { icon: "s-bed", text: "<b>1</b> Bedroom" },
+      { icon: "s-bath", text: "<b>1</b> Bathroom" },
+      { icon: "s-area", text: "<b>26.28</b> sq.m." },
+      { icon: "s-car", text: "Parking for <b>1</b> Car" }
+    ],
+    tags_en: ["Next to BTS", "Near the Mall"]
+  },
+  {
+    ref: "SRA-2048",
+    status: "available",
+    type: ["sale", "land"],
+    badgeClass: "b-land",
+    noteClass: "note-amber",
+    priceText: "📞 ราคาโทรถาม",
+    priceNumber: 0,
+    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",
+    imagePath: "",
+    videoId: "Rmg51jPXF-s",
+    badge: "🌳 ที่ดิน",
+    title: "ขายที่ดิน บางนาตราด กม.49/10 ทรงสี่เหลี่ยมสวย",
+    location: "ริมถนนบางนาตราด กม.49/10 · สมุทรปราการ",
+    desc: "<strong>ไฮไลท์:</strong> หน้ากว้าง 80 ม. ลึก 100 ม. ติดถนนสายหลัก เหมาะสร้างปั๊มน้ำมัน โกดัง คลังสินค้า หรือโรงงาน",
+    note: "5 ไร่",
+    specs: [
+      { icon: "s-area", text: "<b>5</b> ไร่" },
+      { icon: "s-ruler", text: "กว้าง <b>80</b> ม." },
+      { icon: "s-ruler", text: "ยาว <b>100</b> ม." },
+      { icon: "s-pin", text: "กม. <b>49/10</b>" }
+    ],
+    tags: ["ปั๊มน้ำมัน", "โกดัง/โรงงาน"],
+    badge_en: "🌳 Land",
+    title_en: "Prime Land on Bangna-Trad Km.49/10 (Rectangular Shape)",
+    location_en: "Bangna-Trad Frontage Rd. Km.49/10 · Samut Prakan",
+    desc_en: "<strong>Key Highlight:</strong> Width: 80 m, Depth: 100 m with main road access. Ideal for a petrol station, logistics warehouse, or distribution center.",
+    note_en: "5 Rai",
+    specs_en: [
+      { icon: "s-area", text: "<b>5</b> Rai" },
+      { icon: "s-ruler", text: "Width: <b>80</b> m" },
+      { icon: "s-ruler", text: "Depth: <b>100</b> m" },
+      { icon: "s-pin", text: "Km. <b>49/10</b>" }
+    ],
+    tags_en: ["Petrol Station", "Warehouse / Factory"]
+  },
+  {
+    ref: "SRA-3072",
+    status: "available",
+    type: ["sale", "condo"],
+    badgeClass: "b-condo",
+    noteClass: "note-green",
+    priceText: "฿ 2,100,000",
+    priceNumber: 2100000,
+    imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",
+    imagePath: "",
+    videoId: "f_VwtA_PfLI",
+    badge: "คอนโด",
+    title: "Lumpini Place Ratchada ชั้น 11 วิวสูง ใกล้ BTS ตลาดพลู",
+    location: "The Mall Lifestore ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",
+    desc: "",
+    note: "ของดีราคาคุณภาพ",
+    specs: [
+      { icon: "s-bed", text: "<b>1</b> ห้องนอน" },
+      { icon: "s-bath", text: "<b>1</b> ห้องน้ำ" },
+      { icon: "s-area", text: "<b>35.29</b> ตร.ม." },
+      { icon: "s-home", text: "ชั้น <b>11</b>" }
+    ],
+    tags: ["สาทร 15 นาที", "ใกล้ห้างดัง"],
+    badge_en: "Condo",
+    title_en: "Lumpini Place Ratchada (11th Fl.) High Floor near BTS Talat Phlu",
+    location_en: "The Mall Lifestore Thapra · BTS Talat Phlu · BRT Ratchaphruek",
+    desc_en: "",
+    note_en: "Great Value",
+    specs_en: [
+      { icon: "s-bed", text: "<b>1</b> Bedroom" },
+      { icon: "s-bath", text: "<b>1</b> Bathroom" },
+      { icon: "s-area", text: "<b>35.29</b> sq.m." },
+      { icon: "s-home", text: "<b>11th</b> Floor" }
+    ],
+    tags_en: ["Sathorn 15 mins", "Near the Mall"]
+  },
+  {
+    ref: "SRA-5510",
+    status: "available",
+    type: ["rent", "house"],
+    badgeClass: "b-hot",
+    noteClass: "",
+    priceText: "฿ 45,000 / เดือน",
+    priceNumber: 45000,
+    imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",
+    imagePath: "",
+    videoId: "",
+    badge: "🔥 ยอดนิยม",
+    title: "โฮมออฟฟิศ 4 ชั้น ใจกลางอโศก-สุขุมวิท 21",
+    location: "อโศก สุขุมวิท 21 · ใกล้ MRT สุขุมวิท / BTS อโศก",
+    desc: "",
+    note: "สัญญา 3 ปี",
+    specs: [
+      { icon: "s-area", text: "<b>5</b> ห้องทำงาน" },
+      { icon: "s-bath", text: "<b>4</b> ห้องน้ำ" },
+      { icon: "s-area", text: "<b>320</b> ตร.ม." },
+      { icon: "s-car", text: "จอด <b>4</b> คัน" }
+    ],
+    tags: ["ติด MRT/BTS", "ลิฟต์ส่วนตัว"],
+    badge_en: "🔥 Hot Deal",
+    title_en: "4-Storey Modern Home Office in Prime Asoke – Sukhumvit 21",
+    location_en: "Asoke, Sukhumvit 21 · Walking Distance to MRT Sukhumvit & BTS Asok",
+    desc_en: "",
+    note_en: "3-Year Lease",
+    specs_en: [
+      { icon: "s-area", text: "<b>5</b> Office Rooms" },
+      { icon: "s-bath", text: "<b>4</b> Bathrooms" },
+      { icon: "s-area", text: "<b>320</b> sq.m." },
+      { icon: "s-car", text: "Parking for <b>4</b> Cars" }
+    ],
+    tags_en: ["Near MRT & BTS", "Private Elevator"]
+  }
+];
+
+$('importBtn').addEventListener('click', async () => {
+  const btn = $('importBtn');
+  const log = $('importLog');
+  log.classList.add('show');
+  log.innerHTML = '';
+
+  const logLine = (msg, cls = '') => {
+    const div = document.createElement('div');
+    div.className = cls;
+    div.textContent = msg;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  };
+
+  if (!confirm('นำเข้าทรัพย์ 4 รายการ?\n\n⚠️ ถ้าเคยนำเข้าแล้ว จะได้ข้อมูลซ้ำ')) return;
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> กำลังนำเข้า...';
+
+  logLine('🚀 เริ่มนำเข้า ' + IMPORT_DATA.length + ' รายการ...', 'info');
+
+  // เช็คว่ามี ref ซ้ำหรือยัง
+  try {
+    const existing = await getDocs(collection(db, 'properties'));
+    const existingRefs = new Set();
+    existing.forEach(d => existingRefs.add(d.data().ref));
+
+    let success = 0, skipped = 0, failed = 0;
+
+    for (let i = 0; i < IMPORT_DATA.length; i++) {
+      const p = IMPORT_DATA[i];
+      if (existingRefs.has(p.ref)) {
+        logLine(`⏭️ [${i+1}/${IMPORT_DATA.length}] ${p.ref} — มีอยู่แล้ว ข้าม`, 'info');
+        skipped++;
+        continue;
+      }
+
+      p.createdAt = serverTimestamp();
+      p.updatedAt = serverTimestamp();
+
+      try {
+        await addDoc(collection(db, 'properties'), p);
+        logLine(`✅ [${i+1}/${IMPORT_DATA.length}] ${p.ref} — ${p.title.substring(0, 40)}...`, 'ok');
+        success++;
+      } catch (e) {
+        logLine(`❌ [${i+1}/${IMPORT_DATA.length}] ${p.ref} — ${e.message}`, 'err');
+        failed++;
+      }
+    }
+
+    logLine('', 'info');
+    logLine(`🎉 เสร็จแล้ว — สำเร็จ ${success} · ข้าม ${skipped} · ล้มเหลว ${failed}`, 'ok');
+
+    if (success > 0) {
+      toast(`✅ นำเข้าสำเร็จ ${success} รายการ`, 'ok');
+    } else if (skipped === IMPORT_DATA.length) {
+      toast('ℹ️ ทุกรายการมีอยู่แล้ว', '');
+    } else {
+      toast('⚠️ มีบางรายการล้มเหลว ดู log', 'err');
+    }
+  } catch (e) {
+    logLine('❌ ผิดพลาด: ' + e.message, 'err');
+    toast('❌ นำเข้าไม่สำเร็จ', 'err');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '📥 เริ่มนำเข้าทรัพย์ 4 รายการ';
 });
 
 /* ============ IMAGE UPLOAD ============ */
@@ -615,7 +855,7 @@ function subscribeList() {
     const wrap = $('listWrap');
 
     if (snap.empty) {
-      wrap.innerHTML = '<div class="empty"><div class="big">📭</div>ยังไม่มีรายการทรัพย์<br><small>เพิ่มรายการแรกด้านบนได้เลย</small></div>';
+      wrap.innerHTML = '<div class="empty"><div class="big">📭</div>ยังไม่มีรายการทรัพย์<br><small>กด "📥 เริ่มนำเข้า" ด้านบน หรือเพิ่มรายการใหม่</small></div>';
       $('countBadge').textContent = '0 รายการ';
       return;
     }
