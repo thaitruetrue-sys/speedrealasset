@@ -23,7 +23,6 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;color:var(--primary);line-height:1.3}
 .wrap{max-width:1200px;margin:0 auto}
 .hidden{display:none!important}
 
-/* LOGIN */
 .login-box{max-width:420px;margin:60px auto;background:#fff;padding:36px 32px;border-radius:22px;box-shadow:var(--shadow-md)}
 .login-box h1{font-size:22px;margin-bottom:6px;text-align:center}
 .login-box .sub{color:var(--muted);margin-bottom:24px;font-size:13.5px;text-align:center}
@@ -31,14 +30,12 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;color:var(--primary);line-height:1.3}
 .login-logo img{width:100%;height:100%;object-fit:contain}
 .login-err{color:#dc2626;font-size:13px;margin-top:12px;text-align:center;min-height:20px}
 
-/* FORM */
 label{display:block;font-size:13px;font-weight:600;color:var(--primary);margin-bottom:6px}
 input,select,textarea{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;background:#f6f9fe;outline:none;color:#0a1f44;transition:all .2s;margin-bottom:14px}
 input:focus,select:focus,textarea:focus{border-color:var(--pl);background:#fff;box-shadow:0 0 0 3px rgba(26,95,180,.1)}
 textarea{resize:vertical;min-height:60px}
 small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;margin-bottom:12px;font-weight:400}
 
-/* BUTTONS */
 .btn{padding:11px 22px;border-radius:11px;border:0;font-family:'Kanit',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;line-height:1}
 .btn:hover{transform:translateY(-1px)}
 .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
@@ -55,7 +52,6 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .btn-amber{background:#f59e0b;color:#fff;padding:7px 14px;font-size:12.5px}
 .btn-amber:hover:not(:disabled){background:#d97706}
 
-/* TOPBAR */
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:12px;background:#fff;padding:16px 22px;border-radius:16px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
 .topbar-brand{display:flex;align-items:center;gap:12px}
 .topbar-brand img{width:38px;height:38px;object-fit:contain;background:#fff;border-radius:9px;padding:3px;border:1px solid var(--border)}
@@ -63,17 +59,14 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .topbar-brand .user{font-size:12px;color:var(--muted);display:block}
 .topbar-brand .user strong{color:var(--pl)}
 
-/* PANEL */
 .panel{background:#fff;border-radius:18px;padding:26px;box-shadow:var(--shadow-sm);margin-bottom:22px;border:1px solid var(--border)}
 .panel h2{font-size:18px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .panel h2 .badge-count{font-size:12.5px;color:var(--muted);font-weight:500;background:#f1f5f9;padding:4px 12px;border-radius:999px;font-family:'Sarabun',sans-serif}
 
-/* GRID */
 .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 @media(max-width:760px){.row,.row-3{grid-template-columns:1fr}}
 
-/* LANG TABS */
 .lang-tabs{display:flex;gap:8px;margin-bottom:20px;border-bottom:2px solid var(--border);padding-bottom:0}
 .lang-tab{padding:10px 24px;border:0;background:transparent;font-family:'Kanit',sans-serif;font-weight:600;font-size:14px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:8px 8px 0 0}
 .lang-tab:hover{background:#f6f9fe;color:var(--primary)}
@@ -81,7 +74,6 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .lang-panel{display:none}
 .lang-panel.active{display:block}
 
-/* UPLOAD */
 .upload-zone{border:2px dashed var(--border);border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:#f9fbfe;margin-bottom:16px}
 .upload-zone:hover{border-color:var(--pl);background:#eef5fd}
 .upload-zone.dragover{border-color:var(--accent);background:#ecfdf5;transform:scale(1.01)}
@@ -93,7 +85,6 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .preview img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
 .preview .remove{position:absolute;top:8px;right:8px;width:28px;height:28px;background:rgba(220,38,38,.9);border:0;color:#fff;border-radius:50%;cursor:pointer;font-size:16px;display:grid;place-items:center;line-height:1}
 
-/* LIST */
 .list-item{display:grid;grid-template-columns:80px 1fr auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;background:#f9fbfe;transition:all .2s}
 .list-item:hover{background:#fff;border-color:#a8d8f0;box-shadow:var(--shadow-sm)}
 .list-item img{width:80px;height:60px;object-fit:cover;border-radius:9px;background:#e2e8f0}
@@ -111,21 +102,17 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
   .list-item .actions-cell .btn{flex:1}
 }
 
-/* EMPTY STATE */
 .empty{text-align:center;padding:36px 20px;color:var(--muted)}
 .empty .big{font-size:44px;margin-bottom:10px}
 
-/* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;padding:14px 22px;border-radius:12px;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);font-size:14px;z-index:9999;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:340px}
 .toast.show{transform:translateY(0)}
 .toast.err{background:#dc2626}
 .toast.ok{background:var(--accent)}
 
-/* SPINNER */
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* SECTION DIVIDER */
 .divider{border:0;border-top:1px dashed var(--border);margin:20px 0}
 </style>
 </head>
@@ -160,12 +147,10 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
     <button class="btn btn-gray" id="logoutBtn">ออกจากระบบ</button>
   </div>
 
-  <!-- ========== FORM ========== -->
   <div class="panel">
     <h2 id="formTitle">➕ เพิ่มทรัพย์ใหม่</h2>
     <input type="hidden" id="editId">
 
-    <!-- รูปภาพ -->
     <label>รูปภาพ (บีบเป็น WebP อัตโนมัติ)</label>
     <div class="upload-zone" id="uploadZone">
       <input type="file" id="imageInput" accept="image/*">
@@ -180,7 +165,6 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
       </div>
     </div>
 
-    <!-- ฟิลด์กลาง -->
     <div class="row-3">
       <div>
         <label>รหัสทรัพย์ (ref)</label>
@@ -237,13 +221,11 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 
     <hr class="divider">
 
-    <!-- Language Tabs -->
     <div class="lang-tabs">
       <button class="lang-tab active" data-lang="th" type="button">🇹🇭 ภาษาไทย</button>
       <button class="lang-tab" data-lang="en" type="button">🇬🇧 English</button>
     </div>
 
-    <!-- PANEL TH -->
     <div class="lang-panel active" data-lang="th">
       <div class="row">
         <div>
@@ -276,7 +258,6 @@ s-car>จอด <b>1</b> คัน"></textarea>
       <input id="fTags" placeholder="ติด BTS, ใกล้เดอะมอลล์">
     </div>
 
-    <!-- PANEL EN -->
     <div class="lang-panel" data-lang="en">
       <div class="row">
         <div>
@@ -317,7 +298,6 @@ s-car>Parking for <b>1</b> car"></textarea>
     </div>
   </div>
 
-  <!-- ========== LIST ========== -->
   <div class="panel">
     <h2>
       📋 รายการทรัพย์ทั้งหมด
@@ -331,7 +311,6 @@ s-car>Parking for <b>1</b> car"></textarea>
 
 <div class="toast" id="toast"></div>
 
-<!-- ========== FIREBASE SDK ========== -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import {
@@ -346,15 +325,15 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
 
 /* ============================================================
-   🔴 แก้ตรงนี้ — ใส่ firebaseConfig ของคุณ
+   ✅ Firebase Config — ใส่ค่าจริงแล้ว
    ============================================================ */
 const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "estate-b1012.firebaseapp.com",
-  projectId: "estate-b1012",
-  storageBucket: "estate-b1012.appspot.com",
-  messagingSenderId: "1234567890",
-  appId: "1:1234567890:web:abc123def456"
+  apiKey: "AIzaSyCAB3mVBpdtYzr_LTqglmILzvjMiX5Txr4",
+  authDomain: "real-estate-b7272.firebaseapp.com",
+  projectId: "real-estate-b7272",
+  storageBucket: "real-estate-b7272.firebasestorage.app",
+  messagingSenderId: "964835808677",
+  appId: "1:964835808677:web:d4da5a0eda7b632656444c"
 };
 /* ============================================================ */
 
@@ -365,7 +344,6 @@ const storage = getStorage(app);
 
 const $ = id => document.getElementById(id);
 
-/* ============ TOAST ============ */
 let toastTimer;
 function toast(msg, type = '') {
   const t = $('toast');
@@ -375,7 +353,6 @@ function toast(msg, type = '') {
   toastTimer = setTimeout(() => t.className = 'toast', 3200);
 }
 
-/* ============ COMPRESS IMAGE → WebP ============ */
 async function compressImage(file, maxW = 1600, quality = 0.82) {
   const bmp = await createImageBitmap(file);
   const scale = Math.min(1, maxW / bmp.width);
@@ -387,11 +364,10 @@ async function compressImage(file, maxW = 1600, quality = 0.82) {
   return new Promise(resolve => canvas.toBlob(resolve, 'image/webp', quality));
 }
 
-/* ============ STATE ============ */
-let compressedBlob = null;      // Blob รูปใหม่ที่รออัปโหลด
-let existingImageUrl = '';      // URL รูปที่มีอยู่เดิม (ตอนแก้ไข)
-let existingImagePath = '';     // Storage path ของรูปเดิม
-let cache = {};                 // เก็บข้อมูลทรัพย์ทั้งหมด (id → data)
+let compressedBlob = null;
+let existingImageUrl = '';
+let existingImagePath = '';
+let cache = {};
 
 /* ============ LOGIN ============ */
 $('loginBtn').addEventListener('click', async () => {
@@ -409,7 +385,7 @@ $('loginBtn').addEventListener('click', async () => {
     console.error(e);
     const map = {
       'auth/invalid-email': 'อีเมลไม่ถูกต้อง',
-      'auth/user-not-found': 'ไม่พบบัญชีนี้',
+      'auth/user-not-found': 'ไม่พบบัญชีนี้ในระบบ',
       'auth/wrong-password': 'รหัสผ่านไม่ถูกต้อง',
       'auth/invalid-credential': 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
       'auth/too-many-requests': 'ลองผิดหลายครั้งเกินไป รอสักครู่'
@@ -420,7 +396,6 @@ $('loginBtn').addEventListener('click', async () => {
   btn.textContent = 'เข้าสู่ระบบ';
 });
 
-// กด Enter ในช่องรหัสผ่าน = login
 $('loginPass').addEventListener('keydown', e => {
   if (e.key === 'Enter') $('loginBtn').click();
 });
@@ -513,7 +488,6 @@ function clearImage() {
     <span class="up-status">รองรับ JPG / PNG · บีบ ≤ 300 KB อัตโนมัติ</span>`;
 }
 
-/* ============ PARSE SPECS ============ */
 function parseSpecs(text) {
   return text.split('\n')
     .map(l => l.trim())
@@ -538,7 +512,6 @@ $('saveBtn').addEventListener('click', async () => {
   const editId = $('editId').value;
   const isEdit = !!editId;
 
-  // Validate
   if (!$('fRef').value.trim())      { toast('❌ กรุณากรอกรหัสทรัพย์', 'err'); return; }
   if (!$('fTitle').value.trim())    { toast('❌ กรุณากรอกชื่อทรัพย์ (TH)', 'err'); return; }
   if (!$('fPriceText').value.trim()){ toast('❌ กรุณากรอกราคา', 'err'); return; }
@@ -551,7 +524,6 @@ $('saveBtn').addEventListener('click', async () => {
   btn.innerHTML = '<span class="spinner"></span> กำลังบันทึก...';
 
   try {
-    // 1) อัปโหลดรูป (ถ้ามีใหม่)
     let imageUrl  = existingImageUrl;
     let imagePath = existingImagePath;
 
@@ -562,15 +534,12 @@ $('saveBtn').addEventListener('click', async () => {
       imageUrl  = await getDownloadURL(fileRef);
       imagePath = fileName;
 
-      // ลบรูปเก่า
       if (existingImagePath) {
         try { await deleteObject(sRef(storage, existingImagePath)); } catch (e) { /* ignore */ }
       }
     }
 
-    // 2) สร้างข้อมูล
     const data = {
-      // ฟิลด์กลาง
       ref:           $('fRef').value.trim(),
       status:        $('fStatus').value,
       type:          $('fType').value.split(',').map(t => t.trim()).filter(Boolean),
@@ -581,7 +550,6 @@ $('saveBtn').addEventListener('click', async () => {
       imageUrl, imagePath,
       videoId:       $('fVideoId').value.trim(),
 
-      // TH
       badge:         $('fBadge').value.trim(),
       title:         $('fTitle').value.trim(),
       location:      $('fLocation').value.trim(),
@@ -590,7 +558,6 @@ $('saveBtn').addEventListener('click', async () => {
       specs:         parseSpecs($('fSpecs').value),
       tags:          $('fTags').value.split(',').map(t => t.trim()).filter(Boolean),
 
-      // EN (fallback = TH ตอนแสดงผล)
       badge_en:      $('fBadgeEn').value.trim(),
       title_en:      $('fTitleEn').value.trim(),
       location_en:   $('fLocationEn').value.trim(),
@@ -602,7 +569,6 @@ $('saveBtn').addEventListener('click', async () => {
       updatedAt:     serverTimestamp()
     };
 
-    // 3) บันทึก
     if (isEdit) {
       await updateDoc(doc(db, 'properties', editId), data);
       toast('✅ อัปเดตสำเร็จ', 'ok');
@@ -621,7 +587,6 @@ $('saveBtn').addEventListener('click', async () => {
   btn.textContent = '💾 บันทึก';
 });
 
-/* ============ RESET FORM ============ */
 function resetForm() {
   const fields = [
     'fRef','fType','fPriceText','fPriceNumber','fVideoId',
@@ -635,8 +600,6 @@ function resetForm() {
   $('fNoteClass').value = 'note-green';
   clearImage();
   $('formTitle').textContent = '➕ เพิ่มทรัพย์ใหม่';
-
-  // กลับไปแท็บ TH
   document.querySelector('.lang-tab[data-lang="th"]').click();
 }
 
@@ -644,7 +607,7 @@ $('cancelBtn').addEventListener('click', () => {
   if (confirm('ล้างฟอร์มทั้งหมด?')) resetForm();
 });
 
-/* ============ SUBSCRIBE LIST (real-time) ============ */
+/* ============ SUBSCRIBE LIST ============ */
 function subscribeList() {
   const q = query(collection(db, 'properties'), orderBy('createdAt', 'desc'));
   onSnapshot(q, snap => {
@@ -669,10 +632,9 @@ function subscribeList() {
                     : p.status === 'hidden' ? 'ซ่อน'
                     : 'ว่าง';
 
-      const img = p.imageUrl || '';
       return `
         <div class="list-item">
-          <img src="${img}" alt="" loading="lazy">
+          <img src="${p.imageUrl || ''}" alt="" loading="lazy">
           <div class="info">
             <span class="ref ${stClass}">${p.ref || '—'} · ${stText}</span>
             <h4>${escapeHtml(p.title || '(ไม่มีชื่อ)')}</h4>
@@ -687,7 +649,6 @@ function subscribeList() {
         </div>`;
     }).join('');
 
-    // ผูก event ให้ปุ่มต่างๆ
     wrap.querySelectorAll('[data-act]').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.dataset.id;
@@ -709,7 +670,6 @@ function escapeHtml(s) {
   }[c]));
 }
 
-/* ============ EDIT ============ */
 function editItem(id) {
   const p = cache[id];
   if (!p) return;
@@ -724,7 +684,6 @@ function editItem(id) {
   $('fPriceNumber').value  = p.priceNumber || '';
   $('fVideoId').value      = p.videoId || '';
 
-  // TH
   $('fBadge').value        = p.badge || '';
   $('fTitle').value        = p.title || '';
   $('fLocation').value     = p.location || '';
@@ -733,7 +692,6 @@ function editItem(id) {
   $('fSpecs').value        = specsToString(p.specs);
   $('fTags').value         = (p.tags || []).join(', ');
 
-  // EN
   $('fBadgeEn').value      = p.badge_en || '';
   $('fTitleEn').value      = p.title_en || '';
   $('fLocationEn').value   = p.location_en || '';
@@ -742,7 +700,6 @@ function editItem(id) {
   $('fSpecsEn').value      = specsToString(p.specs_en);
   $('fTagsEn').value       = (p.tags_en || []).join(', ');
 
-  // รูปเดิม
   compressedBlob     = null;
   existingImageUrl   = p.imageUrl || '';
   existingImagePath  = p.imagePath || '';
@@ -757,7 +714,6 @@ function editItem(id) {
   toast('📝 โหลดข้อมูลมาแก้ไขแล้ว');
 }
 
-/* ============ CHANGE STATUS ============ */
 async function changeStatus(id, status) {
   try {
     await updateDoc(doc(db, 'properties', id), {
@@ -770,21 +726,17 @@ async function changeStatus(id, status) {
   }
 }
 
-/* ============ DELETE ============ */
 async function deleteItem(id) {
   const p = cache[id];
   if (!p) return;
   if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nแนะนำ: ถ้าแค่ขายแล้ว ให้กดปุ่ม "ขายแล้ว" แทน — ข้อมูลจะยังอยู่`)) return;
 
   try {
-    // ลบรูปใน Storage
     if (p.imagePath) {
       try { await deleteObject(sRef(storage, p.imagePath)); } catch (e) { /* ignore */ }
     }
     await deleteDoc(doc(db, 'properties', id));
     toast('🗑️ ลบสำเร็จ', 'ok');
-
-    // ถ้ากำลังแก้ไข item นี้อยู่ → รีเซ็ตฟอร์ม
     if ($('editId').value === id) resetForm();
   } catch (e) {
     console.error(e);
