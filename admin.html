@@ -191,7 +191,7 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 
   <div class="toolbar">
     <h3>📋 รายการทรัพย์ในระบบ <span class="count" id="countBadge">—</span></h3>
-    <span style="font-size:11.5px;color:var(--muted)">☁️ รูปเก็บที่ Cloudinary · 🔄 Real-time</span>
+    <span style="font-size:11.5px;color:var(--muted)">🖼️ รูปเก็บที่ ImgBB · 🔄 Real-time</span>
   </div>
 
   <div class="list-wrap" id="listWrap">
@@ -208,7 +208,7 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
     <div class="panel-body">
       <input type="hidden" id="editId">
 
-      <label>รูปภาพ (บีบเป็น WebP + อัปโหลด Cloudinary)</label>
+      <label>รูปภาพ (บีบเป็น WebP + อัปโหลด ImgBB)</label>
       <div class="upload-zone" id="uploadZone">
         <input type="file" id="imageInput" accept="image/*">
         <div id="uploadText">
@@ -342,10 +342,9 @@ const firebaseConfig = {
 };
 
 /* ============================================================
-   ☁️ Cloudinary Config — ใช้ sra_upload
+   🖼️ ImgBB Config
    ============================================================ */
-const CLOUDINARY_CLOUD_NAME    = "a7jig3ni";
-const CLOUDINARY_UPLOAD_PRESET = "sra_upload";
+const IMGBB_API_KEY = "052bf9ea935dbb243d6a7fde3a5ef70b";
 /* ============================================================ */
 
 const app  = initializeApp(firebaseConfig);
@@ -373,12 +372,25 @@ async function compressImage(file, maxW = 1600, quality = 0.82) {
   return new Promise(resolve => canvas.toBlob(resolve, 'image/webp', quality));
 }
 
-function uploadToCloudinary(blob, onProgress) {
+function blobToBase64(blob) {
   return new Promise((resolve, reject) => {
-    const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64 = reader.result.split(',')[1];
+      resolve(base64);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function uploadToImgBB(blob, onProgress) {
+  const base64 = await blobToBase64(blob);
+
+  return new Promise((resolve, reject) => {
+    const url = `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`;
     const formData = new FormData();
-    formData.append('file', blob);
-    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    formData.append('image', base64);
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
@@ -390,23 +402,20 @@ function uploadToCloudinary(blob, onProgress) {
     };
 
     xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        try { resolve(JSON.parse(xhr.responseText)); }
-        catch (e) { reject(new Error('Invalid JSON response')); }
-      } else {
-        let errMsg = 'Cloudinary error ' + xhr.status;
-        try { errMsg = JSON.parse(xhr.responseText).error.message || errMsg; } catch (e) {}
-        reject(new Error(errMsg));
+      try {
+        const data = JSON.parse(xhr.responseText);
+        if (data.success && data.data) {
+          resolve(data.data);
+        } else {
+          reject(new Error(data.error?.message || 'ImgBB upload failed'));
+        }
+      } catch (e) {
+        reject(new Error('Invalid JSON response'));
       }
     };
     xhr.onerror = () => reject(new Error('Network error'));
     xhr.send(formData);
   });
-}
-
-function cloudinaryOptimized(url, width = 800) {
-  if (!url || !url.includes('/upload/')) return url;
-  return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
 }
 
 let compressedBlob = null;
@@ -600,13 +609,13 @@ $('saveBtn').addEventListener('click', async () => {
       $('progressBar').classList.add('show');
       $('progressFill').style.width = '0%';
 
-      const result = await uploadToCloudinary(compressedBlob, pct => {
+      const result = await uploadToImgBB(compressedBlob, pct => {
         $('progressFill').style.width = pct + '%';
         btn.innerHTML = `<span class="spinner"></span> อัปโหลด ${pct}%`;
       });
 
-      imageUrl = result.secure_url;
-      publicId = result.public_id;
+      imageUrl = result.display_url || result.url;
+      publicId = result.id;
 
       $('progressBar').classList.remove('show');
     }
@@ -704,11 +713,10 @@ function subscribeList() {
 
       const stClass = p.status === 'sold' ? 'st-sold' : p.status === 'hidden' ? 'st-hidden' : 'st-available';
       const stText  = p.status === 'sold' ? 'ขายแล้ว' : p.status === 'hidden' ? 'ซ่อน' : 'ว่าง';
-      const thumbUrl = p.publicId ? cloudinaryOptimized(p.imageUrl, 200) : p.imageUrl;
 
       return `
         <div class="list-item">
-          <img class="thumb" src="${thumbUrl || ''}" alt="" loading="lazy">
+          <img class="thumb" src="${p.imageUrl || ''}" alt="" loading="lazy">
           <div class="info">
             <span class="ref ${stClass}">${p.ref || '—'} · ${stText}</span>
             <h4>${escapeHtml(p.title || '(ไม่มีชื่อ)')}</h4>
@@ -791,7 +799,7 @@ async function changeStatus(id, status) {
 async function deleteItem(id) {
   const p = cache[id];
   if (!p) return;
-  if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nℹ️ รูปจะยังอยู่ใน Cloudinary (ลบเองได้ใน Dashboard)`)) return;
+  if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nℹ️ รูปจะยังอยู่ใน ImgBB (ลบเองได้ที่ imgbb.com)`)) return;
   try {
     await deleteDoc(doc(db, 'properties', id));
     toast('🗑️ ลบสำเร็จ', 'ok');
