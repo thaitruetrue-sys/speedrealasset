@@ -18,7 +18,7 @@
   --shadow-md:0 12px 28px -10px rgba(10,31,68,.14);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Sarabun',sans-serif;background:var(--bg);color:#1a2f5a;padding:20px;line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:#1a2f5a;padding:16px;line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-family:'Kanit',sans-serif;color:var(--primary);line-height:1.3}
 .wrap{max-width:1200px;margin:0 auto}
 .hidden{display:none!important}
@@ -36,87 +36,100 @@ input:focus,select:focus,textarea:focus{border-color:var(--pl);background:#fff;b
 textarea{resize:vertical;min-height:60px}
 small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;margin-bottom:12px;font-weight:400}
 
-.btn{padding:11px 22px;border-radius:11px;border:0;font-family:'Kanit',sans-serif;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;line-height:1}
+.btn{padding:10px 18px;border-radius:10px;border:0;font-family:'Kanit',sans-serif;font-weight:600;font-size:13.5px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;line-height:1}
 .btn:hover{transform:translateY(-1px)}
 .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-.btn-primary{background:var(--primary);color:#fff;width:100%}
+.btn-primary{background:var(--primary);color:#fff;width:100%;padding:12px}
 .btn-primary:hover:not(:disabled){background:#040d22}
 .btn-green{background:var(--accent);color:#fff}
 .btn-green:hover:not(:disabled){background:#05a347}
 .btn-gray{background:#e5e7eb;color:#374151}
 .btn-gray:hover:not(:disabled){background:#d1d5db}
-.btn-red{background:#dc2626;color:#fff;padding:7px 14px;font-size:12.5px}
+.btn-red{background:#dc2626;color:#fff;padding:6px 12px;font-size:12px}
 .btn-red:hover:not(:disabled){background:#b91c1c}
-.btn-blue{background:var(--pl);color:#fff;padding:7px 14px;font-size:12.5px}
+.btn-blue{background:var(--pl);color:#fff;padding:6px 12px;font-size:12px}
 .btn-blue:hover:not(:disabled){background:#1d4ed8}
-.btn-amber{background:#f59e0b;color:#fff;padding:7px 14px;font-size:12.5px}
+.btn-amber{background:#f59e0b;color:#fff;padding:6px 12px;font-size:12px}
 .btn-amber:hover:not(:disabled){background:#d97706}
-.btn-import{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;padding:11px 22px;font-size:14px}
+.btn-import{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;padding:8px 14px;font-size:12.5px}
 .btn-import:hover:not(:disabled){background:linear-gradient(135deg,#6d28d9,#4c1d95)}
 
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:12px;background:#fff;padding:16px 22px;border-radius:16px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
-.topbar-brand{display:flex;align-items:center;gap:12px}
-.topbar-brand img{width:38px;height:38px;object-fit:contain;background:#fff;border-radius:9px;padding:3px;border:1px solid var(--border)}
-.topbar-brand h1{font-size:18px;margin-bottom:2px}
-.topbar-brand .user{font-size:12px;color:var(--muted);display:block}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px;background:#fff;padding:14px 18px;border-radius:14px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+.topbar-brand{display:flex;align-items:center;gap:10px}
+.topbar-brand img{width:36px;height:36px;object-fit:contain;background:#fff;border-radius:9px;padding:3px;border:1px solid var(--border)}
+.topbar-brand h1{font-size:16px;margin-bottom:1px}
+.topbar-brand .user{font-size:11px;color:var(--muted);display:block}
 .topbar-brand .user strong{color:var(--pl)}
+.topbar-actions{display:flex;gap:8px;flex-wrap:wrap}
 
-.panel{background:#fff;border-radius:18px;padding:26px;box-shadow:var(--shadow-sm);margin-bottom:22px;border:1px solid var(--border)}
-.panel h2{font-size:18px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.panel h2 .badge-count{font-size:12.5px;color:var(--muted);font-weight:500;background:#f1f5f9;padding:4px 12px;border-radius:999px;font-family:'Sarabun',sans-serif}
+.dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .2s}
+.stat:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.stat .num{font-family:'Kanit',sans-serif;font-size:26px;font-weight:700;line-height:1.1;color:var(--primary)}
+.stat .lbl{font-size:11.5px;color:var(--muted);font-weight:500;margin-top:3px}
+.stat.s-available .num{color:#059669}
+.stat.s-sold .num{color:#dc2626}
+.stat.s-hidden .num{color:#d97706}
 
-.import-panel{background:linear-gradient(135deg,#faf5ff,#f3e8ff);border:1px solid #e9d5ff}
-.import-panel h2{color:#5b21b6;border-bottom-color:#e9d5ff}
-.import-panel p{font-size:13.5px;color:#6b21a8;margin-bottom:16px;line-height:1.6}
-.import-log{background:#1e1b4b;color:#a5f3fc;font-family:'Courier New',monospace;font-size:12px;padding:14px;border-radius:10px;max-height:240px;overflow-y:auto;display:none;margin-top:14px;line-height:1.7}
-.import-log.show{display:block}
-.import-log .ok{color:#4ade80}
-.import-log .err{color:#f87171}
-.import-log .info{color:#fbbf24}
+.toolbar{background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px 16px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;box-shadow:var(--shadow-sm)}
+.toolbar h3{font-size:15px;display:flex;align-items:center;gap:8px}
+.toolbar h3 .count{font-size:12.5px;color:var(--muted);font-weight:500;background:#f1f5f9;padding:3px 10px;border-radius:999px;font-family:'Sarabun',sans-serif}
 
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.list-wrap{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.list-item{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:#fff;transition:all .2s;box-shadow:var(--shadow-sm)}
+.list-item:hover{border-color:#a8d8f0;box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.list-item .thumb{width:70px;height:52px;object-fit:cover;border-radius:8px;background:#e2e8f0}
+.list-item .info .ref{display:inline-block;font-size:10px;background:#eef5fd;padding:2px 8px;border-radius:4px;color:var(--pl);font-weight:700;font-family:'Kanit',sans-serif;letter-spacing:.03em;margin-bottom:3px}
+.list-item .info .ref.st-available{background:#ecfdf5;color:#059669}
+.list-item .info .ref.st-sold{background:#fee2e2;color:#991b1b}
+.list-item .info .ref.st-hidden{background:#fef3c7;color:#92400e}
+.list-item .info h4{font-size:13.5px;margin-bottom:2px;line-height:1.3;font-weight:600}
+.list-item .info p{font-size:11.5px;color:var(--muted);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.list-item .actions-cell{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.list-item .actions-cell .btn{padding:6px 10px;font-size:11.5px}
+
+@media(max-width:640px){
+  body{padding:12px}
+  .list-item{grid-template-columns:56px 1fr;padding:10px}
+  .list-item .thumb{width:56px;height:44px}
+  .list-item .actions-cell{grid-column:1/-1;justify-content:stretch;margin-top:4px}
+  .list-item .actions-cell .btn{flex:1}
+}
+
+.empty{text-align:center;padding:36px 20px;color:var(--muted);background:#fff;border-radius:14px;border:1px dashed var(--border)}
+.empty .big{font-size:44px;margin-bottom:10px}
+
+.panel{background:#fff;border-radius:14px;padding:20px;box-shadow:var(--shadow-sm);margin-bottom:14px;border:1px solid var(--border)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;gap:10px;flex-wrap:wrap}
+.panel-head h2{font-size:16px;display:flex;align-items:center;gap:8px}
+.panel-head .toggle{font-size:20px;color:var(--muted);transition:transform .25s}
+.panel.collapsed .panel-body{display:none}
+.panel.collapsed .toggle{transform:rotate(-90deg)}
+.panel-body{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 @media(max-width:760px){.row,.row-3{grid-template-columns:1fr}}
 
-.lang-tabs{display:flex;gap:8px;margin-bottom:20px;border-bottom:2px solid var(--border);padding-bottom:0}
-.lang-tab{padding:10px 24px;border:0;background:transparent;font-family:'Kanit',sans-serif;font-weight:600;font-size:14px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:8px 8px 0 0}
+.lang-tabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:2px solid var(--border);padding-bottom:0}
+.lang-tab{padding:9px 20px;border:0;background:transparent;font-family:'Kanit',sans-serif;font-weight:600;font-size:13.5px;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;border-radius:8px 8px 0 0}
 .lang-tab:hover{background:#f6f9fe;color:var(--primary)}
 .lang-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
 .lang-panel{display:none}
 .lang-panel.active{display:block}
 
-.upload-zone{border:2px dashed var(--border);border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:#f9fbfe;margin-bottom:16px}
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;background:#f9fbfe;margin-bottom:14px}
 .upload-zone:hover{border-color:var(--pl);background:#eef5fd}
-.upload-zone.dragover{border-color:var(--accent);background:#ecfdf5;transform:scale(1.01)}
+.upload-zone.dragover{border-color:var(--accent);background:#ecfdf5}
 .upload-zone input{display:none}
-.upload-zone .icon-up{font-size:36px;margin-bottom:8px}
+.upload-zone .icon-up{font-size:32px;margin-bottom:6px}
 .upload-zone strong{color:var(--pl)}
-.upload-zone .up-status{font-size:12px;color:var(--muted);margin-top:8px}
-.preview{margin:12px auto 0;max-width:260px;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px -6px rgba(0,0,0,.2);position:relative}
+.upload-zone .up-status{font-size:11.5px;color:var(--muted);margin-top:6px}
+.preview{margin:10px auto 0;max-width:220px;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px -6px rgba(0,0,0,.2);position:relative}
 .preview img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
-.preview .remove{position:absolute;top:8px;right:8px;width:28px;height:28px;background:rgba(220,38,38,.9);border:0;color:#fff;border-radius:50%;cursor:pointer;font-size:16px;display:grid;place-items:center;line-height:1}
+.preview .remove{position:absolute;top:6px;right:6px;width:26px;height:26px;background:rgba(220,38,38,.9);border:0;color:#fff;border-radius:50%;cursor:pointer;font-size:14px;display:grid;place-items:center;line-height:1}
 
-.list-item{display:grid;grid-template-columns:80px 1fr auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--border);border-radius:12px;margin-bottom:10px;background:#f9fbfe;transition:all .2s}
-.list-item:hover{background:#fff;border-color:#a8d8f0;box-shadow:var(--shadow-sm)}
-.list-item img{width:80px;height:60px;object-fit:cover;border-radius:9px;background:#e2e8f0}
-.list-item .info h4{font-size:14px;margin-bottom:4px;line-height:1.3}
-.list-item .info p{font-size:12px;color:var(--muted);line-height:1.3}
-.list-item .info .ref{display:inline-block;font-size:10.5px;background:#eef5fd;padding:2px 9px;border-radius:5px;color:var(--pl);font-weight:700;margin-bottom:5px;font-family:'Kanit',sans-serif;letter-spacing:.03em}
-.list-item .info .st-available{background:#ecfdf5;color:#059669}
-.list-item .info .st-sold{background:#fee2e2;color:#991b1b}
-.list-item .info .st-hidden{background:#fef3c7;color:#92400e}
-.list-item .actions-cell{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-@media(max-width:640px){
-  .list-item{grid-template-columns:60px 1fr}
-  .list-item img{width:60px;height:48px}
-  .list-item .actions-cell{grid-column:1/-1;justify-content:stretch}
-  .list-item .actions-cell .btn{flex:1}
-}
-
-.empty{text-align:center;padding:36px 20px;color:var(--muted)}
-.empty .big{font-size:44px;margin-bottom:10px}
-
-.toast{position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;padding:14px 22px;border-radius:12px;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);font-size:14px;z-index:9999;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:340px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--primary);color:#fff;padding:13px 20px;border-radius:12px;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);font-size:13.5px;z-index:9999;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:320px}
 .toast.show{transform:translateY(0)}
 .toast.err{background:#dc2626}
 .toast.ok{background:var(--accent)}
@@ -124,12 +137,20 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.divider{border:0;border-top:1px dashed var(--border);margin:20px 0}
+.progress-bar{height:6px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:8px;display:none}
+.progress-bar.show{display:block}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,#7c3aed,#1a5fb4);width:0%;transition:width .3s;border-radius:999px}
+
+.import-log{background:#1e1b4b;color:#a5f3fc;font-family:'Courier New',monospace;font-size:11.5px;padding:12px;border-radius:10px;max-height:200px;overflow-y:auto;display:none;margin-top:12px;line-height:1.7}
+.import-log.show{display:block}
+.import-log .ok{color:#4ade80}
+.import-log .err{color:#f87171}
+.import-log .info{color:#fbbf24}
 </style>
 </head>
 <body>
 
-<!-- ============ LOGIN ============ -->
+<!-- LOGIN -->
 <div class="login-box" id="loginBox">
   <div class="login-logo">
     <img src="https://thaitruetrue-sys.github.io/speedrealasset/logo-main.png" alt="SRA">
@@ -144,7 +165,7 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
   <div class="login-err" id="loginErr"></div>
 </div>
 
-<!-- ============ ADMIN ============ -->
+<!-- ADMIN -->
 <div class="wrap hidden" id="adminWrap">
 
   <div class="topbar">
@@ -155,179 +176,143 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
         <span class="user">เข้าสู่ระบบ: <strong id="userEmail">—</strong></span>
       </div>
     </div>
-    <button class="btn btn-gray" id="logoutBtn">ออกจากระบบ</button>
+    <div class="topbar-actions">
+      <button class="btn btn-import hidden" id="importBtn">📥 นำเข้าทรัพย์เก่า</button>
+      <button class="btn btn-gray" id="logoutBtn">ออกจากระบบ</button>
+    </div>
   </div>
 
-  <!-- ========== IMPORT PANEL ========== -->
-  <div class="panel import-panel">
-    <h2>📥 นำเข้าทรัพย์ 4 รายการเก่า (ทำครั้งเดียว)</h2>
-    <p>
-      ปุ่มนี้จะนำเข้าทรัพย์ 4 รายการที่ฝังอยู่ในหน้าเว็บเดิม (Whizdom, ที่ดินบางนา, Lumpini, ออฟฟิศอโศก) เข้าสู่ระบบจัดการ<br>
-      <strong>⚠️ กดครั้งเดียว</strong> — ถ้ากดซ้ำจะได้ข้อมูลซ้ำกัน
-    </p>
-    <button class="btn btn-import" id="importBtn">📥 เริ่มนำเข้าทรัพย์ 4 รายการ</button>
-    <div class="import-log" id="importLog"></div>
+  <div class="dashboard">
+    <div class="stat"><div class="num" id="statTotal">—</div><div class="lbl">ทรัพย์ทั้งหมด</div></div>
+    <div class="stat s-available"><div class="num" id="statAvailable">—</div><div class="lbl">✅ ว่าง (แสดงเว็บ)</div></div>
+    <div class="stat s-sold"><div class="num" id="statSold">—</div><div class="lbl">🔴 ขายแล้ว</div></div>
+    <div class="stat s-hidden"><div class="num" id="statHidden">—</div><div class="lbl">🟡 ซ่อนชั่วคราว</div></div>
   </div>
 
-  <!-- ========== FORM ========== -->
-  <div class="panel">
-    <h2 id="formTitle">➕ เพิ่มทรัพย์ใหม่</h2>
-    <input type="hidden" id="editId">
+  <div class="toolbar">
+    <h3>📋 รายการทรัพย์ในระบบ <span class="count" id="countBadge">—</span></h3>
+    <span style="font-size:11.5px;color:var(--muted)">☁️ รูปเก็บที่ Cloudinary · 🔄 Real-time</span>
+  </div>
 
-    <label>รูปภาพ (บีบเป็น WebP อัตโนมัติ)</label>
-    <div class="upload-zone" id="uploadZone">
-      <input type="file" id="imageInput" accept="image/*">
-      <div id="uploadText">
-        <div class="icon-up">📸</div>
-        <strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br>
-        <span class="up-status">รองรับ JPG / PNG · บีบ ≤ 300 KB อัตโนมัติ</span>
-      </div>
-      <div class="preview hidden" id="previewBox">
-        <img id="previewImg" alt="preview">
-        <button type="button" class="remove" id="removeImgBtn" title="ลบรูป">×</button>
-      </div>
+  <div class="list-wrap" id="listWrap">
+    <div class="empty"><div class="big">⏳</div>กำลังโหลด...</div>
+  </div>
+
+  <div id="importLog" class="import-log"></div>
+
+  <div class="panel collapsed" id="formPanel">
+    <div class="panel-head" id="formToggle">
+      <h2 id="formTitle">➕ เพิ่มทรัพย์ใหม่</h2>
+      <span class="toggle">▼</span>
     </div>
+    <div class="panel-body">
+      <input type="hidden" id="editId">
 
-    <div class="row-3">
-      <div>
-        <label>รหัสทรัพย์ (ref)</label>
-        <input id="fRef" placeholder="SRA-1024">
+      <label>รูปภาพ (บีบเป็น WebP + อัปโหลด Cloudinary)</label>
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="imageInput" accept="image/*">
+        <div id="uploadText">
+          <div class="icon-up">📸</div>
+          <strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br>
+          <span class="up-status">รองรับ JPG / PNG · บีบอัตโนมัติ</span>
+        </div>
+        <div class="progress-bar" id="progressBar"><div class="fill" id="progressFill"></div></div>
+        <div class="preview hidden" id="previewBox">
+          <img id="previewImg" alt="preview">
+          <button type="button" class="remove" id="removeImgBtn" title="ลบรูป">×</button>
+        </div>
       </div>
-      <div>
-        <label>สถานะ</label>
-        <select id="fStatus">
-          <option value="available">✅ ว่าง (แสดงเว็บ)</option>
-          <option value="sold">🔴 ขายแล้ว (ซ่อน)</option>
-          <option value="hidden">🟡 ซ่อนชั่วคราว</option>
-        </select>
-      </div>
-      <div>
-        <label>ประเภท (คั่นด้วย ,)</label>
-        <input id="fType" placeholder="sale, condo">
-        <small class="hint">all / sale / rent / condo / land / house</small>
-      </div>
-    </div>
 
-    <div class="row-3">
-      <div>
-        <label>ราคา (แสดงผล)</label>
-        <input id="fPriceText" placeholder="฿ 3,500,000">
+      <div class="row-3">
+        <div><label>รหัสทรัพย์ (ref)</label><input id="fRef" placeholder="SRA-1024"></div>
+        <div>
+          <label>สถานะ</label>
+          <select id="fStatus">
+            <option value="available">✅ ว่าง (แสดงเว็บ)</option>
+            <option value="sold">🔴 ขายแล้ว (ซ่อน)</option>
+            <option value="hidden">🟡 ซ่อนชั่วคราว</option>
+          </select>
+        </div>
+        <div>
+          <label>ประเภท (คั่นด้วย ,)</label>
+          <input id="fType" placeholder="sale, condo">
+          <small class="hint">sale / rent / condo / land / house</small>
+        </div>
       </div>
-      <div>
-        <label>ราคา (ตัวเลข)</label>
-        <input type="number" id="fPriceNumber" placeholder="3500000">
-      </div>
-      <div>
-        <label>สีป้าย (badgeClass)</label>
-        <select id="fBadgeClass">
-          <option value="b-condo">🟣 ม่วง (คอนโด)</option>
-          <option value="b-land">🟤 น้ำตาล (ที่ดิน)</option>
-          <option value="b-hot">🔴 แดง (ยอดนิยม)</option>
-        </select>
-      </div>
-    </div>
 
-    <div class="row">
-      <div>
-        <label>YouTube Video ID (optional)</label>
-        <input id="fVideoId" placeholder="W0v2z146zqY">
+      <div class="row-3">
+        <div><label>ราคา (แสดงผล)</label><input id="fPriceText" placeholder="฿ 3,500,000"></div>
+        <div><label>ราคา (ตัวเลข)</label><input type="number" id="fPriceNumber" placeholder="3500000"></div>
+        <div>
+          <label>สีป้าย</label>
+          <select id="fBadgeClass">
+            <option value="b-condo">🟣 ม่วง (คอนโด)</option>
+            <option value="b-land">🟤 น้ำตาล (ที่ดิน)</option>
+            <option value="b-hot">🔴 แดง (ยอดนิยม)</option>
+          </select>
+        </div>
       </div>
-      <div>
-        <label>สีหมายเหตุ (noteClass)</label>
-        <select id="fNoteClass">
-          <option value="note-green">🟢 เขียว (ราคาต่อ ตร.ม.)</option>
-          <option value="">🔵 ฟ้า (default)</option>
-          <option value="note-amber">🟡 เหลือง (เตือน)</option>
-        </select>
-      </div>
-    </div>
 
-    <hr class="divider">
-
-    <div class="lang-tabs">
-      <button class="lang-tab active" data-lang="th" type="button">🇹🇭 ภาษาไทย</button>
-      <button class="lang-tab" data-lang="en" type="button">🇬🇧 English</button>
-    </div>
-
-    <div class="lang-panel active" data-lang="th">
       <div class="row">
+        <div><label>YouTube Video ID</label><input id="fVideoId" placeholder="W0v2z146zqY"></div>
         <div>
-          <label>ป้ายมุมรูป</label>
-          <input id="fBadge" placeholder="คอนโด / ที่ดิน / 🔥 ยอดนิยม">
-        </div>
-        <div>
-          <label>หมายเหตุ</label>
-          <input id="fNote" placeholder="≈ ฿133,180 / ตร.ม.">
+          <label>สีหมายเหตุ</label>
+          <select id="fNoteClass">
+            <option value="note-green">🟢 เขียว</option>
+            <option value="">🔵 ฟ้า (default)</option>
+            <option value="note-amber">🟡 เหลือง</option>
+          </select>
         </div>
       </div>
 
-      <label>ชื่อทรัพย์</label>
-      <input id="fTitle" placeholder="Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม.">
+      <div class="lang-tabs">
+        <button class="lang-tab active" data-lang="th" type="button">🇹🇭 ภาษาไทย</button>
+        <button class="lang-tab" data-lang="en" type="button">🇬🇧 English</button>
+      </div>
 
-      <label>ทำเล</label>
-      <input id="fLocation" placeholder="ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู">
-
-      <label>คำอธิบายเพิ่มเติม (optional)</label>
-      <textarea id="fDesc" rows="2" placeholder="<strong>ไฮไลท์:</strong> ..."></textarea>
-
-      <label>Specs — บรรทัดละ 1 รายการ</label>
-      <textarea id="fSpecs" rows="4" placeholder="s-bed><b>1</b> ห้องนอน
+      <div class="lang-panel active" data-lang="th">
+        <div class="row">
+          <div><label>ป้ายมุมรูป</label><input id="fBadge" placeholder="คอนโด"></div>
+          <div><label>หมายเหตุ</label><input id="fNote" placeholder="≈ ฿133,180 / ตร.ม."></div>
+        </div>
+        <label>ชื่อทรัพย์</label>
+        <input id="fTitle" placeholder="Whizdom Station รัชดา – ท่าพระ">
+        <label>ทำเล</label>
+        <input id="fLocation" placeholder="ตรงข้าม The Mall ท่าพระ">
+        <label>คำอธิบาย (optional)</label>
+        <textarea id="fDesc" rows="2"></textarea>
+        <label>Specs — บรรทัดละ 1</label>
+        <textarea id="fSpecs" rows="4" placeholder="s-bed><b>1</b> ห้องนอน
 s-bath><b>1</b> ห้องน้ำ
 s-area><b>26.28</b> ตร.ม.
 s-car>จอด <b>1</b> คัน"></textarea>
-      <small class="hint">Icons: s-bed, s-bath, s-area, s-car, s-home, s-ruler, s-pin</small>
-
-      <label>Tags — คั่นด้วย ,</label>
-      <input id="fTags" placeholder="ติด BTS, ใกล้เดอะมอลล์">
-    </div>
-
-    <div class="lang-panel" data-lang="en">
-      <div class="row">
-        <div>
-          <label>Badge</label>
-          <input id="fBadgeEn" placeholder="Condo / Land / 🔥 Hot Deal">
-        </div>
-        <div>
-          <label>Note</label>
-          <input id="fNoteEn" placeholder="≈ ฿133,180 / sq.m.">
-        </div>
+        <small class="hint">Icons: s-bed, s-bath, s-area, s-car, s-home, s-ruler, s-pin</small>
+        <label>Tags — คั่นด้วย ,</label>
+        <input id="fTags" placeholder="ติด BTS, ใกล้เดอะมอลล์">
       </div>
 
-      <label>Title</label>
-      <input id="fTitleEn" placeholder="Whizdom Station Ratchada – Thapra 26.28 sq.m.">
+      <div class="lang-panel" data-lang="en">
+        <div class="row">
+          <div><label>Badge</label><input id="fBadgeEn" placeholder="Condo"></div>
+          <div><label>Note</label><input id="fNoteEn" placeholder="≈ ฿133,180 / sq.m."></div>
+        </div>
+        <label>Title</label>
+        <input id="fTitleEn" placeholder="Whizdom Station Ratchada – Thapra">
+        <label>Location</label>
+        <input id="fLocationEn" placeholder="Opposite The Mall Thapra">
+        <label>Description (optional)</label>
+        <textarea id="fDescEn" rows="2"></textarea>
+        <label>Specs — one per line</label>
+        <textarea id="fSpecsEn" rows="4"></textarea>
+        <label>Tags — comma separated</label>
+        <input id="fTagsEn" placeholder="BTS Access, Near The Mall">
+        <small class="hint">💡 ถ้าเว้นว่าง หน้า EN จะใช้ข้อมูลภาษาไทยแทนอัตโนมัติ</small>
+      </div>
 
-      <label>Location</label>
-      <input id="fLocationEn" placeholder="Opposite The Mall Thapra · BTS Talat Phlu">
-
-      <label>Description (optional)</label>
-      <textarea id="fDescEn" rows="2" placeholder="<strong>Highlight:</strong> ..."></textarea>
-
-      <label>Specs — one per line</label>
-      <textarea id="fSpecsEn" rows="4" placeholder="s-bed><b>1</b> Bedroom
-s-bath><b>1</b> Bathroom
-s-area><b>26.28</b> sq.m.
-s-car>Parking for <b>1</b> car"></textarea>
-
-      <label>Tags — comma separated</label>
-      <input id="fTagsEn" placeholder="BTS Access, Near The Mall">
-      <small class="hint">💡 ถ้าเว้นว่างไว้ หน้า EN จะใช้ข้อมูลภาษาไทยแทนอัตโนมัติ</small>
-    </div>
-
-    <hr class="divider">
-
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-green" id="saveBtn" style="flex:2;min-width:180px">💾 บันทึก</button>
-      <button class="btn btn-gray" id="cancelBtn" style="flex:1;min-width:120px">ยกเลิก / ล้างฟอร์ม</button>
-    </div>
-  </div>
-
-  <div class="panel">
-    <h2>
-      📋 รายการทรัพย์ทั้งหมด
-      <span class="badge-count" id="countBadge">—</span>
-    </h2>
-    <div id="listWrap">
-      <div class="empty"><div class="big">⏳</div>กำลังโหลด...</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+        <button class="btn btn-green" id="saveBtn" style="flex:2;min-width:160px">💾 บันทึก</button>
+        <button class="btn btn-gray" id="cancelBtn" style="flex:1;min-width:110px">ล้างฟอร์ม</button>
+      </div>
     </div>
   </div>
 </div>
@@ -343,12 +328,9 @@ import {
   getFirestore, collection, doc, addDoc, updateDoc, deleteDoc,
   onSnapshot, serverTimestamp, query, orderBy, getDocs
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-import {
-  getStorage, ref as sRef, uploadBytes, getDownloadURL, deleteObject
-} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js';
 
 /* ============================================================
-   ✅ Firebase Config — ใส่ค่าจริงแล้ว
+   🔥 Firebase Config
    ============================================================ */
 const firebaseConfig = {
   apiKey: "AIzaSyCAB3mVBpdtYzr_LTqglmILzvjMiX5Txr4",
@@ -358,12 +340,18 @@ const firebaseConfig = {
   messagingSenderId: "964835808677",
   appId: "1:964835808677:web:d4da5a0eda7b632656444c"
 };
+
+/* ============================================================
+   ☁️ Cloudinary Config
+   ============================================================ */
+const CLOUDINARY_CLOUD_NAME    = "a7jig3ni";
+const CLOUDINARY_UPLOAD_PRESET = "speedrealasset";
+const CLOUDINARY_FOLDER        = "properties";
 /* ============================================================ */
 
-const app     = initializeApp(firebaseConfig);
-const auth    = getAuth(app);
-const db      = getFirestore(app);
-const storage = getStorage(app);
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
 
 const $ = id => document.getElementById(id);
 
@@ -382,14 +370,50 @@ async function compressImage(file, maxW = 1600, quality = 0.82) {
   const canvas = document.createElement('canvas');
   canvas.width  = Math.round(bmp.width  * scale);
   canvas.height = Math.round(bmp.height * scale);
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(bmp, 0, 0, canvas.width, canvas.height);
+  canvas.getContext('2d').drawImage(bmp, 0, 0, canvas.width, canvas.height);
   return new Promise(resolve => canvas.toBlob(resolve, 'image/webp', quality));
+}
+
+function uploadToCloudinary(blob, onProgress) {
+  return new Promise((resolve, reject) => {
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+    const formData = new FormData();
+    formData.append('file', blob);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    if (CLOUDINARY_FOLDER) formData.append('folder', CLOUDINARY_FOLDER);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+
+    xhr.upload.onprogress = e => {
+      if (e.lengthComputable && onProgress) {
+        onProgress(Math.round((e.loaded / e.total) * 100));
+      }
+    };
+
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        try { resolve(JSON.parse(xhr.responseText)); }
+        catch (e) { reject(new Error('Invalid JSON response')); }
+      } else {
+        let errMsg = 'Cloudinary error ' + xhr.status;
+        try { errMsg = JSON.parse(xhr.responseText).error.message || errMsg; } catch (e) {}
+        reject(new Error(errMsg));
+      }
+    };
+    xhr.onerror = () => reject(new Error('Network error'));
+    xhr.send(formData);
+  });
+}
+
+function cloudinaryOptimized(url, width = 800) {
+  if (!url || !url.includes('/upload/')) return url;
+  return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
 }
 
 let compressedBlob = null;
 let existingImageUrl = '';
-let existingImagePath = '';
+let existingPublicId = '';
 let cache = {};
 
 /* ============ LOGIN ============ */
@@ -401,31 +425,24 @@ $('loginBtn').addEventListener('click', async () => {
   if (!email || !pass) { $('loginErr').textContent = 'กรอกอีเมลและรหัสผ่าน'; return; }
 
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> กำลังเข้าสู่ระบบ...';
+  btn.innerHTML = '<span class="spinner"></span> กำลังเข้า...';
   try {
     await signInWithEmailAndPassword(auth, email, pass);
   } catch (e) {
-    console.error(e);
     const map = {
       'auth/invalid-email': 'อีเมลไม่ถูกต้อง',
-      'auth/user-not-found': 'ไม่พบบัญชีนี้ในระบบ',
+      'auth/user-not-found': 'ไม่พบบัญชีนี้',
       'auth/wrong-password': 'รหัสผ่านไม่ถูกต้อง',
       'auth/invalid-credential': 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
-      'auth/too-many-requests': 'ลองผิดหลายครั้งเกินไป รอสักครู่'
+      'auth/too-many-requests': 'ลองผิดหลายครั้งเกินไป'
     };
     $('loginErr').textContent = map[e.code] || 'เข้าสู่ระบบไม่สำเร็จ: ' + e.code;
   }
   btn.disabled = false;
   btn.textContent = 'เข้าสู่ระบบ';
 });
-
-$('loginPass').addEventListener('keydown', e => {
-  if (e.key === 'Enter') $('loginBtn').click();
-});
-
-$('logoutBtn').addEventListener('click', () => {
-  if (confirm('ออกจากระบบ?')) signOut(auth);
-});
+$('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') $('loginBtn').click(); });
+$('logoutBtn').addEventListener('click', () => { if (confirm('ออกจากระบบ?')) signOut(auth); });
 
 onAuthStateChanged(auth, user => {
   if (user) {
@@ -439,7 +456,6 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-/* ============ LANGUAGE TABS ============ */
 document.querySelectorAll('.lang-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
@@ -449,152 +465,14 @@ document.querySelectorAll('.lang-tab').forEach(tab => {
   });
 });
 
+$('formToggle').addEventListener('click', () => $('formPanel').classList.toggle('collapsed'));
+
 /* ============ IMPORT 4 รายการเก่า ============ */
 const IMPORT_DATA = [
-  {
-    ref: "SRA-1024",
-    status: "available",
-    type: ["sale", "condo"],
-    badgeClass: "b-condo",
-    noteClass: "note-green",
-    priceText: "฿ 3,500,000",
-    priceNumber: 3500000,
-    imageUrl: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",
-    imagePath: "",
-    videoId: "W0v2z146zqY",
-    badge: "คอนโด",
-    title: "Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม. ติด BTS ตลาดพลู",
-    location: "ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",
-    desc: "",
-    note: "≈ ฿133,180 / ตร.ม.",
-    specs: [
-      { icon: "s-bed", text: "<b>1</b> ห้องนอน" },
-      { icon: "s-bath", text: "<b>1</b> ห้องน้ำ" },
-      { icon: "s-area", text: "<b>26.28</b> ตร.ม." },
-      { icon: "s-car", text: "จอด <b>1</b> คัน" }
-    ],
-    tags: ["ติด BTS", "ใกล้เดอะมอลล์"],
-    badge_en: "Condo",
-    title_en: "Whizdom Station Ratchada – Thapra (26.28 sq.m.) Next to BTS Talat Phlu",
-    location_en: "Opposite The Mall Thapra · BTS Talat Phlu · BRT Ratchaphruek",
-    desc_en: "",
-    note_en: "≈ ฿133,180 / sq.m.",
-    specs_en: [
-      { icon: "s-bed", text: "<b>1</b> Bedroom" },
-      { icon: "s-bath", text: "<b>1</b> Bathroom" },
-      { icon: "s-area", text: "<b>26.28</b> sq.m." },
-      { icon: "s-car", text: "Parking for <b>1</b> Car" }
-    ],
-    tags_en: ["Next to BTS", "Near the Mall"]
-  },
-  {
-    ref: "SRA-2048",
-    status: "available",
-    type: ["sale", "land"],
-    badgeClass: "b-land",
-    noteClass: "note-amber",
-    priceText: "📞 ราคาโทรถาม",
-    priceNumber: 0,
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",
-    imagePath: "",
-    videoId: "Rmg51jPXF-s",
-    badge: "🌳 ที่ดิน",
-    title: "ขายที่ดิน บางนาตราด กม.49/10 ทรงสี่เหลี่ยมสวย",
-    location: "ริมถนนบางนาตราด กม.49/10 · สมุทรปราการ",
-    desc: "<strong>ไฮไลท์:</strong> หน้ากว้าง 80 ม. ลึก 100 ม. ติดถนนสายหลัก เหมาะสร้างปั๊มน้ำมัน โกดัง คลังสินค้า หรือโรงงาน",
-    note: "5 ไร่",
-    specs: [
-      { icon: "s-area", text: "<b>5</b> ไร่" },
-      { icon: "s-ruler", text: "กว้าง <b>80</b> ม." },
-      { icon: "s-ruler", text: "ยาว <b>100</b> ม." },
-      { icon: "s-pin", text: "กม. <b>49/10</b>" }
-    ],
-    tags: ["ปั๊มน้ำมัน", "โกดัง/โรงงาน"],
-    badge_en: "🌳 Land",
-    title_en: "Prime Land on Bangna-Trad Km.49/10 (Rectangular Shape)",
-    location_en: "Bangna-Trad Frontage Rd. Km.49/10 · Samut Prakan",
-    desc_en: "<strong>Key Highlight:</strong> Width: 80 m, Depth: 100 m with main road access. Ideal for a petrol station, logistics warehouse, or distribution center.",
-    note_en: "5 Rai",
-    specs_en: [
-      { icon: "s-area", text: "<b>5</b> Rai" },
-      { icon: "s-ruler", text: "Width: <b>80</b> m" },
-      { icon: "s-ruler", text: "Depth: <b>100</b> m" },
-      { icon: "s-pin", text: "Km. <b>49/10</b>" }
-    ],
-    tags_en: ["Petrol Station", "Warehouse / Factory"]
-  },
-  {
-    ref: "SRA-3072",
-    status: "available",
-    type: ["sale", "condo"],
-    badgeClass: "b-condo",
-    noteClass: "note-green",
-    priceText: "฿ 2,100,000",
-    priceNumber: 2100000,
-    imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",
-    imagePath: "",
-    videoId: "f_VwtA_PfLI",
-    badge: "คอนโด",
-    title: "Lumpini Place Ratchada ชั้น 11 วิวสูง ใกล้ BTS ตลาดพลู",
-    location: "The Mall Lifestore ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",
-    desc: "",
-    note: "ของดีราคาคุณภาพ",
-    specs: [
-      { icon: "s-bed", text: "<b>1</b> ห้องนอน" },
-      { icon: "s-bath", text: "<b>1</b> ห้องน้ำ" },
-      { icon: "s-area", text: "<b>35.29</b> ตร.ม." },
-      { icon: "s-home", text: "ชั้น <b>11</b>" }
-    ],
-    tags: ["สาทร 15 นาที", "ใกล้ห้างดัง"],
-    badge_en: "Condo",
-    title_en: "Lumpini Place Ratchada (11th Fl.) High Floor near BTS Talat Phlu",
-    location_en: "The Mall Lifestore Thapra · BTS Talat Phlu · BRT Ratchaphruek",
-    desc_en: "",
-    note_en: "Great Value",
-    specs_en: [
-      { icon: "s-bed", text: "<b>1</b> Bedroom" },
-      { icon: "s-bath", text: "<b>1</b> Bathroom" },
-      { icon: "s-area", text: "<b>35.29</b> sq.m." },
-      { icon: "s-home", text: "<b>11th</b> Floor" }
-    ],
-    tags_en: ["Sathorn 15 mins", "Near the Mall"]
-  },
-  {
-    ref: "SRA-5510",
-    status: "available",
-    type: ["rent", "house"],
-    badgeClass: "b-hot",
-    noteClass: "",
-    priceText: "฿ 45,000 / เดือน",
-    priceNumber: 45000,
-    imageUrl: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",
-    imagePath: "",
-    videoId: "",
-    badge: "🔥 ยอดนิยม",
-    title: "โฮมออฟฟิศ 4 ชั้น ใจกลางอโศก-สุขุมวิท 21",
-    location: "อโศก สุขุมวิท 21 · ใกล้ MRT สุขุมวิท / BTS อโศก",
-    desc: "",
-    note: "สัญญา 3 ปี",
-    specs: [
-      { icon: "s-area", text: "<b>5</b> ห้องทำงาน" },
-      { icon: "s-bath", text: "<b>4</b> ห้องน้ำ" },
-      { icon: "s-area", text: "<b>320</b> ตร.ม." },
-      { icon: "s-car", text: "จอด <b>4</b> คัน" }
-    ],
-    tags: ["ติด MRT/BTS", "ลิฟต์ส่วนตัว"],
-    badge_en: "🔥 Hot Deal",
-    title_en: "4-Storey Modern Home Office in Prime Asoke – Sukhumvit 21",
-    location_en: "Asoke, Sukhumvit 21 · Walking Distance to MRT Sukhumvit & BTS Asok",
-    desc_en: "",
-    note_en: "3-Year Lease",
-    specs_en: [
-      { icon: "s-area", text: "<b>5</b> Office Rooms" },
-      { icon: "s-bath", text: "<b>4</b> Bathrooms" },
-      { icon: "s-area", text: "<b>320</b> sq.m." },
-      { icon: "s-car", text: "Parking for <b>4</b> Cars" }
-    ],
-    tags_en: ["Near MRT & BTS", "Private Elevator"]
-  }
+  {ref:"SRA-1024",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 3,500,000",priceNumber:3500000,imageUrl:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",publicId:"",videoId:"W0v2z146zqY",badge:"คอนโด",title:"Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม. ติด BTS ตลาดพลู",location:"ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",desc:"",note:"≈ ฿133,180 / ตร.ม.",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>26.28</b> ตร.ม."},{icon:"s-car",text:"จอด <b>1</b> คัน"}],tags:["ติด BTS","ใกล้เดอะมอลล์"],badge_en:"Condo",title_en:"Whizdom Station Ratchada – Thapra (26.28 sq.m.) Next to BTS Talat Phlu",location_en:"Opposite The Mall Thapra · BTS Talat Phlu · BRT Ratchaphruek",desc_en:"",note_en:"≈ ฿133,180 / sq.m.",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>26.28</b> sq.m."},{icon:"s-car",text:"Parking for <b>1</b> Car"}],tags_en:["Next to BTS","Near the Mall"]},
+  {ref:"SRA-2048",status:"available",type:["sale","land"],badgeClass:"b-land",noteClass:"note-amber",priceText:"📞 ราคาโทรถาม",priceNumber:0,imageUrl:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",publicId:"",videoId:"Rmg51jPXF-s",badge:"🌳 ที่ดิน",title:"ขายที่ดิน บางนาตราด กม.49/10 ทรงสี่เหลี่ยมสวย",location:"ริมถนนบางนาตราด กม.49/10 · สมุทรปราการ",desc:"<strong>ไฮไลท์:</strong> หน้ากว้าง 80 ม. ลึก 100 ม. ติดถนนสายหลัก เหมาะสร้างปั๊มน้ำมัน โกดัง คลังสินค้า หรือโรงงาน",note:"5 ไร่",specs:[{icon:"s-area",text:"<b>5</b> ไร่"},{icon:"s-ruler",text:"กว้าง <b>80</b> ม."},{icon:"s-ruler",text:"ยาว <b>100</b> ม."},{icon:"s-pin",text:"กม. <b>49/10</b>"}],tags:["ปั๊มน้ำมัน","โกดัง/โรงงาน"],badge_en:"🌳 Land",title_en:"Prime Land on Bangna-Trad Km.49/10 (Rectangular Shape)",location_en:"Bangna-Trad Frontage Rd. Km.49/10 · Samut Prakan",desc_en:"<strong>Key Highlight:</strong> Width: 80 m, Depth: 100 m with main road access.",note_en:"5 Rai",specs_en:[{icon:"s-area",text:"<b>5</b> Rai"},{icon:"s-ruler",text:"Width: <b>80</b> m"},{icon:"s-ruler",text:"Depth: <b>100</b> m"},{icon:"s-pin",text:"Km. <b>49/10</b>"}],tags_en:["Petrol Station","Warehouse / Factory"]},
+  {ref:"SRA-3072",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 2,100,000",priceNumber:2100000,imageUrl:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",publicId:"",videoId:"f_VwtA_PfLI",badge:"คอนโด",title:"Lumpini Place Ratchada ชั้น 11 วิวสูง ใกล้ BTS ตลาดพลู",location:"The Mall Lifestore ท่าพระ · BTS ตลาดพลู",desc:"",note:"ของดีราคาคุณภาพ",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>35.29</b> ตร.ม."},{icon:"s-home",text:"ชั้น <b>11</b>"}],tags:["สาทร 15 นาที","ใกล้ห้างดัง"],badge_en:"Condo",title_en:"Lumpini Place Ratchada (11th Fl.) High Floor near BTS Talat Phlu",location_en:"The Mall Lifestore Thapra · BTS Talat Phlu",desc_en:"",note_en:"Great Value",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>35.29</b> sq.m."},{icon:"s-home",text:"<b>11th</b> Floor"}],tags_en:["Sathorn 15 mins","Near the Mall"]},
+  {ref:"SRA-5510",status:"available",type:["rent","house"],badgeClass:"b-hot",noteClass:"",priceText:"฿ 45,000 / เดือน",priceNumber:45000,imageUrl:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",publicId:"",videoId:"",badge:"🔥 ยอดนิยม",title:"โฮมออฟฟิศ 4 ชั้น ใจกลางอโศก-สุขุมวิท 21",location:"อโศก สุขุมวิท 21 · ใกล้ MRT / BTS",desc:"",note:"สัญญา 3 ปี",specs:[{icon:"s-area",text:"<b>5</b> ห้องทำงาน"},{icon:"s-bath",text:"<b>4</b> ห้องน้ำ"},{icon:"s-area",text:"<b>320</b> ตร.ม."},{icon:"s-car",text:"จอด <b>4</b> คัน"}],tags:["ติด MRT/BTS","ลิฟต์ส่วนตัว"],badge_en:"🔥 Hot Deal",title_en:"4-Storey Modern Home Office in Prime Asoke – Sukhumvit 21",location_en:"Asoke, Sukhumvit 21 · MRT Sukhumvit & BTS Asok",desc_en:"",note_en:"3-Year Lease",specs_en:[{icon:"s-area",text:"<b>5</b> Office Rooms"},{icon:"s-bath",text:"<b>4</b> Bathrooms"},{icon:"s-area",text:"<b>320</b> sq.m."},{icon:"s-car",text:"Parking for <b>4</b> Cars"}],tags_en:["Near MRT & BTS","Private Elevator"]}
 ];
 
 $('importBtn').addEventListener('click', async () => {
@@ -611,95 +489,65 @@ $('importBtn').addEventListener('click', async () => {
     log.scrollTop = log.scrollHeight;
   };
 
-  if (!confirm('นำเข้าทรัพย์ 4 รายการ?\n\n⚠️ ถ้าเคยนำเข้าแล้ว จะได้ข้อมูลซ้ำ')) return;
+  if (!confirm('นำเข้าทรัพย์ 4 รายการจากเว็บหลัก?')) return;
 
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> กำลังนำเข้า...';
-
   logLine('🚀 เริ่มนำเข้า ' + IMPORT_DATA.length + ' รายการ...', 'info');
 
-  // เช็คว่ามี ref ซ้ำหรือยัง
   try {
     const existing = await getDocs(collection(db, 'properties'));
     const existingRefs = new Set();
     existing.forEach(d => existingRefs.add(d.data().ref));
 
     let success = 0, skipped = 0, failed = 0;
-
     for (let i = 0; i < IMPORT_DATA.length; i++) {
       const p = IMPORT_DATA[i];
       if (existingRefs.has(p.ref)) {
-        logLine(`⏭️ [${i+1}/${IMPORT_DATA.length}] ${p.ref} — มีอยู่แล้ว ข้าม`, 'info');
+        logLine(`⏭️ [${i+1}/4] ${p.ref} — มีอยู่แล้ว ข้าม`, 'info');
         skipped++;
         continue;
       }
-
       p.createdAt = serverTimestamp();
       p.updatedAt = serverTimestamp();
-
       try {
         await addDoc(collection(db, 'properties'), p);
-        logLine(`✅ [${i+1}/${IMPORT_DATA.length}] ${p.ref} — ${p.title.substring(0, 40)}...`, 'ok');
+        logLine(`✅ [${i+1}/4] ${p.ref} — ${p.title.substring(0, 40)}...`, 'ok');
         success++;
       } catch (e) {
-        logLine(`❌ [${i+1}/${IMPORT_DATA.length}] ${p.ref} — ${e.message}`, 'err');
+        logLine(`❌ [${i+1}/4] ${p.ref} — ${e.message}`, 'err');
         failed++;
       }
     }
-
-    logLine('', 'info');
-    logLine(`🎉 เสร็จแล้ว — สำเร็จ ${success} · ข้าม ${skipped} · ล้มเหลว ${failed}`, 'ok');
-
-    if (success > 0) {
-      toast(`✅ นำเข้าสำเร็จ ${success} รายการ`, 'ok');
-    } else if (skipped === IMPORT_DATA.length) {
-      toast('ℹ️ ทุกรายการมีอยู่แล้ว', '');
-    } else {
-      toast('⚠️ มีบางรายการล้มเหลว ดู log', 'err');
-    }
+    logLine('');
+    logLine(`🎉 เสร็จ — สำเร็จ ${success} · ข้าม ${skipped} · ล้มเหลว ${failed}`, 'ok');
+    toast(`✅ นำเข้าสำเร็จ ${success} รายการ`, 'ok');
   } catch (e) {
-    logLine('❌ ผิดพลาด: ' + e.message, 'err');
+    logLine('❌ ' + e.message, 'err');
     toast('❌ นำเข้าไม่สำเร็จ', 'err');
   }
-
   btn.disabled = false;
-  btn.innerHTML = '📥 เริ่มนำเข้าทรัพย์ 4 รายการ';
+  btn.innerHTML = '📥 นำเข้าทรัพย์เก่า';
 });
 
 /* ============ IMAGE UPLOAD ============ */
 const uploadZone = $('uploadZone');
-uploadZone.addEventListener('click', e => {
-  if (e.target.id === 'removeImgBtn') return;
-  $('imageInput').click();
-});
-uploadZone.addEventListener('dragover', e => {
-  e.preventDefault();
-  uploadZone.classList.add('dragover');
-});
+uploadZone.addEventListener('click', e => { if (e.target.id !== 'removeImgBtn') $('imageInput').click(); });
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
 uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
 uploadZone.addEventListener('drop', e => {
-  e.preventDefault();
-  uploadZone.classList.remove('dragover');
+  e.preventDefault(); uploadZone.classList.remove('dragover');
   if (e.dataTransfer.files[0]) handleImageFile(e.dataTransfer.files[0]);
 });
-$('imageInput').addEventListener('change', e => {
-  if (e.target.files[0]) handleImageFile(e.target.files[0]);
-});
-$('removeImgBtn').addEventListener('click', e => {
-  e.stopPropagation();
-  clearImage();
-});
+$('imageInput').addEventListener('change', e => { if (e.target.files[0]) handleImageFile(e.target.files[0]); });
+$('removeImgBtn').addEventListener('click', e => { e.stopPropagation(); clearImage(); });
 
 async function handleImageFile(file) {
-  if (!file.type.startsWith('image/')) {
-    toast('❌ ต้องเป็นไฟล์รูปภาพเท่านั้น', 'err');
-    return;
-  }
-  if (file.size > 15 * 1024 * 1024) {
-    toast('❌ ไฟล์ใหญ่เกิน 15 MB', 'err');
-    return;
-  }
+  if (!file.type.startsWith('image/')) return toast('❌ ต้องเป็นไฟล์รูปภาพ', 'err');
+  if (file.size > 15 * 1024 * 1024) return toast('❌ ไฟล์ใหญ่เกิน 15 MB', 'err');
 
+  $('progressBar').classList.add('show');
+  $('progressFill').style.width = '0%';
   $('uploadText').innerHTML = '<div class="icon-up">⏳</div>กำลังบีบรูป...';
 
   try {
@@ -707,44 +555,30 @@ async function handleImageFile(file) {
     const url = URL.createObjectURL(compressedBlob);
     $('previewImg').src = url;
     $('previewBox').classList.remove('hidden');
-    $('uploadText').innerHTML = `<div class="icon-up">✅</div>พร้อมบันทึก · ขนาด ${(compressedBlob.size/1024).toFixed(0)} KB`;
+    $('uploadText').innerHTML = `<div class="icon-up">✅</div>พร้อมบันทึก · ${(compressedBlob.size/1024).toFixed(0)} KB`;
+    $('progressBar').classList.remove('show');
   } catch (err) {
-    console.error(err);
     toast('❌ บีบรูปไม่สำเร็จ', 'err');
     $('uploadText').innerHTML = '<div class="icon-up">📸</div><strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง';
+    $('progressBar').classList.remove('show');
   }
 }
 
 function clearImage() {
-  compressedBlob = null;
-  existingImageUrl = '';
-  existingImagePath = '';
-  $('imageInput').value = '';
-  $('previewBox').classList.add('hidden');
-  $('previewImg').src = '';
-  $('uploadText').innerHTML = `
-    <div class="icon-up">📸</div>
-    <strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br>
-    <span class="up-status">รองรับ JPG / PNG · บีบ ≤ 300 KB อัตโนมัติ</span>`;
+  compressedBlob = null; existingImageUrl = ''; existingPublicId = '';
+  $('imageInput').value = ''; $('previewBox').classList.add('hidden'); $('previewImg').src = '';
+  $('progressBar').classList.remove('show');
+  $('uploadText').innerHTML = `<div class="icon-up">📸</div><strong>คลิกเลือกไฟล์</strong> หรือลากรูปมาวาง<br><span class="up-status">รองรับ JPG / PNG · บีบอัตโนมัติ</span>`;
 }
 
 function parseSpecs(text) {
-  return text.split('\n')
-    .map(l => l.trim())
-    .filter(Boolean)
-    .map(line => {
-      const idx = line.indexOf('>');
-      if (idx === -1) return { icon: 's-check', text: line };
-      return {
-        icon: line.slice(0, idx).trim(),
-        text: line.slice(idx + 1).trim()
-      };
-    });
+  return text.split('\n').map(l => l.trim()).filter(Boolean).map(line => {
+    const idx = line.indexOf('>');
+    if (idx === -1) return { icon: 's-check', text: line };
+    return { icon: line.slice(0, idx).trim(), text: line.slice(idx + 1).trim() };
+  });
 }
-
-function specsToString(arr) {
-  return (arr || []).map(s => `${s.icon}>${s.text}`).join('\n');
-}
+function specsToString(arr) { return (arr || []).map(s => `${s.icon}>${s.text}`).join('\n'); }
 
 /* ============ SAVE ============ */
 $('saveBtn').addEventListener('click', async () => {
@@ -752,61 +586,60 @@ $('saveBtn').addEventListener('click', async () => {
   const editId = $('editId').value;
   const isEdit = !!editId;
 
-  if (!$('fRef').value.trim())      { toast('❌ กรุณากรอกรหัสทรัพย์', 'err'); return; }
-  if (!$('fTitle').value.trim())    { toast('❌ กรุณากรอกชื่อทรัพย์ (TH)', 'err'); return; }
-  if (!$('fPriceText').value.trim()){ toast('❌ กรุณากรอกราคา', 'err'); return; }
-  if (!compressedBlob && !existingImageUrl) {
-    toast('❌ กรุณาเลือกรูปภาพ', 'err');
-    return;
-  }
+  if (!$('fRef').value.trim())      return toast('❌ กรุณากรอกรหัสทรัพย์', 'err');
+  if (!$('fTitle').value.trim())    return toast('❌ กรุณากรอกชื่อทรัพย์ (TH)', 'err');
+  if (!$('fPriceText').value.trim()) return toast('❌ กรุณากรอกราคา', 'err');
+  if (!compressedBlob && !existingImageUrl) return toast('❌ กรุณาเลือกรูปภาพ', 'err');
 
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> กำลังบันทึก...';
+  btn.innerHTML = '<span class="spinner"></span> กำลังอัปโหลด...';
 
   try {
-    let imageUrl  = existingImageUrl;
-    let imagePath = existingImagePath;
+    let imageUrl = existingImageUrl;
+    let publicId = existingPublicId;
 
     if (compressedBlob) {
-      const fileName = `properties/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.webp`;
-      const fileRef = sRef(storage, fileName);
-      await uploadBytes(fileRef, compressedBlob, { contentType: 'image/webp' });
-      imageUrl  = await getDownloadURL(fileRef);
-      imagePath = fileName;
+      $('progressBar').classList.add('show');
+      $('progressFill').style.width = '0%';
 
-      if (existingImagePath) {
-        try { await deleteObject(sRef(storage, existingImagePath)); } catch (e) { /* ignore */ }
-      }
+      const result = await uploadToCloudinary(compressedBlob, pct => {
+        $('progressFill').style.width = pct + '%';
+        btn.innerHTML = `<span class="spinner"></span> อัปโหลด ${pct}%`;
+      });
+
+      imageUrl = result.secure_url;
+      publicId = result.public_id;
+
+      $('progressBar').classList.remove('show');
     }
 
+    btn.innerHTML = '<span class="spinner"></span> กำลังบันทึกข้อมูล...';
+
     const data = {
-      ref:           $('fRef').value.trim(),
-      status:        $('fStatus').value,
-      type:          $('fType').value.split(',').map(t => t.trim()).filter(Boolean),
-      badgeClass:    $('fBadgeClass').value,
-      noteClass:     $('fNoteClass').value,
-      priceText:     $('fPriceText').value.trim(),
-      priceNumber:   Number($('fPriceNumber').value) || 0,
-      imageUrl, imagePath,
-      videoId:       $('fVideoId').value.trim(),
-
-      badge:         $('fBadge').value.trim(),
-      title:         $('fTitle').value.trim(),
-      location:      $('fLocation').value.trim(),
-      desc:          $('fDesc').value.trim(),
-      note:          $('fNote').value.trim(),
-      specs:         parseSpecs($('fSpecs').value),
-      tags:          $('fTags').value.split(',').map(t => t.trim()).filter(Boolean),
-
-      badge_en:      $('fBadgeEn').value.trim(),
-      title_en:      $('fTitleEn').value.trim(),
-      location_en:   $('fLocationEn').value.trim(),
-      desc_en:       $('fDescEn').value.trim(),
-      note_en:       $('fNoteEn').value.trim(),
-      specs_en:      parseSpecs($('fSpecsEn').value),
-      tags_en:       $('fTagsEn').value.split(',').map(t => t.trim()).filter(Boolean),
-
-      updatedAt:     serverTimestamp()
+      ref: $('fRef').value.trim(),
+      status: $('fStatus').value,
+      type: $('fType').value.split(',').map(t => t.trim()).filter(Boolean),
+      badgeClass: $('fBadgeClass').value,
+      noteClass: $('fNoteClass').value,
+      priceText: $('fPriceText').value.trim(),
+      priceNumber: Number($('fPriceNumber').value) || 0,
+      imageUrl, publicId,
+      videoId: $('fVideoId').value.trim(),
+      badge: $('fBadge').value.trim(),
+      title: $('fTitle').value.trim(),
+      location: $('fLocation').value.trim(),
+      desc: $('fDesc').value.trim(),
+      note: $('fNote').value.trim(),
+      specs: parseSpecs($('fSpecs').value),
+      tags: $('fTags').value.split(',').map(t => t.trim()).filter(Boolean),
+      badge_en: $('fBadgeEn').value.trim(),
+      title_en: $('fTitleEn').value.trim(),
+      location_en: $('fLocationEn').value.trim(),
+      desc_en: $('fDescEn').value.trim(),
+      note_en: $('fNoteEn').value.trim(),
+      specs_en: parseSpecs($('fSpecsEn').value),
+      tags_en: $('fTagsEn').value.split(',').map(t => t.trim()).filter(Boolean),
+      updatedAt: serverTimestamp()
     };
 
     if (isEdit) {
@@ -817,24 +650,18 @@ $('saveBtn').addEventListener('click', async () => {
       await addDoc(collection(db, 'properties'), data);
       toast('✅ เพิ่มทรัพย์สำเร็จ', 'ok');
     }
-
     resetForm();
+    $('formPanel').classList.add('collapsed');
   } catch (e) {
     console.error(e);
-    toast('❌ เกิดข้อผิดพลาด: ' + (e.message || e.code), 'err');
+    toast('❌ ' + (e.message || e.code), 'err');
   }
   btn.disabled = false;
   btn.textContent = '💾 บันทึก';
 });
 
 function resetForm() {
-  const fields = [
-    'fRef','fType','fPriceText','fPriceNumber','fVideoId',
-    'fBadge','fTitle','fLocation','fDesc','fNote','fSpecs','fTags',
-    'fBadgeEn','fTitleEn','fLocationEn','fDescEn','fNoteEn','fSpecsEn','fTagsEn',
-    'editId'
-  ];
-  fields.forEach(id => $(id).value = '');
+  ['fRef','fType','fPriceText','fPriceNumber','fVideoId','fBadge','fTitle','fLocation','fDesc','fNote','fSpecs','fTags','fBadgeEn','fTitleEn','fLocationEn','fDescEn','fNoteEn','fSpecsEn','fTagsEn','editId'].forEach(id => $(id).value = '');
   $('fStatus').value = 'available';
   $('fBadgeClass').value = 'b-condo';
   $('fNoteClass').value = 'note-green';
@@ -842,10 +669,7 @@ function resetForm() {
   $('formTitle').textContent = '➕ เพิ่มทรัพย์ใหม่';
   document.querySelector('.lang-tab[data-lang="th"]').click();
 }
-
-$('cancelBtn').addEventListener('click', () => {
-  if (confirm('ล้างฟอร์มทั้งหมด?')) resetForm();
-});
+$('cancelBtn').addEventListener('click', () => { if (confirm('ล้างฟอร์ม?')) resetForm(); });
 
 /* ============ SUBSCRIBE LIST ============ */
 function subscribeList() {
@@ -854,8 +678,23 @@ function subscribeList() {
     cache = {};
     const wrap = $('listWrap');
 
+    let available = 0, sold = 0, hidden = 0;
+    snap.forEach(d => {
+      const s = d.data().status;
+      if (s === 'available') available++;
+      else if (s === 'sold') sold++;
+      else if (s === 'hidden') hidden++;
+    });
+    $('statTotal').textContent = snap.size;
+    $('statAvailable').textContent = available;
+    $('statSold').textContent = sold;
+    $('statHidden').textContent = hidden;
+
+    if (snap.empty) $('importBtn').classList.remove('hidden');
+    else $('importBtn').classList.add('hidden');
+
     if (snap.empty) {
-      wrap.innerHTML = '<div class="empty"><div class="big">📭</div>ยังไม่มีรายการทรัพย์<br><small>กด "📥 เริ่มนำเข้า" ด้านบน หรือเพิ่มรายการใหม่</small></div>';
+      wrap.innerHTML = '<div class="empty"><div class="big">📭</div>ยังไม่มีรายการในระบบ<br><small style="display:block;margin-top:8px">กดปุ่ม <strong style="color:#7c3aed">📥 นำเข้าทรัพย์เก่า</strong> ด้านบน</small></div>';
       $('countBadge').textContent = '0 รายการ';
       return;
     }
@@ -865,16 +704,13 @@ function subscribeList() {
       const p = d.data();
       cache[d.id] = p;
 
-      const stClass = p.status === 'sold' ? 'st-sold'
-                    : p.status === 'hidden' ? 'st-hidden'
-                    : 'st-available';
-      const stText  = p.status === 'sold' ? 'ขายแล้ว'
-                    : p.status === 'hidden' ? 'ซ่อน'
-                    : 'ว่าง';
+      const stClass = p.status === 'sold' ? 'st-sold' : p.status === 'hidden' ? 'st-hidden' : 'st-available';
+      const stText  = p.status === 'sold' ? 'ขายแล้ว' : p.status === 'hidden' ? 'ซ่อน' : 'ว่าง';
+      const thumbUrl = p.publicId ? cloudinaryOptimized(p.imageUrl, 200) : p.imageUrl;
 
       return `
         <div class="list-item">
-          <img src="${p.imageUrl || ''}" alt="" loading="lazy">
+          <img class="thumb" src="${thumbUrl || ''}" alt="" loading="lazy">
           <div class="info">
             <span class="ref ${stClass}">${p.ref || '—'} · ${stText}</span>
             <h4>${escapeHtml(p.title || '(ไม่มีชื่อ)')}</h4>
@@ -891,8 +727,7 @@ function subscribeList() {
 
     wrap.querySelectorAll('[data-act]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const id = btn.dataset.id;
-        const act = btn.dataset.act;
+        const id = btn.dataset.id, act = btn.dataset.act;
         if (act === 'edit') return editItem(id);
         if (act === 'del')  return deleteItem(id);
         if (act === 'sold' || act === 'available') return changeStatus(id, act);
@@ -900,88 +735,70 @@ function subscribeList() {
     });
   }, err => {
     console.error(err);
-    $('listWrap').innerHTML = '<div class="empty"><div class="big">⚠️</div>โหลดรายการไม่สำเร็จ<br><small>' + err.message + '</small></div>';
+    $('listWrap').innerHTML = '<div class="empty"><div class="big">⚠️</div>โหลดไม่สำเร็จ<br><small>' + err.message + '</small></div>';
   });
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[c]));
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
 function editItem(id) {
   const p = cache[id];
   if (!p) return;
-
-  $('editId').value        = id;
-  $('fRef').value          = p.ref || '';
-  $('fStatus').value       = p.status || 'available';
-  $('fType').value         = (p.type || []).join(', ');
-  $('fBadgeClass').value   = p.badgeClass || 'b-condo';
-  $('fNoteClass').value    = p.noteClass || 'note-green';
-  $('fPriceText').value    = p.priceText || '';
-  $('fPriceNumber').value  = p.priceNumber || '';
-  $('fVideoId').value      = p.videoId || '';
-
-  $('fBadge').value        = p.badge || '';
-  $('fTitle').value        = p.title || '';
-  $('fLocation').value     = p.location || '';
-  $('fDesc').value         = p.desc || '';
-  $('fNote').value         = p.note || '';
-  $('fSpecs').value        = specsToString(p.specs);
-  $('fTags').value         = (p.tags || []).join(', ');
-
-  $('fBadgeEn').value      = p.badge_en || '';
-  $('fTitleEn').value      = p.title_en || '';
-  $('fLocationEn').value   = p.location_en || '';
-  $('fDescEn').value       = p.desc_en || '';
-  $('fNoteEn').value       = p.note_en || '';
-  $('fSpecsEn').value      = specsToString(p.specs_en);
-  $('fTagsEn').value       = (p.tags_en || []).join(', ');
-
-  compressedBlob     = null;
-  existingImageUrl   = p.imageUrl || '';
-  existingImagePath  = p.imagePath || '';
+  $('editId').value = id;
+  $('fRef').value = p.ref || '';
+  $('fStatus').value = p.status || 'available';
+  $('fType').value = (p.type || []).join(', ');
+  $('fBadgeClass').value = p.badgeClass || 'b-condo';
+  $('fNoteClass').value = p.noteClass || 'note-green';
+  $('fPriceText').value = p.priceText || '';
+  $('fPriceNumber').value = p.priceNumber || '';
+  $('fVideoId').value = p.videoId || '';
+  $('fBadge').value = p.badge || '';
+  $('fTitle').value = p.title || '';
+  $('fLocation').value = p.location || '';
+  $('fDesc').value = p.desc || '';
+  $('fNote').value = p.note || '';
+  $('fSpecs').value = specsToString(p.specs);
+  $('fTags').value = (p.tags || []).join(', ');
+  $('fBadgeEn').value = p.badge_en || '';
+  $('fTitleEn').value = p.title_en || '';
+  $('fLocationEn').value = p.location_en || '';
+  $('fDescEn').value = p.desc_en || '';
+  $('fNoteEn').value = p.note_en || '';
+  $('fSpecsEn').value = specsToString(p.specs_en);
+  $('fTagsEn').value = (p.tags_en || []).join(', ');
+  compressedBlob = null;
+  existingImageUrl = p.imageUrl || '';
+  existingPublicId = p.publicId || '';
   if (existingImageUrl) {
     $('previewImg').src = existingImageUrl;
     $('previewBox').classList.remove('hidden');
-    $('uploadText').innerHTML = '<div class="icon-up">🖼️</div>ใช้รูปเดิมอยู่ · คลิกเพื่อเปลี่ยน';
+    $('uploadText').innerHTML = '<div class="icon-up">🖼️</div>ใช้รูปเดิม · คลิกเพื่อเปลี่ยน';
   }
-
   $('formTitle').textContent = '✏️ แก้ไข: ' + (p.ref || '');
+  $('formPanel').classList.remove('collapsed');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  toast('📝 โหลดข้อมูลมาแก้ไขแล้ว');
+  toast('📝 โหลดข้อมูลมาแก้ไข');
 }
 
 async function changeStatus(id, status) {
   try {
-    await updateDoc(doc(db, 'properties', id), {
-      status,
-      updatedAt: serverTimestamp()
-    });
-    toast(status === 'sold' ? '🔴 ทำเครื่องหมายขายแล้ว' : '✅ เปิดขายอีกครั้ง', 'ok');
-  } catch (e) {
-    toast('❌ เปลี่ยนสถานะไม่สำเร็จ', 'err');
-  }
+    await updateDoc(doc(db, 'properties', id), { status, updatedAt: serverTimestamp() });
+    toast(status === 'sold' ? '🔴 ตั้งเป็นขายแล้ว' : '✅ เปิดขายอีกครั้ง', 'ok');
+  } catch (e) { toast('❌ เปลี่ยนสถานะไม่สำเร็จ', 'err'); }
 }
 
 async function deleteItem(id) {
   const p = cache[id];
   if (!p) return;
-  if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nแนะนำ: ถ้าแค่ขายแล้ว ให้กดปุ่ม "ขายแล้ว" แทน — ข้อมูลจะยังอยู่`)) return;
-
+  if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nℹ️ รูปจะยังอยู่ใน Cloudinary (ลบเองได้ใน Dashboard)`)) return;
   try {
-    if (p.imagePath) {
-      try { await deleteObject(sRef(storage, p.imagePath)); } catch (e) { /* ignore */ }
-    }
     await deleteDoc(doc(db, 'properties', id));
     toast('🗑️ ลบสำเร็จ', 'ok');
     if ($('editId').value === id) resetForm();
-  } catch (e) {
-    console.error(e);
-    toast('❌ ลบไม่สำเร็จ: ' + e.message, 'err');
-  }
+  } catch (e) { toast('❌ ลบไม่สำเร็จ: ' + e.message, 'err'); }
 }
 </script>
 </body>
