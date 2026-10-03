@@ -3,8 +3,5 @@ Allow: /
 
 Sitemap: https://thaitruetrue-sys.github.io/speedrealasset/sitemap.xml
 
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
+Disallow: /admin.html
+Disallow: /*.json$
