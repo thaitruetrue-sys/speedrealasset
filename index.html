@@ -58,21 +58,34 @@
       "@type": ["RealEstateAgent", "LocalBusiness"],
       "@id": "https://thaitruetrue-sys.github.io/speedrealasset/#organization",
       "name": "Speed Real Asset",
-      "alternateName": ["สปีด เรียล แอสเซท"],
-      "description": "นายหน้าอสังหาริมทรัพย์มืออาชีพ",
+      "alternateName": ["สปีด เรียล แอสเซท", "Speed Real Asset นายหน้าอสังหาริมทรัพย์"],
+      "description": "นายหน้าอสังหาริมทรัพย์มืออาชีพ บริการรับฝากขาย ซื้อ เช่า บ้าน คอนโดมิเนียม ที่ดินเปล่า อาคารพาณิชย์ ตรวจสอบโฉนดฟรี และให้คำปรึกษาสินเชื่อธนาคาร",
       "url": "https://thaitruetrue-sys.github.io/speedrealasset/",
       "logo": "https://thaitruetrue-sys.github.io/speedrealasset/logo-main.png",
+      "image": "https://thaitruetrue-sys.github.io/speedrealasset/logo-main.png",
       "telephone": "+66838799635",
       "email": "speedrealasset@gmail.com",
+      "priceRange": "฿฿ - ฿฿฿฿",
       "address": {"@type": "PostalAddress", "addressLocality": "ธนบุรี", "addressRegion": "กรุงเทพมหานคร", "postalCode": "10600", "addressCountry": "TH"},
-      "founder": {"@type": "Person", "name": "คุณทศพล", "telephone": "+66838799635"},
-      "contactPoint": {"@type": "ContactPoint", "telephone": "+66838799635", "contactType": "customer service", "availableLanguage": ["Thai","English"]}
+      "geo": {"@type": "GeoCoordinates", "latitude": 13.7167, "longitude": 100.4783},
+      "areaServed": [
+        {"@type": "AdministrativeArea", "name": "กรุงเทพมหานคร"},
+        {"@type": "AdministrativeArea", "name": "สมุทรปราการ"},
+        {"@type": "AdministrativeArea", "name": "นนทบุรี"}
+      ],
+      "founder": {"@type": "Person", "name": "คุณทศพล", "jobTitle": "ผู้เชี่ยวชาญด้านอสังหาริมทรัพย์และนายหน้าวิชาชีพ", "telephone": "+66838799635"},
+      "contactPoint": {"@type": "ContactPoint", "telephone": "+66838799635", "contactType": "customer service", "availableLanguage": ["Thai","English"]},
+      "sameAs": ["https://line.me/ti/p/~0838799635"]
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type":"Question","name":"Speed Real Asset คืออะไร?","acceptedAnswer":{"@type":"Answer","text":"บริษัทนายหน้าอสังหาริมทรัพย์มืออาชีพ ตรวจสอบโฉนดฟรี"}},
-        {"@type":"Question","name":"คิดค่าบริการเท่าไหร่?","acceptedAnswer":{"@type":"Answer","text":"ซื้อ-ขาย 3% ของราคาขาย เช่า 1 เดือน"}}
+        {"@type":"Question","name":"Speed Real Asset คืออะไร?","acceptedAnswer":{"@type":"Answer","text":"Speed Real Asset คือบริษัทนายหน้าอสังหาริมทรัพย์มืออาชีพ ให้บริการรับฝากขาย ซื้อ เช่า บ้าน คอนโด ที่ดิน ทั่วไทย ตรวจสอบโฉนดฟรีและบริการยื่นกู้สินเชื่อธนาคารฟรี"}},
+        {"@type":"Question","name":"คิดค่าบริการนายหน้าอสังหาริมทรัพย์เท่าไหร่?","acceptedAnswer":{"@type":"Answer","text":"กรณีซื้อ-ขาย คิดค่าคอมมิชชั่น 3% ของราคาขายจริงเมื่อปิดการขายสำเร็จ ไม่มีค่าใช้จ่ายล่วงหน้า ส่วนการเช่าคิด 1 เดือนของสัญญาเช่า 1 ปี"}},
+        {"@type":"Question","name":"ตรวจสอบเอกสารทรัพย์ให้ฟรีไหม?","acceptedAnswer":{"@type":"Answer","text":"ฟรี 100% เราตรวจสอบโฉนด นิติกรรม และภาระผูกพันกับกรมที่ดินและสถาบันการเงินทุกครั้ง"}},
+        {"@type":"Question","name":"ช่วยยื่นสินเชื่อธนาคารได้ไหม?","acceptedAnswer":{"@type":"Answer","text":"ได้ครับ เราประสานงานกับสถาบันการเงินกว่า 10 แห่ง เพื่อช่วยเปรียบเทียบดอกเบี้ยโปรโมชั่นพิเศษ"}},
+        {"@type":"Question","name":"นัดชมทรัพย์ต้องทำอย่างไร?","acceptedAnswer":{"@type":"Answer","text":"นัดชมได้ทุกวัน 09:00 – 20:00 น. โทร 083-879-9635 หรือ LINE ID: 083-879-9635 ไม่มีค่าใช้จ่าย"}},
+        {"@type":"Question","name":"มีบริการประเมินราคาและค่าโอนกรรมสิทธิ์หรือไม่?","acceptedAnswer":{"@type":"Answer","text":"มีครับ เรามีเครื่องคำนวณและทีมงานช่วยประเมินค่าธรรมเนียมการโอน ภาษีธุรกิจเฉพาะ อากรแสตมป์ และภาษีหัก ณ ที่จ่าย"}}
       ]
     }
   ]
@@ -182,7 +195,6 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .b-hot{background:linear-gradient(135deg,#e11d48,#be123c)}
 .ref{position:absolute;bottom:12px;left:14px;z-index:2;font-size:11px;font-weight:600;color:#e2e8f0;background:rgba(10,31,68,.75);backdrop-filter:blur(6px);padding:3px 9px;border-radius:6px}
 
-/* ===== GALLERY BADGE (มุมขวารูป) ===== */
 .gallery-hint{position:absolute;top:14px;right:14px;z-index:3;background:rgba(10,31,68,.78);backdrop-filter:blur(6px);color:#fff;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:5px;pointer-events:none;font-family:'Kanit',sans-serif}
 .gallery-hint .ic{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
@@ -264,8 +276,18 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .footer-top{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.1)}
 .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 
-/* ✅ Footer logo — ใช้สไตล์เดียวกับ header แล้ว */
-.footer-brand-logo{width:52px;height:52px;flex:none;border-radius:12px;overflow:hidden;background:#fff;display:grid;place-items:center;box-shadow:0 4px 14px -6px rgba(26,95,180,.35);padding:4px;border:1px solid var(--border-color)}
+/* ============================================================
+   ✅ FOOTER LOGO — แก้แล้วให้ glow ฟ้าเหมือน Header
+   ============================================================ */
+.footer-brand-logo{
+  width:52px;height:52px;flex:none;
+  border-radius:12px;overflow:hidden;background:#fff;
+  display:grid;place-items:center;padding:4px;
+  border:1px solid rgba(125,211,252,.35);
+  box-shadow:
+    0 4px 20px -4px rgba(125,211,252,.55),
+    0 0 0 4px rgba(125,211,252,.08);
+}
 .footer-brand-logo img{width:100%;height:100%;object-fit:contain}
 
 .footer-brand-name{font-family:'Kanit',sans-serif;font-weight:900;font-size:18px;color:#fff;display:block}
@@ -290,7 +312,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ============================================================
-   LIGHTBOX GALLERY (กดรูป → เปิดเต็มจอ → ปัดซ้ายขวา)
+   LIGHTBOX GALLERY
    ============================================================ */
 .lightbox{position:fixed;inset:0;z-index:9999;background:rgba(4,13,34,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease;overscroll-behavior:contain}
 .lightbox.open{display:flex;opacity:1}
@@ -563,27 +585,27 @@ body.lightbox-open{overflow:hidden}
     <div class="faq-list">
       <details class="faq-item" open>
         <summary>Speed Real Asset คืออะไร?</summary>
-        <div class="faq-answer"><p><strong>Speed Real Asset</strong> คือบริษัทนายหน้าอสังหาริมทรัพย์มืออาชีพ ดูแลโดยคุณทศพล พร้อมตรวจสอบเอกสารครบถ้วนและให้คำปรึกษาสินเชื่อฟรี</p></div>
+        <div class="faq-answer"><p><strong>Speed Real Asset</strong> คือบริษัทนายหน้าอสังหาริมทรัพย์มืออาชีพที่ให้บริการซื้อ ขาย เช่า บ้าน คอนโด ที่ดิน และโฮมออฟฟิศทั่วประเทศไทย ดูแลโดยคุณทศพล พร้อมตรวจสอบเอกสารครบถ้วนและให้คำปรึกษาสินเชื่อฟรี</p></div>
       </details>
       <details class="faq-item">
         <summary>คิดค่าบริการนายหน้าอสังหาริมทรัพย์เท่าไหร่?</summary>
-        <div class="faq-answer"><p>ซื้อ-ขาย <strong>3%</strong> ของราคาทรัพย์ · เช่า <strong>1 เดือน</strong> ของค่าเช่า จ่ายเมื่อปิดดีลสำเร็จเท่านั้น</p></div>
+        <div class="faq-answer"><p>สำหรับการซื้อ-ขาย คิดค่าคอมมิชชั่น <strong>3%</strong> ของราคาทรัพย์ ส่วนการเช่าคิด <strong>1 เดือน</strong> ของค่าเช่า โดยไม่มีค่าใช้จ่ายอื่นแอบแฝง ลูกค้าจ่ายเมื่อปิดดีลสำเร็จเท่านั้น</p></div>
       </details>
       <details class="faq-item">
         <summary>ตรวจสอบเอกสารทรัพย์ให้ฟรีไหม?</summary>
-        <div class="faq-answer"><p><strong>ฟรี 100%</strong> ตรวจสอบโฉนด สัญญา และภาระผูกพันก่อนซื้อขายทุกครั้ง</p></div>
+        <div class="faq-answer"><p><strong>ฟรี 100%</strong> เราตรวจสอบโฉนด สัญญา และประวัติทรัพย์ให้ทุกครั้งก่อนซื้อขาย พร้อมตรวจสอบภาระผูกพันกับสถาบันการเงิน เพื่อป้องกันปัญหาโอนไม่ได้ภายหลัง</p></div>
       </details>
       <details class="faq-item">
         <summary>ช่วยยื่นสินเชื่อธนาคารได้ไหม?</summary>
-        <div class="faq-answer"><p>ได้ครับ เรามีทีมงานช่วยยื่นสินเชื่อกับธนาคารชั้นนำกว่า 10 แห่ง พร้อมเปรียบเทียบดอกเบี้ย</p></div>
+        <div class="faq-answer"><p>ได้ครับ เรามีทีมงานช่วยยื่นสินเชื่อกับธนาคารชั้นนำกว่า 10 แห่ง ทั้งธนาคารกรุงเทพ กสิกรไทย ไทยพาณิชย์ กรุงศรี และอื่น ๆ พร้อมเปรียบเทียบดอกเบี้ยให้เลือกที่คุ้มที่สุด</p></div>
       </details>
       <details class="faq-item">
         <summary>นัดชมทรัพย์ต้องทำอย่างไร?</summary>
-        <div class="faq-answer"><p>โทร <strong>083-879-9635</strong> หรือ LINE ID <strong>083-879-9635</strong> เปิดให้ชมทุกวัน 09:00 – 20:00 น. ไม่มีค่าใช้จ่าย</p></div>
+        <div class="faq-answer"><p>ลูกค้าสามารถนัดชมทรัพย์ได้ 3 ช่องทาง: (1) โทร <strong>083-879-9635</strong> (2) แอด LINE ID <strong>083-879-9635</strong> (3) แวะที่สำนักงาน เปิดให้ชมทุกวัน 09:00 – 20:00 น. ไม่มีค่าใช้จ่าย</p></div>
       </details>
       <details class="faq-item">
         <summary>มีทรัพย์ให้เลือกกี่รายการ?</summary>
-        <div class="faq-answer"><p>ปัจจุบันมีทรัพย์ในระบบกว่า <strong>250 รายการ</strong> พร้อมอัปเดตใหม่ทุกสัปดาห์</p></div>
+        <div class="faq-answer"><p>ปัจจุบันมีทรัพย์ในระบบกว่า <strong>250 รายการ</strong> ครอบคลุมบ้านเดี่ยว คอนโด ทาวน์โฮม ที่ดินเปล่า และอาคารพาณิชย์ในกรุงเทพฯ ปริมณฑล และต่างจังหวัด พร้อมอัปเดตรายการใหม่ทุกสัปดาห์</p></div>
       </details>
     </div>
   </section>
@@ -633,7 +655,7 @@ body.lightbox-open{overflow:hidden}
 </div>
 
 <!-- ============================================================
-     LIGHTBOX GALLERY (กดรูป → เปิดเต็มจอ → ปัดซ้ายขวาเอง)
+     LIGHTBOX GALLERY
      ============================================================ -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="ดูรูปภาพทรัพย์">
   <span class="lb-counter" id="lbCounter">1 / 1</span>
@@ -682,7 +704,6 @@ function escapeHtml(s) {
   }[c]));
 }
 
-// ✅ ดึงรายการรูปทั้งหมดของทรัพย์ (รองรับ 5 รูป + backward compatible)
 function getImages(p) {
   if (Array.isArray(p.images) && p.images.length) {
     return p.images.map(i => (typeof i === 'string' ? i : i?.url)).filter(Boolean);
@@ -712,16 +733,12 @@ window.__renderFromFirebase = (list) => {
     const specs    = p.specs    || [];
     const tags     = p.tags     || [];
 
-    // ✅ ดึงรูปทั้งหมด
     const imgs = getImages(p);
     const mainImg = imgs[0] || '';
     const imgUrl = p.publicId ? cloudinaryOptimized(mainImg, 800) : mainImg;
     const imgCount = imgs.length;
-
-    // ✅ data-images สำหรับ lightbox
     const dataImages = imgs.map(u => cloudinaryOptimized(u, 1400)).join('|');
 
-    // ✅ Badge "📷 5 รูป"
     const galleryBadge = imgCount > 1
       ? `<span class="gallery-hint"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>${imgCount} รูป</span>`
       : '';
@@ -858,7 +875,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('cards:rendered', () => {
     filterCards();
 
-    // Video facade
     document.querySelectorAll('.video-facade').forEach(facade => {
       facade.onclick = function() {
         const videoId = this.getAttribute('data-video-id');
@@ -868,7 +884,6 @@ document.addEventListener('DOMContentLoaded', function() {
       };
     });
 
-    // Calc sync
     document.querySelectorAll('.btn-calc-sync').forEach(btn => {
       btn.onclick = function() {
         const price = this.getAttribute('data-calc-price');
@@ -882,7 +897,6 @@ document.addEventListener('DOMContentLoaded', function() {
       };
     });
 
-    // ✅ Gallery click
     document.querySelectorAll('.card-img.open-gallery').forEach(el => {
       el.onclick = () => {
         const card = el.closest('.card');
