@@ -177,7 +177,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:60px}
 .card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border-color);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm);transition:all .3s}
 .card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-.card-img{position:relative;aspect-ratio:16/10;overflow:hidden;background:#e2e8f0}
+.card-img{position:relative;aspect-ratio:16/10;overflow:hidden;background:#e2e8f0;cursor:zoom-in}
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
 .card:hover .card-img img{transform:scale(1.05)}
 .card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,68,.35) 0%,transparent 40%,transparent 60%,rgba(10,31,68,.6) 100%);pointer-events:none}
@@ -186,6 +186,11 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .b-land{background:linear-gradient(135deg,#a16207,#713f12)}
 .b-hot{background:linear-gradient(135deg,#e11d48,#be123c)}
 .ref{position:absolute;bottom:12px;left:14px;z-index:2;font-size:11px;font-weight:600;color:#e2e8f0;background:rgba(10,31,68,.75);backdrop-filter:blur(6px);padding:3px 9px;border-radius:6px}
+
+/* ===== GALLERY BADGE (top-right) ===== */
+.gallery-hint{position:absolute;top:14px;right:14px;z-index:3;background:rgba(10,31,68,.78);backdrop-filter:blur(6px);color:#fff;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:5px;pointer-events:none;font-family:'Kanit',sans-serif}
+.gallery-hint .ic{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
 .card-body{display:flex;flex-direction:column;flex:1;padding:20px}
 .price-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
 .price{font-family:'Kanit',sans-serif;font-size:24px;font-weight:700;color:var(--primary-light);line-height:1.1}
@@ -263,8 +268,19 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .footer-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
 .footer-top{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:32px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.1)}
 .footer-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.footer-brand-logo{width:50px;height:50px;flex:none;border-radius:10px;background:#fff;display:grid;place-items:center;padding:4px}
+
+/* ✅ Footer logo — same style as header */
+.footer-brand-logo{
+  width:52px;height:52px;flex:none;
+  border-radius:12px;overflow:hidden;background:#fff;
+  display:grid;place-items:center;padding:4px;
+  border:1px solid rgba(125,211,252,.35);
+  box-shadow:
+    0 4px 20px -4px rgba(125,211,252,.55),
+    0 0 0 4px rgba(125,211,252,.08);
+}
 .footer-brand-logo img{width:100%;height:100%;object-fit:contain}
+
 .footer-brand-name{font-family:'Kanit',sans-serif;font-weight:900;font-size:18px;color:#fff;display:block}
 .footer-brand-name span{color:#7dd3fc}
 .footer p{font-size:13.5px;color:#a9b8d0;line-height:1.7;max-width:400px}
@@ -285,6 +301,45 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 .loading{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted)}
 .loading .spin{display:inline-block;width:36px;height:36px;border:3px solid #e3eaf6;border-top-color:var(--primary-light);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:14px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============================================================
+   LIGHTBOX GALLERY
+   ============================================================ */
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(4,13,34,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease;overscroll-behavior:contain}
+.lightbox.open{display:flex;opacity:1}
+
+.lb-counter{position:absolute;top:22px;left:22px;color:#fff;font-family:'Kanit',sans-serif;font-weight:600;font-size:14px;background:rgba(10,31,68,.75);padding:6px 14px;border-radius:999px;backdrop-filter:blur(8px);z-index:3;letter-spacing:.03em}
+.lb-close{position:absolute;top:18px;right:18px;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(8px);transition:all .2s;z-index:3}
+.lb-close:hover{background:rgba(239,68,68,.9);transform:rotate(90deg)}
+.lb-close svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+
+.lightbox-stage{position:relative;width:min(94vw,1100px);height:min(80vh,720px);display:flex;align-items:center;justify-content:center;user-select:none;touch-action:pan-y}
+.lightbox-track{width:100%;height:100%;display:flex;transition:transform .35s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.lightbox-slide{flex:0 0 100%;height:100%;display:flex;align-items:center;justify-content:center;padding:8px}
+.lightbox-slide img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;box-shadow:0 24px 60px -20px rgba(0,0,0,.8);-webkit-user-drag:none;user-select:none}
+
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;display:grid;place-items:center;transition:all .2s;backdrop-filter:blur(8px);z-index:2}
+.lb-btn:hover:not(:disabled){background:rgba(255,255,255,.28);transform:translateY(-50%) scale(1.06)}
+.lb-btn:disabled{opacity:.22;cursor:not-allowed}
+.lb-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.lb-prev{left:-6px}
+.lb-next{right:-6px}
+
+.lb-dots{position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
+.lb-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);border:0;padding:0;cursor:pointer;transition:all .25s}
+.lb-dot.active{background:#fff;width:26px;border-radius:999px}
+
+@media(max-width:640px){
+  .lightbox-stage{width:100vw;height:78vh}
+  .lb-btn{width:44px;height:44px}
+  .lb-prev{left:8px}
+  .lb-next{right:8px}
+  .lb-close{top:14px;right:14px;width:40px;height:40px}
+  .lb-counter{top:16px;left:16px;font-size:12px;padding:5px 11px}
+  .lb-dots{bottom:-40px}
+  .gallery-hint{font-size:10px;padding:4px 9px;top:10px;right:10px}
+}
+body.lightbox-open{overflow:hidden}
 
 @media (max-width:820px){
   .footer-top{grid-template-columns:1fr;gap:24px}
@@ -336,6 +391,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
 <symbol id="s-docs" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
 <symbol id="s-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/></symbol>
 <symbol id="s-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="s-photo" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></symbol>
 </svg>
 
 <header class="header">
@@ -436,7 +492,6 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
     </div>
   </div>
 
-  <!-- Grid: filled by Firebase -->
   <div class="grid" id="grid">
     <div class="loading">
       <div class="spin"></div>
@@ -565,7 +620,7 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
       <div>
         <div class="footer-brand">
           <span class="footer-brand-logo">
-            <img src="https://thaitruetrue-sys.github.io/speedrealasset/logo-footer.png" alt="Speed Real Asset" width="46" height="46">
+            <img src="https://thaitruetrue-sys.github.io/speedrealasset/logo-main.png" alt="Speed Real Asset" width="52" height="52">
           </span>
           <span><span class="footer-brand-name">SPEED <span>REAL ASSET</span></span></span>
         </div>
@@ -602,9 +657,28 @@ h1,h2,h3,h4{font-family:'Kanit',sans-serif;line-height:1.3;font-weight:600;color
   <a class="btn btn-call" href="tel:0838799635"><svg class="ico"><use href="#s-phone"/></svg> Call Now</a>
 </div>
 
+<!-- ============================================================
+     LIGHTBOX GALLERY
+     ============================================================ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Property photos">
+  <span class="lb-counter" id="lbCounter">1 / 1</span>
+  <button class="lb-close" id="lbClose" aria-label="Close">
+    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <div class="lightbox-stage" id="lbStage">
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><polyline points="15 5 8 12 15 19"/></svg>
+    </button>
+    <div class="lightbox-track" id="lbTrack"></div>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next">
+      <svg viewBox="0 0 24 24"><polyline points="9 5 16 12 9 19"/></svg>
+    </button>
+    <div class="lb-dots" id="lbDots"></div>
+  </div>
+</div>
+
 <!-- ==================== FIREBASE + RENDER ==================== -->
 <script type="module">
-// ✅ แก้แล้ว: ไม่ใช้ orderBy → ไม่ต้องใช้ Composite Index
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import {
   getFirestore, collection, query, where, onSnapshot
@@ -633,6 +707,14 @@ function escapeHtml(s) {
   }[c]));
 }
 
+// ✅ Get all images for a property (5 images + backward compatible)
+function getImages(p) {
+  if (Array.isArray(p.images) && p.images.length) {
+    return p.images.map(i => (typeof i === 'string' ? i : i?.url)).filter(Boolean);
+  }
+  return p.imageUrl ? [p.imageUrl] : [];
+}
+
 window.__renderFromFirebase = (list) => {
   const grid = document.getElementById('grid');
 
@@ -655,12 +737,23 @@ window.__renderFromFirebase = (list) => {
     const specs    = (p.specs_en && p.specs_en.length ? p.specs_en : p.specs) || [];
     const tags     = (p.tags_en    && p.tags_en.length    ? p.tags_en    : p.tags)  || [];
 
-    const imgUrl = p.publicId ? cloudinaryOptimized(p.imageUrl, 800) : p.imageUrl;
+    // ✅ Get all images
+    const imgs = getImages(p);
+    const mainImg = imgs[0] || '';
+    const imgUrl = p.publicId ? cloudinaryOptimized(mainImg, 800) : mainImg;
+    const imgCount = imgs.length;
+    const dataImages = imgs.map(u => cloudinaryOptimized(u, 1400)).join('|');
+
+    // ✅ "📷 N Photos" badge
+    const galleryBadge = imgCount > 1
+      ? `<span class="gallery-hint"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>${imgCount} Photos</span>`
+      : '';
 
     return `
-      <article class="card" data-type="${(p.type || []).join(' ')}">
-        <div class="card-img">
+      <article class="card" data-type="${(p.type || []).join(' ')}" data-images="${escapeHtml(dataImages)}">
+        <div class="card-img open-gallery">
           <span class="badge ${p.badgeClass || 'b-condo'}">${escapeHtml(badge)}</span>
+          ${galleryBadge}
           <img src="${escapeHtml(imgUrl || '')}" alt="${escapeHtml(title)}" loading="lazy" width="700" height="438" decoding="async">
           <span class="ref">${escapeHtml(p.ref || '')}</span>
         </div>
@@ -698,14 +791,12 @@ window.__renderFromFirebase = (list) => {
   document.dispatchEvent(new CustomEvent('cards:rendered'));
 };
 
-// ✅ Query ใหม่: แค่ where อย่างเดียว → ไม่ต้องใช้ Composite Index
 const q = query(
   collection(db, 'properties'),
   where('status', '==', 'available')
 );
 
 onSnapshot(q, snap => {
-  // เรียงฝั่ง client (ใหม่ → เก่า)
   const list = snap.docs
     .map(d => d.data())
     .sort((a, b) => {
@@ -811,6 +902,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       };
     });
+
+    // ✅ Gallery click
+    document.querySelectorAll('.card-img.open-gallery').forEach(el => {
+      el.onclick = () => {
+        const card = el.closest('.card');
+        const raw = card?.getAttribute('data-images') || '';
+        const list = raw.split('|').map(s => s.trim()).filter(Boolean);
+        if (list.length) window.__openGallery(list, 0);
+      };
+    });
   });
 
   /* 3. CALCULATOR */
@@ -899,6 +1000,107 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
+</script>
+
+<!-- ==================== GALLERY LIGHTBOX SCRIPT ==================== -->
+<script>
+(function initGallery() {
+  const lightbox = document.getElementById('lightbox');
+  const stage    = document.getElementById('lbStage');
+  const track    = document.getElementById('lbTrack');
+  const dotsBox  = document.getElementById('lbDots');
+  const counter  = document.getElementById('lbCounter');
+  const btnPrev  = document.getElementById('lbPrev');
+  const btnNext  = document.getElementById('lbNext');
+  const btnClose = document.getElementById('lbClose');
+
+  let images = [];
+  let index = 0;
+  let startX = 0, startY = 0, deltaX = 0, dragging = false;
+
+  function render() {
+    track.innerHTML = images.map(src => `
+      <div class="lightbox-slide"><img src="${src}" alt="Property photo" draggable="false" loading="lazy"></div>
+    `).join('');
+
+    dotsBox.innerHTML = images.map((_, i) => 
+      `<button class="lb-dot${i === index ? ' active' : ''}" data-i="${i}" aria-label="Photo ${i+1}"></button>`
+    ).join('');
+
+    dotsBox.querySelectorAll('.lb-dot').forEach(d => {
+      d.onclick = () => go(Number(d.dataset.i));
+    });
+  }
+
+  function go(i) {
+    index = Math.max(0, Math.min(images.length - 1, i));
+    track.style.transform = `translateX(${-index * 100}%)`;
+    counter.textContent = `${index + 1} / ${images.length}`;
+    btnPrev.disabled = index === 0;
+    btnNext.disabled = index === images.length - 1;
+    dotsBox.querySelectorAll('.lb-dot').forEach((d, k) => 
+      d.classList.toggle('active', k === index)
+    );
+  }
+
+  function open(list, startAt = 0) {
+    images = list;
+    index = startAt;
+    render();
+    go(index);
+    lightbox.classList.add('open');
+    document.body.classList.add('lightbox-open');
+  }
+
+  function close() {
+    lightbox.classList.remove('open');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  window.__openGallery = open;
+
+  btnPrev.onclick = () => go(index - 1);
+  btnNext.onclick = () => go(index + 1);
+  btnClose.onclick = close;
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') go(index - 1);
+    if (e.key === 'ArrowRight') go(index + 1);
+  });
+
+  stage.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    deltaX = 0;
+    dragging = true;
+    track.style.transition = 'none';
+  }, { passive: true });
+
+  stage.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    deltaX = e.touches[0].clientX - startX;
+    const dy = Math.abs(e.touches[0].clientY - startY);
+    if (dy > 40) return;
+    const offset = -index * stage.clientWidth + deltaX;
+    track.style.transform = `translateX(${offset}px)`;
+  }, { passive: true });
+
+  stage.addEventListener('touchend', () => {
+    dragging = false;
+    track.style.transition = '';
+    if (Math.abs(deltaX) > 60) {
+      go(deltaX < 0 ? index + 1 : index - 1);
+    } else {
+      go(index);
+    }
+  });
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) close();
+  });
+})();
 </script>
 
 </body>
