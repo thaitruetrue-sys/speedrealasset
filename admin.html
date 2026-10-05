@@ -140,6 +140,7 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 
 .img-slot .slot-badge{position:absolute;top:5px;left:5px;background:rgba(10,31,68,.85);color:#fff;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:5px;font-family:'Kanit',sans-serif;z-index:2;letter-spacing:.03em}
 .img-slot .slot-badge.main{background:linear-gradient(135deg,#f59e0b,#ea580c)}
+.img-slot .slot-badge.saved{background:linear-gradient(135deg,#06c755,#05a347)}
 
 .img-slot .slot-remove{position:absolute;top:5px;right:5px;width:24px;height:24px;background:rgba(220,38,38,.92);color:#fff;border:0;border-radius:50%;cursor:pointer;font-size:14px;display:grid;place-items:center;line-height:1;z-index:3;font-family:inherit}
 .img-slot .slot-remove:hover{background:#b91c1c;transform:scale(1.1)}
@@ -149,14 +150,10 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 
 .img-slot .slot-uploading-text{position:absolute;inset:0;background:rgba(10,31,68,.75);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;z-index:2;font-family:'Kanit',sans-serif}
 
+.img-slot .slot-name{position:absolute;bottom:2px;left:2px;right:2px;background:rgba(10,31,68,.85);color:#fff;font-size:9px;padding:1px 4px;border-radius:4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Kanit',sans-serif;z-index:2}
+
 .img-help{font-size:11.5px;color:var(--muted);text-align:center;margin-bottom:14px;line-height:1.5}
 .img-help strong{color:var(--pl)}
-
-.upload-zone{display:none} /* ปิดโซนเดิม */
-
-.preview{margin:10px auto 0;max-width:220px;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px -6px rgba(0,0,0,.2);position:relative}
-.preview img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
-.preview .remove{position:absolute;top:6px;right:6px;width:26px;height:26px;background:rgba(220,38,38,.9);border:0;color:#fff;border-radius:50%;cursor:pointer;font-size:14px;display:grid;place-items:center;line-height:1}
 
 .toast{position:fixed;bottom:20px;right:20px;background:var(--primary);color:#fff;padding:13px 20px;border-radius:12px;box-shadow:0 12px 30px -8px rgba(0,0,0,.35);font-size:13.5px;z-index:9999;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:320px}
 .toast.show{transform:translateY(0)}
@@ -175,6 +172,40 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
 .import-log .ok{color:#4ade80}
 .import-log .err{color:#f87171}
 .import-log .info{color:#fbbf24}
+
+/* ====== DELETE MODAL ====== */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,31,68,.65);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:9998;display:none;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .2s}
+.modal-overlay.open{display:flex;opacity:1}
+.modal-box{background:#fff;border-radius:18px;padding:24px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);transform:translateY(20px);transition:transform .25s}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-box h3{font-size:18px;margin-bottom:6px;color:#dc2626}
+.modal-box .del-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+.modal-box .del-sub strong{color:var(--primary)}
+
+.del-imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:16px;padding:12px;background:#f9fbfe;border-radius:12px;border:1px solid var(--border)}
+.del-img-item{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;background:#e2e8f0;border:2px solid #e3eaf6}
+.del-img-item img{width:100%;height:100%;object-fit:cover}
+.del-img-item .dii-badge{position:absolute;top:4px;left:4px;background:rgba(10,31,68,.85);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;font-family:'Kanit',sans-serif}
+.del-img-item .dii-badge.main{background:linear-gradient(135deg,#f59e0b,#ea580c)}
+.del-img-item .dii-name{position:absolute;bottom:0;left:0;right:0;background:rgba(10,31,68,.9);color:#fff;font-size:9px;padding:2px 4px;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.del-img-item.no-delete{border-color:#f59e0b}
+.del-img-item.no-delete::after{content:'⚠️ ไม่มี delete_url';position:absolute;inset:auto 0 20px 0;background:rgba(245,158,11,.95);color:#fff;font-size:9px;padding:2px;text-align:center;font-weight:700}
+
+.del-warn{background:#fef3c7;border-left:4px solid #f59e0b;color:#92400e;font-size:12.5px;padding:10px 14px;border-radius:8px;margin-bottom:16px;line-height:1.6}
+.del-warn strong{color:#78350f}
+.del-warn ul{margin:6px 0 0 18px}
+
+.modal-actions{display:flex;gap:10px;margin-top:16px}
+.modal-actions .btn{flex:1;padding:12px;font-size:14px}
+.modal-actions .btn-red{background:#dc2626;color:#fff;padding:12px}
+.modal-actions .btn-red:hover:not(:disabled){background:#b91c1c}
+
+.del-log{background:#1e1b4b;color:#a5f3fc;font-family:'Courier New',monospace;font-size:11.5px;padding:12px;border-radius:10px;max-height:180px;overflow-y:auto;margin-top:12px;line-height:1.7;display:none}
+.del-log.show{display:block}
+.del-log .ok{color:#4ade80}
+.del-log .err{color:#f87171}
+.del-log .info{color:#fbbf24}
+.del-log .warn{color:#f59e0b}
 </style>
 </head>
 <body>
@@ -238,12 +269,10 @@ small.hint{display:block;font-size:11px;color:var(--muted);margin-top:-10px;marg
       <input type="hidden" id="editId">
 
       <label>รูปภาพ (สูงสุด 5 รูป · บีบเป็น WebP + อัปโหลด ImgBB)</label>
-      <div class="img-slot-grid" id="imgSlotGrid">
-        <!-- สร้างด้วย JS -->
-      </div>
+      <div class="img-slot-grid" id="imgSlotGrid"></div>
       <div class="img-help">
-        📌 ช่องแรก = <strong>รูปหลัก</strong> ที่แสดงบนการ์ด · ช่องที่เหลือจะแสดงในแกลเลอรี<br>
-        💡 คลิกที่ช่องเพื่อเลือกรูป · รองรับ JPG / PNG · บีบอัตโนมัติ
+        📌 ช่องแรก = <strong>รูปหลัก</strong> · ช่องที่เหลือจะแสดงในแกลเลอรี<br>
+        💡 ระบบจะ <strong>จำชื่อไฟล์ + ลิงก์ลบ</strong> ของทุกรูป เพื่อลบให้ตรงตัวเมื่อลบทรัพย์
       </div>
       <input type="file" id="imageInput" accept="image/*" hidden>
 
@@ -341,6 +370,25 @@ s-car>จอด <b>1</b> คัน"></textarea>
   </div>
 </div>
 
+<!-- ===== DELETE MODAL ===== -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal-box">
+    <h3>🗑️ ยืนยันลบทรัพย์</h3>
+    <p class="del-sub">ทรัพย์: <strong id="delRef">—</strong> · <span id="delTitle">—</span></p>
+
+    <div class="del-imgs" id="delImgs"></div>
+
+    <div class="del-warn" id="delWarn" style="display:none"></div>
+
+    <div class="del-log" id="delLog"></div>
+
+    <div class="modal-actions">
+      <button class="btn btn-gray" id="delCancel">ยกเลิก</button>
+      <button class="btn btn-red" id="delConfirm">🗑️ ยืนยันลบทั้งหมด</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script type="module">
@@ -365,12 +413,8 @@ const firebaseConfig = {
   appId: "1:964835808677:web:d4da5a0eda7b632656444c"
 };
 
-/* ============================================================
-   🖼️ ImgBB Config
-   ============================================================ */
 const IMGBB_API_KEY = "052bf9ea935dbb243d6a7fde3a5ef70b";
 const MAX_IMAGES = 5;
-/* ============================================================ */
 
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -406,6 +450,9 @@ function blobToBase64(blob) {
   });
 }
 
+/* ============================================================
+   ✅ อัปโหลด → คืนค่า url, id, deleteUrl, name ครบ
+   ============================================================ */
 async function uploadToImgBB(blob, onProgress) {
   const base64 = await blobToBase64(blob);
   return new Promise((resolve, reject) => {
@@ -423,8 +470,17 @@ async function uploadToImgBB(blob, onProgress) {
     xhr.onload = () => {
       try {
         const data = JSON.parse(xhr.responseText);
-        if (data.success && data.data) resolve(data.data);
-        else reject(new Error(data.error?.message || 'ImgBB upload failed'));
+        if (data.success && data.data) {
+          resolve({
+            url: data.data.display_url || data.data.url,
+            id: data.data.id || '',
+            deleteUrl: data.data.delete_url || '',
+            name: (data.data.image && data.data.image.name) || data.data.title || '',
+            thumb: (data.data.thumb && data.data.thumb.url) || ''
+          });
+        } else {
+          reject(new Error(data.error?.message || 'ImgBB upload failed'));
+        }
       } catch (e) { reject(new Error('Invalid JSON')); }
     };
     xhr.onerror = () => reject(new Error('Network error'));
@@ -432,13 +488,43 @@ async function uploadToImgBB(blob, onProgress) {
   });
 }
 
-/* ============ IMAGE SLOTS STATE ============ */
+/* ============================================================
+   ✅ ลบรูปออกจาก ImgBB ผ่าน delete_url
+   ============================================================ */
+function deleteImgBBImage(deleteUrl) {
+  return new Promise((resolve) => {
+    if (!deleteUrl) return resolve({ ok: false, reason: 'no-url' });
+
+    // ใช้ iframe โหลด delete_url → browser จะ trigger การลบจริง
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'fixed';
+    iframe.style.width = '1px';
+    iframe.style.height = '1px';
+    iframe.style.opacity = '0';
+    iframe.style.pointerEvents = 'none';
+    iframe.style.border = '0';
+    iframe.src = deleteUrl;
+    document.body.appendChild(iframe);
+
+    // ให้เวลา 3 วินาทีในการโหลด
+    setTimeout(() => {
+      try { iframe.remove(); } catch (e) {}
+      resolve({ ok: true, method: 'iframe' });
+    }, 3000);
+  });
+}
+
+/* ============================================================
+   Image Slots State — เก็บ deleteUrl + name ด้วย
+   ============================================================ */
 function makeEmptySlot() {
   return {
-    blob: null,        // ไฟล์ใหม่ที่ยังไม่อัป (มีค่าเมื่อผู้ใช้เพิ่งเลือก)
-    previewUrl: null,  // blob URL สำหรับพรีวิว
-    url: '',           // URL ที่บันทึกได้ (จาก ImgBB หรือโหลดมาจากเดิม)
-    publicId: '',      // id จาก ImgBB
+    blob: null,
+    previewUrl: null,
+    url: '',
+    publicId: '',
+    deleteUrl: '',       // ✅ เก็บลิงก์ลบ
+    name: '',            // ✅ เก็บชื่อไฟล์
     uploading: false,
     progress: 0,
     error: false
@@ -447,7 +533,6 @@ function makeEmptySlot() {
 
 let imageSlots = Array(MAX_IMAGES).fill(null).map(makeEmptySlot);
 let currentSlotIndex = 0;
-
 let cache = {};
 
 /* ============ SLOT UI ============ */
@@ -481,18 +566,23 @@ function renderSlots() {
       `;
     }
 
+    // ✅ แสดงชื่อไฟล์ด้านล่าง
+    const nameBar = (slot.url && slot.name)
+      ? `<span class="slot-name" title="${escapeHtml(slot.name)}">${escapeHtml(slot.name)}</span>`
+      : '';
+
     return `
       <div class="img-slot ${hasImg ? 'has-image' : ''} ${slot.uploading ? 'uploading' : ''} ${slot.error ? 'error' : ''}"
            data-slot="${i}">
         ${bgImg}
         <span class="${badgeClass}">${badgeText}</span>
-        ${hasImg && !slot.uploading ? `<button type="button" class="slot-remove" data-remove="${i}" title="ลบรูป">×</button>` : ''}
+        ${nameBar}
+        ${hasImg && !slot.uploading ? `<button type="button" class="slot-remove" data-remove="${i}" title="ลบรูปนี้ออกจากช่อง">×</button>` : ''}
         ${innerHtml}
       </div>
     `;
   }).join('');
 
-  // Event: click slot → open file picker
   grid.querySelectorAll('.img-slot').forEach(el => {
     el.addEventListener('click', e => {
       if (e.target.closest('.slot-remove')) return;
@@ -501,7 +591,6 @@ function renderSlots() {
       $('imageInput').click();
     });
 
-    // Drag & drop
     el.addEventListener('dragover', e => {
       e.preventDefault();
       el.classList.add('dragover');
@@ -515,11 +604,14 @@ function renderSlots() {
     });
   });
 
-  // Event: remove button
+  // ⚠️ ปุ่ม × = ลบออกจากช่องเท่านั้น (ไม่ลบจาก ImgBB ทันที)
+  // รูปลบจริงตอนกด Save (ถ้าลบ slot) หรือตอนลบทรัพย์ทั้งอัน
   grid.querySelectorAll('[data-remove]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
       const idx = Number(btn.dataset.remove);
+      const slot = imageSlots[idx];
+      if (slot.deleteUrl && !confirm('ลบรูปนี้ออกจากช่อง?\n\nℹ️ รูปจะยังไม่ถูกลบจาก ImgBB จนกว่าจะกดบันทึก\n(ถ้าต้องการลบจริง ให้ลบทรัพย์ทั้งอัน)')) return;
       imageSlots[idx] = makeEmptySlot();
       renderSlots();
     });
@@ -537,8 +629,6 @@ async function handleSlotFile(slotIndex, file) {
   if (file.size > 15 * 1024 * 1024) return toast('❌ ไฟล์ใหญ่เกิน 15 MB', 'err');
 
   const slot = imageSlots[slotIndex];
-
-  // แสดงสถานะกำลังบีบ
   slot.uploading = true;
   slot.progress = 0;
   slot.error = false;
@@ -551,6 +641,8 @@ async function handleSlotFile(slotIndex, file) {
     slot.previewUrl = URL.createObjectURL(blob);
     slot.url = '';
     slot.publicId = '';
+    slot.deleteUrl = '';
+    slot.name = file.name; // ✅ เก็บชื่อไฟล์เดิม
     slot.uploading = false;
     renderSlots();
     toast(`✅ บีบรูปช่อง ${slotIndex + 1} สำเร็จ (${(blob.size/1024).toFixed(0)} KB)`, 'ok');
@@ -624,12 +716,12 @@ document.querySelectorAll('.lang-tab').forEach(tab => {
 
 $('formToggle').addEventListener('click', () => $('formPanel').classList.toggle('collapsed'));
 
-/* ============ IMPORT 4 รายการเก่า ============ */
+/* ============ IMPORT ============ */
 const IMPORT_DATA = [
-  {ref:"SRA-1024",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 3,500,000",priceNumber:3500000,imageUrl:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",images:[{url:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",id:""}],publicId:"",videoId:"W0v2z146zqY",badge:"คอนโด",title:"Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม. ติด BTS ตลาดพลู",location:"ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",desc:"",note:"≈ ฿133,180 / ตร.ม.",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>26.28</b> ตร.ม."},{icon:"s-car",text:"จอด <b>1</b> คัน"}],tags:["ติด BTS","ใกล้เดอะมอลล์"],badge_en:"Condo",title_en:"Whizdom Station Ratchada – Thapra (26.28 sq.m.) Next to BTS Talat Phlu",location_en:"Opposite The Mall Thapra · BTS Talat Phlu · BRT Ratchaphruek",desc_en:"",note_en:"≈ ฿133,180 / sq.m.",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>26.28</b> sq.m."},{icon:"s-car",text:"Parking for <b>1</b> Car"}],tags_en:["Next to BTS","Near the Mall"]},
-  {ref:"SRA-2048",status:"available",type:["sale","land"],badgeClass:"b-land",noteClass:"note-amber",priceText:"📞 ราคาโทรถาม",priceNumber:0,imageUrl:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",images:[{url:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",id:""}],publicId:"",videoId:"Rmg51jPXF-s",badge:"🌳 ที่ดิน",title:"ขายที่ดิน บางนาตราด กม.49/10 ทรงสี่เหลี่ยมสวย",location:"ริมถนนบางนาตราด กม.49/10 · สมุทรปราการ",desc:"<strong>ไฮไลท์:</strong> หน้ากว้าง 80 ม. ลึก 100 ม. ติดถนนสายหลัก เหมาะสร้างปั๊มน้ำมัน โกดัง คลังสินค้า หรือโรงงาน",note:"5 ไร่",specs:[{icon:"s-area",text:"<b>5</b> ไร่"},{icon:"s-ruler",text:"กว้าง <b>80</b> ม."},{icon:"s-ruler",text:"ยาว <b>100</b> ม."},{icon:"s-pin",text:"กม. <b>49/10</b>"}],tags:["ปั๊มน้ำมัน","โกดัง/โรงงาน"],badge_en:"🌳 Land",title_en:"Prime Land on Bangna-Trad Km.49/10 (Rectangular Shape)",location_en:"Bangna-Trad Frontage Rd. Km.49/10 · Samut Prakan",desc_en:"<strong>Key Highlight:</strong> Width: 80 m, Depth: 100 m with main road access.",note_en:"5 Rai",specs_en:[{icon:"s-area",text:"<b>5</b> Rai"},{icon:"s-ruler",text:"Width: <b>80</b> m"},{icon:"s-ruler",text:"Depth: <b>100</b> m"},{icon:"s-pin",text:"Km. <b>49/10</b>"}],tags_en:["Petrol Station","Warehouse / Factory"]},
-  {ref:"SRA-3072",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 2,100,000",priceNumber:2100000,imageUrl:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",images:[{url:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",id:""}],publicId:"",videoId:"f_VwtA_PfLI",badge:"คอนโด",title:"Lumpini Place Ratchada ชั้น 11 วิวสูง ใกล้ BTS ตลาดพลู",location:"The Mall Lifestore ท่าพระ · BTS ตลาดพลู",desc:"",note:"ของดีราคาคุณภาพ",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>35.29</b> ตร.ม."},{icon:"s-home",text:"ชั้น <b>11</b>"}],tags:["สาทร 15 นาที","ใกล้ห้างดัง"],badge_en:"Condo",title_en:"Lumpini Place Ratchada (11th Fl.) High Floor near BTS Talat Phlu",location_en:"The Mall Lifestore Thapra · BTS Talat Phlu",desc_en:"",note_en:"Great Value",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>35.29</b> sq.m."},{icon:"s-home",text:"<b>11th</b> Floor"}],tags_en:["Sathorn 15 mins","Near the Mall"]},
-  {ref:"SRA-5510",status:"available",type:["rent","house"],badgeClass:"b-hot",noteClass:"",priceText:"฿ 45,000 / เดือน",priceNumber:45000,imageUrl:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",images:[{url:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",id:""}],publicId:"",videoId:"",badge:"🔥 ยอดนิยม",title:"โฮมออฟฟิศ 4 ชั้น ใจกลางอโศก-สุขุมวิท 21",location:"อโศก สุขุมวิท 21 · ใกล้ MRT / BTS",desc:"",note:"สัญญา 3 ปี",specs:[{icon:"s-area",text:"<b>5</b> ห้องทำงาน"},{icon:"s-bath",text:"<b>4</b> ห้องน้ำ"},{icon:"s-area",text:"<b>320</b> ตร.ม."},{icon:"s-car",text:"จอด <b>4</b> คัน"}],tags:["ติด MRT/BTS","ลิฟต์ส่วนตัว"],badge_en:"🔥 Hot Deal",title_en:"4-Storey Modern Home Office in Prime Asoke – Sukhumvit 21",location_en:"Asoke, Sukhumvit 21 · MRT Sukhumvit & BTS Asok",desc_en:"",note_en:"3-Year Lease",specs_en:[{icon:"s-area",text:"<b>5</b> Office Rooms"},{icon:"s-bath",text:"<b>4</b> Bathrooms"},{icon:"s-area",text:"<b>320</b> sq.m."},{icon:"s-car",text:"Parking for <b>4</b> Cars"}],tags_en:["Near MRT & BTS","Private Elevator"]}
+  {ref:"SRA-1024",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 3,500,000",priceNumber:3500000,imageUrl:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",images:[{url:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=900&q=80",id:"",deleteUrl:"",name:""}],publicId:"",videoId:"W0v2z146zqY",badge:"คอนโด",title:"Whizdom Station รัชดา – ท่าพระ 26.28 ตร.ม. ติด BTS ตลาดพลู",location:"ตรงข้าม The Mall ท่าพระ · BTS ตลาดพลู · BRT ท่าพระ",desc:"",note:"≈ ฿133,180 / ตร.ม.",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>26.28</b> ตร.ม."},{icon:"s-car",text:"จอด <b>1</b> คัน"}],tags:["ติด BTS","ใกล้เดอะมอลล์"],badge_en:"Condo",title_en:"Whizdom Station Ratchada – Thapra (26.28 sq.m.) Next to BTS Talat Phlu",location_en:"Opposite The Mall Thapra · BTS Talat Phlu · BRT Ratchaphruek",desc_en:"",note_en:"≈ ฿133,180 / sq.m.",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>26.28</b> sq.m."},{icon:"s-car",text:"Parking for <b>1</b> Car"}],tags_en:["Next to BTS","Near the Mall"]},
+  {ref:"SRA-2048",status:"available",type:["sale","land"],badgeClass:"b-land",noteClass:"note-amber",priceText:"📞 ราคาโทรถาม",priceNumber:0,imageUrl:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",images:[{url:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",id:"",deleteUrl:"",name:""}],publicId:"",videoId:"Rmg51jPXF-s",badge:"🌳 ที่ดิน",title:"ขายที่ดิน บางนาตราด กม.49/10 ทรงสี่เหลี่ยมสวย",location:"ริมถนนบางนาตราด กม.49/10 · สมุทรปราการ",desc:"<strong>ไฮไลท์:</strong> หน้ากว้าง 80 ม. ลึก 100 ม. ติดถนนสายหลัก เหมาะสร้างปั๊มน้ำมัน โกดัง คลังสินค้า หรือโรงงาน",note:"5 ไร่",specs:[{icon:"s-area",text:"<b>5</b> ไร่"},{icon:"s-ruler",text:"กว้าง <b>80</b> ม."},{icon:"s-ruler",text:"ยาว <b>100</b> ม."},{icon:"s-pin",text:"กม. <b>49/10</b>"}],tags:["ปั๊มน้ำมัน","โกดัง/โรงงาน"],badge_en:"🌳 Land",title_en:"Prime Land on Bangna-Trad Km.49/10 (Rectangular Shape)",location_en:"Bangna-Trad Frontage Rd. Km.49/10 · Samut Prakan",desc_en:"<strong>Key Highlight:</strong> Width: 80 m, Depth: 100 m with main road access.",note_en:"5 Rai",specs_en:[{icon:"s-area",text:"<b>5</b> Rai"},{icon:"s-ruler",text:"Width: <b>80</b> m"},{icon:"s-ruler",text:"Depth: <b>100</b> m"},{icon:"s-pin",text:"Km. <b>49/10</b>"}],tags_en:["Petrol Station","Warehouse / Factory"]},
+  {ref:"SRA-3072",status:"available",type:["sale","condo"],badgeClass:"b-condo",noteClass:"note-green",priceText:"฿ 2,100,000",priceNumber:2100000,imageUrl:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",images:[{url:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80",id:"",deleteUrl:"",name:""}],publicId:"",videoId:"f_VwtA_PfLI",badge:"คอนโด",title:"Lumpini Place Ratchada ชั้น 11 วิวสูง ใกล้ BTS ตลาดพลู",location:"The Mall Lifestore ท่าพระ · BTS ตลาดพลู",desc:"",note:"ของดีราคาคุณภาพ",specs:[{icon:"s-bed",text:"<b>1</b> ห้องนอน"},{icon:"s-bath",text:"<b>1</b> ห้องน้ำ"},{icon:"s-area",text:"<b>35.29</b> ตร.ม."},{icon:"s-home",text:"ชั้น <b>11</b>"}],tags:["สาทร 15 นาที","ใกล้ห้างดัง"],badge_en:"Condo",title_en:"Lumpini Place Ratchada (11th Fl.) High Floor near BTS Talat Phlu",location_en:"The Mall Lifestore Thapra · BTS Talat Phlu",desc_en:"",note_en:"Great Value",specs_en:[{icon:"s-bed",text:"<b>1</b> Bedroom"},{icon:"s-bath",text:"<b>1</b> Bathroom"},{icon:"s-area",text:"<b>35.29</b> sq.m."},{icon:"s-home",text:"<b>11th</b> Floor"}],tags_en:["Sathorn 15 mins","Near the Mall"]},
+  {ref:"SRA-5510",status:"available",type:["rent","house"],badgeClass:"b-hot",noteClass:"",priceText:"฿ 45,000 / เดือน",priceNumber:45000,imageUrl:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",images:[{url:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80",id:"",deleteUrl:"",name:""}],publicId:"",videoId:"",badge:"🔥 ยอดนิยม",title:"โฮมออฟฟิศ 4 ชั้น ใจกลางอโศก-สุขุมวิท 21",location:"อโศก สุขุมวิท 21 · ใกล้ MRT / BTS",desc:"",note:"สัญญา 3 ปี",specs:[{icon:"s-area",text:"<b>5</b> ห้องทำงาน"},{icon:"s-bath",text:"<b>4</b> ห้องน้ำ"},{icon:"s-area",text:"<b>320</b> ตร.ม."},{icon:"s-car",text:"จอด <b>4</b> คัน"}],tags:["ติด MRT/BTS","ลิฟต์ส่วนตัว"],badge_en:"🔥 Hot Deal",title_en:"4-Storey Modern Home Office in Prime Asoke – Sukhumvit 21",location_en:"Asoke, Sukhumvit 21 · MRT Sukhumvit & BTS Asok",desc_en:"",note_en:"3-Year Lease",specs_en:[{icon:"s-area",text:"<b>5</b> Office Rooms"},{icon:"s-bath",text:"<b>4</b> Bathrooms"},{icon:"s-area",text:"<b>320</b> sq.m."},{icon:"s-car",text:"Parking for <b>4</b> Cars"}],tags_en:["Near MRT & BTS","Private Elevator"]}
 ];
 
 $('importBtn').addEventListener('click', async () => {
@@ -687,7 +779,7 @@ $('importBtn').addEventListener('click', async () => {
   btn.innerHTML = '📥 นำเข้าทรัพย์เก่า';
 });
 
-/* ============ PARSE HELPERS ============ */
+/* ============ HELPERS ============ */
 function parseSpecs(text) {
   return text.split('\n').map(l => l.trim()).filter(Boolean).map(line => {
     const idx = line.indexOf('>');
@@ -696,8 +788,11 @@ function parseSpecs(text) {
   });
 }
 function specsToString(arr) { return (arr || []).map(s => `${s.icon}>${s.text}`).join('\n'); }
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
 
-/* ============ SAVE (รองรับ 5 รูป) ============ */
+/* ============ SAVE ============ */
 $('saveBtn').addEventListener('click', async () => {
   const btn = $('saveBtn');
   const editId = $('editId').value;
@@ -707,17 +802,15 @@ $('saveBtn').addEventListener('click', async () => {
   if (!$('fTitle').value.trim())     return toast('❌ กรุณากรอกชื่อทรัพย์ (TH)', 'err');
   if (!$('fPriceText').value.trim()) return toast('❌ กรุณากรอกราคา', 'err');
 
-  // นับรูปที่มี (blob ใหม่ + url เดิม)
   const readySlots = imageSlots.filter(s => s.blob || s.url);
   if (readySlots.length === 0) {
-    return toast('❌ กรุณาเลือกรูปอย่างน้อย 1 รูป (ช่องแรก = รูปหลัก)', 'err');
+    return toast('❌ กรุณาเลือกรูปอย่างน้อย 1 รูป', 'err');
   }
 
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> กำลังเตรียม...';
 
   try {
-    // อัปโหลดรูปที่ยังเป็น blob (parallel)
     const pending = imageSlots
       .map((slot, i) => ({ slot, i }))
       .filter(({ slot }) => slot.blob);
@@ -736,8 +829,11 @@ $('saveBtn').addEventListener('click', async () => {
             slot.progress = pct;
             renderSlots();
           });
-          slot.url = result.display_url || result.url;
+          // ✅ เก็บทุกอย่าง: url, id, deleteUrl, name
+          slot.url = result.url;
           slot.publicId = result.id;
+          slot.deleteUrl = result.deleteUrl;
+          if (result.name) slot.name = result.name;
           slot.blob = null;
           slot.uploading = false;
           slot.progress = 100;
@@ -756,12 +852,16 @@ $('saveBtn').addEventListener('click', async () => {
 
     btn.innerHTML = '<span class="spinner"></span> กำลังบันทึกข้อมูล...';
 
-    // สร้าง images array (เรียงตาม slot)
+    // ✅ สร้าง images array พร้อม deleteUrl + name
     const images = imageSlots
       .filter(s => s.url)
-      .map(s => ({ url: s.url, id: s.publicId || '' }));
+      .map(s => ({
+        url: s.url,
+        id: s.publicId || '',
+        deleteUrl: s.deleteUrl || '',
+        name: s.name || ''
+      }));
 
-    // รูปแรก = รูปหลัก (เก็บ imageUrl/publicId แยกไว้ให้หน้าบ้านเก่าอ่านได้)
     const mainImage = images[0] || { url: '', id: '' };
 
     const data = {
@@ -772,13 +872,9 @@ $('saveBtn').addEventListener('click', async () => {
       noteClass: $('fNoteClass').value,
       priceText: $('fPriceText').value.trim(),
       priceNumber: Number($('fPriceNumber').value) || 0,
-
-      // ✅ ใหม่: 5 รูป
       images: images,
-      // ✅ เก็บไว้ backward compatible (หน้าบ้านเก่า / SEO)
       imageUrl: mainImage.url,
       publicId: mainImage.id,
-
       videoId: $('fVideoId').value.trim(),
       badge: $('fBadge').value.trim(),
       title: $('fTitle').value.trim(),
@@ -861,8 +957,6 @@ function subscribeList() {
 
       const stClass = p.status === 'sold' ? 'st-sold' : p.status === 'hidden' ? 'st-hidden' : 'st-available';
       const stText  = p.status === 'sold' ? 'ขายแล้ว' : p.status === 'hidden' ? 'ซ่อน' : 'ว่าง';
-
-      // นับจำนวนรูป
       const imgCount = (p.images && p.images.length) ? p.images.length : (p.imageUrl ? 1 : 0);
       const thumbUrl = (p.images && p.images[0]?.url) || p.imageUrl || '';
 
@@ -890,7 +984,7 @@ function subscribeList() {
       btn.addEventListener('click', () => {
         const id = btn.dataset.id, act = btn.dataset.act;
         if (act === 'edit') return editItem(id);
-        if (act === 'del')  return deleteItem(id);
+        if (act === 'del')  return openDeleteModal(id);
         if (act === 'sold' || act === 'available') return changeStatus(id, act);
       });
     });
@@ -900,11 +994,7 @@ function subscribeList() {
   });
 }
 
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-/* ============ EDIT: โหลด 5 รูปเดิมกลับเข้าช่อง ============ */
+/* ============ EDIT ============ */
 function editItem(id) {
   const p = cache[id];
   if (!p) return;
@@ -933,13 +1023,12 @@ function editItem(id) {
   $('fSpecsEn').value = specsToString(p.specs_en);
   $('fTagsEn').value = (p.tags_en || []).join(', ');
 
-  // โหลดรูปเดิมทั้ง 5 ช่อง
   resetAllSlots();
   let oldImages = [];
   if (Array.isArray(p.images) && p.images.length) {
     oldImages = p.images;
   } else if (p.imageUrl) {
-    oldImages = [{ url: p.imageUrl, id: p.publicId || '' }];
+    oldImages = [{ url: p.imageUrl, id: p.publicId || '', deleteUrl: '', name: '' }];
   }
 
   oldImages.slice(0, MAX_IMAGES).forEach((img, i) => {
@@ -948,6 +1037,8 @@ function editItem(id) {
       previewUrl: null,
       url: img.url || '',
       publicId: img.id || '',
+      deleteUrl: img.deleteUrl || '',
+      name: img.name || '',
       uploading: false,
       progress: 100,
       error: false
@@ -968,16 +1059,172 @@ async function changeStatus(id, status) {
   } catch (e) { toast('❌ เปลี่ยนสถานะไม่สำเร็จ', 'err'); }
 }
 
-async function deleteItem(id) {
+/* ============================================================
+   ✅ DELETE FLOW ใหม่: ลบทั้ง ImgBB + Firestore
+   ============================================================ */
+let pendingDeleteId = null;
+
+function openDeleteModal(id) {
   const p = cache[id];
   if (!p) return;
-  if (!confirm(`ลบ "${p.ref}" ถาวร?\n\nℹ️ รูปจะยังอยู่ใน ImgBB (ลบเองได้ที่ imgbb.com)`)) return;
+  pendingDeleteId = id;
+
+  $('delRef').textContent = p.ref || '—';
+  $('delTitle').textContent = p.title || '(ไม่มีชื่อ)';
+
+  // รวมรูป
+  let images = [];
+  if (Array.isArray(p.images) && p.images.length) {
+    images = p.images;
+  } else if (p.imageUrl) {
+    images = [{ url: p.imageUrl, id: p.publicId || '', deleteUrl: '', name: '' }];
+  }
+
+  // แสดงรูป
+  const imgsBox = $('delImgs');
+  if (!images.length) {
+    imgsBox.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#94a3b8;padding:16px">ไม่มีรูปในทรัพย์นี้</div>';
+  } else {
+    imgsBox.innerHTML = images.map((img, i) => {
+      const hasDelete = !!img.deleteUrl;
+      return `
+        <div class="del-img-item ${hasDelete ? '' : 'no-delete'}">
+          <img src="${escapeHtml(img.url || '')}" alt="img ${i+1}" loading="lazy">
+          <span class="dii-badge ${i === 0 ? 'main' : ''}">${i === 0 ? '⭐ หลัก' : '#' + (i+1)}</span>
+          <div class="dii-name" title="${escapeHtml(img.name || '(ไม่มีชื่อ)')}">${escapeHtml(img.name || '(ไม่มีชื่อ)')}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Warning
+  const noDeleteCount = images.filter(img => !img.deleteUrl).length;
+  const warnBox = $('delWarn');
+  if (noDeleteCount > 0) {
+    warnBox.style.display = 'block';
+    warnBox.innerHTML = `
+      <strong>⚠️ พบ ${noDeleteCount} รูปที่ไม่มีลิงก์ลบ (delete_url)</strong>
+      <ul>
+        <li>รูปเหล่านี้เป็นรูปเก่าที่อัปโหลดก่อนมีระบบนี้</li>
+        <li>ระบบจะ <strong>ลบออกจาก Firestore ได้</strong> แต่จะไม่สามารถลบออกจาก ImgBB ได้อัตโนมัติ</li>
+        <li>คุณต้องเข้าไปลบเองที่ <a href="https://todsapon-lohagut.imgbb.com/" target="_blank" style="color:#92400e;text-decoration:underline;font-weight:700">todsapon-lohagut.imgbb.com</a></li>
+      </ul>
+    `;
+  } else if (images.length > 0) {
+    warnBox.style.display = 'block';
+    warnBox.innerHTML = `
+      <strong>✅ รูปทั้ง ${images.length} รูปมีลิงก์ลบครบ</strong>
+      ระบบจะลบรูปออกจาก ImgBB ให้อัตโนมัติ (ทีละรูป ใช้เวลาประมาณ ${Math.ceil(images.length * 3)} วินาที)
+    `;
+  } else {
+    warnBox.style.display = 'none';
+  }
+
+  $('delLog').classList.remove('show');
+  $('delLog').innerHTML = '';
+  $('delConfirm').disabled = false;
+  $('delConfirm').textContent = '🗑️ ยืนยันลบทั้งหมด';
+
+  $('deleteModal').classList.add('open');
+}
+
+$('delCancel').addEventListener('click', () => {
+  $('deleteModal').classList.remove('open');
+  pendingDeleteId = null;
+});
+
+$('deleteModal').addEventListener('click', e => {
+  if (e.target === $('deleteModal')) {
+    $('deleteModal').classList.remove('open');
+    pendingDeleteId = null;
+  }
+});
+
+$('delConfirm').addEventListener('click', async () => {
+  const id = pendingDeleteId;
+  if (!id) return;
+  const p = cache[id];
+  if (!p) return;
+
+  const btn = $('delConfirm');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> กำลังลบ...';
+
+  const log = $('delLog');
+  log.classList.add('show');
+  log.innerHTML = '';
+
+  const logLine = (msg, cls = '') => {
+    const div = document.createElement('div');
+    div.className = cls;
+    div.textContent = msg;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  };
+
+  // รวบรวมรูป
+  let images = [];
+  if (Array.isArray(p.images) && p.images.length) {
+    images = p.images;
+  } else if (p.imageUrl) {
+    images = [{ url: p.imageUrl, id: p.publicId || '', deleteUrl: '', name: '' }];
+  }
+
+  logLine(`🔎 พบรูปทั้งหมด ${images.length} รูป`, 'info');
+  logLine('', '');
+  logLine('📌 เริ่มลบรูปจาก ImgBB...', 'info');
+
+  let deletedCount = 0, skippedCount = 0, failedCount = 0;
+
+  // ✅ ลบทีละรูปเรียงลำดับ (ไม่ parallel เพื่อไม่ให้ ImgBB rate limit)
+  for (let i = 0; i < images.length; i++) {
+    const img = images[i];
+    const name = img.name || `(รูปที่ ${i+1})`;
+    const label = `[${i+1}/${images.length}] ${name}`;
+
+    if (!img.deleteUrl) {
+      logLine(`⚠️ ${label} — ไม่มี delete_url → ข้าม (ต้องลบเอง)`, 'warn');
+      skippedCount++;
+      continue;
+    }
+
+    try {
+      await deleteImgBBImage(img.deleteUrl);
+      logLine(`✅ ${label} — ส่งคำสั่งลบไปที่ ImgBB แล้ว`, 'ok');
+      deletedCount++;
+    } catch (e) {
+      logLine(`❌ ${label} — ลบไม่สำเร็จ: ${e.message}`, 'err');
+      failedCount++;
+    }
+
+    // หน่วง 300ms ระหว่างรูป
+    await new Promise(r => setTimeout(r, 300));
+  }
+
+  logLine('', '');
+  logLine(`🎯 สรุป ImgBB: ✅ ${deletedCount} · ⚠️ ข้าม ${skippedCount} · ❌ ล้มเหลว ${failedCount}`, 'info');
+  logLine('', '');
+  logLine('📌 กำลังลบข้อมูลจาก Firestore...', 'info');
+
+  // ✅ ลบ Firestore
   try {
     await deleteDoc(doc(db, 'properties', id));
-    toast('🗑️ ลบสำเร็จ', 'ok');
+    logLine('✅ ลบข้อมูลทรัพย์ออกจาก Firestore สำเร็จ', 'ok');
+    toast('🗑️ ลบทรัพย์สำเร็จ', 'ok');
     if ($('editId').value === id) resetForm();
-  } catch (e) { toast('❌ ลบไม่สำเร็จ: ' + e.message, 'err'); }
-}
+
+    // ปิด modal หลัง 1.5 วินาที
+    setTimeout(() => {
+      $('deleteModal').classList.remove('open');
+      pendingDeleteId = null;
+    }, 1500);
+  } catch (e) {
+    logLine('❌ ลบ Firestore ไม่สำเร็จ: ' + e.message, 'err');
+    toast('❌ ลบข้อมูลทรัพย์ไม่สำเร็จ', 'err');
+    btn.disabled = false;
+    btn.textContent = '🗑️ ลองอีกครั้ง';
+  }
+});
 </script>
 </body>
 </html>
